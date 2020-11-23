@@ -19,7 +19,7 @@ Page({
       phone: options.phone,
       ident: options.ident,
       identity: options.ident=='host'?'房主':'租赁者',
-      avaurl: "https://irimskydb.oss-cn-beijing.aliyuncs.com/avator/ava/" + options.ident + '/' + options.phone + '.jpg?' + Math.random() / 9999,
+      avaurl: "https://sanmizufang.oss-cn-shanghai.aliyuncs.com/avator/ava/" + options.ident + '/' + options.phone + '.jpg?' + Math.random() / 9999,
     })
     that = this
     console.log(this.data.avaurl)

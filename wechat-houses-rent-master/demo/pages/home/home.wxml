@@ -38,11 +38,11 @@
 <button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>
 
 <block wx:for='{{houses}}' wx:key="item">
-	<block wx:if="{{item.status=='待租' || showRent==1 }}">
+	<block wx:if="{{item.status=='待租' || showRent==1}}">
 
 		<view class="container" data-id="{{item.id}}" bindtap="onItemClick">
 			<view class='container-img'>
-				<image mode="aspectFill" class="img-prev" src='你的图片链接' lazy-load="true"></image>
+				<image mode="aspectFill" class="img-prev" src='https://sanmizufang.oss-cn-shanghai.aliyuncs.com/avator/imgs/0.jpg' lazy-load="true"></image>
 			</view>
 
 			<view class='container-content'>

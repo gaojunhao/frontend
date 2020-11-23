@@ -13,7 +13,7 @@ Page({
     keyword: '',
     showRent: 0,
     itemcnt: 0,
-    ident: 'guest'
+    ident: 'host'
   },
 
   /**
@@ -85,11 +85,11 @@ Page({
       title: '加载中',
     })
 
-    var url = "你的服务器链接"
+    var url = "http://www.semmy.cn/springmvc/say?v=a"
     wx.request({
       url: url,
       success(res) {
-        console.log(res.data)
+        console.log(res.data)/*
         var arr = res.data
 		
         for (var i = 0; i < arr.length; i++) {
@@ -110,11 +110,13 @@ Page({
           }
           arr[i]['type'] = s.substring(0, end).split('，')
           arr[i].rent = arr[i].rent.toFixed(2)
-        }
+        }*/
 		
         that.setData({
-          houses: arr,
-          itemcnt: arr.length
+          //houses: arr,
+          houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
+          //itemcnt: arr.length
+          itemcnt: 1
         })
         wx.stopPullDownRefresh();
         wx.hideLoading({})

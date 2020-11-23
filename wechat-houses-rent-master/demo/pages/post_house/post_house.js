@@ -9,6 +9,7 @@ Page({
   data: {
     img_count: 0,
     imgs: [],
+    img_paths: '',
     ads: '',
     type: '',
     maxg: '0',
@@ -133,8 +134,53 @@ Page({
     this.setData({
       abled: false
     })
+    for (var i = 0; i < that.data.imgs.length; i++) {
+      //显示消息提示框
+      wx.showLoading({
+        title: '上传中' + (i + 1),
+        mask: true
+      })
+
+  uploadImage(that.data.imgs[i], i, '12345678912'+'/imgs/',
+  function (result) {
+    console.log("======上传成功图片地址为：", result);
+    if (i == that.data.imgs.length -1)
+      that.data.img_paths = that.data.img_paths + result
+    else
+      that.data.img_paths = that.data.img_paths + result + ','
+  },
+  function (result) {
+    console.log("======上传失败======", result);
+    //做你具体的业务逻辑操作
+    wx.showToast({
+      title: '图片上传失败！',
+      icon: 'none'
+    })
+    wx.hideLoading()
+    that.setData({
+      abled: true
+    })
+    return
+  }
+)
+      
+    }
     wx.request({
-      url: "你的服务器链接",
+      url: "http://www.semmy.cn/springmvc/sethouses",
+      method: 'post',
+      data: {
+        //phone: app.globalData.phone,
+        phone: '12345678912',
+        ads: this.data.ads,
+        maxg: this.data.maxg,
+        mtype: this.data.type,
+        rent: this.data.rent,
+        img: this.data.img_paths,
+        img_count: this.data.img_count
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
       success(res) {
         console.log(res.data)
         var id = res.data.substring(0, res.data.length - 2)
@@ -145,17 +191,6 @@ Page({
             icon: 'none'
           })
           return
-        }
-
-        for (var i = 0; i < that.data.imgs.length; i++) {
-          //显示消息提示框
-          wx.showLoading({
-            title: '上传中' + (i + 1),
-            mask: true
-          })
-
-          //uploadImage(...) // 你的图片上传操作
-          
         }
         setTimeout(function () {
           wx.navigateBack()
