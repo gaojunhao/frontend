@@ -85,11 +85,11 @@ Page({
       title: '加载中',
     })
 
-    var url = "http://www.semmy.cn/springmvc/say?v=a"
+    var url = "http://www.semmy.cn/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
-        console.log(res.data)/*
+        console.log(res.data)
         var arr = res.data
 		
         for (var i = 0; i < arr.length; i++) {
@@ -98,7 +98,6 @@ Page({
           }
 
           var s = arr[i]['type']
-
           var end = arr[i]['type'].length
           if (arr[i]['type'].length > 12) {
             end = 13
@@ -108,13 +107,16 @@ Page({
                 break;
               }
           }
-          arr[i]['type'] = s.substring(0, end).split('，')
-          arr[i].rent = arr[i].rent.toFixed(2)
-        }*/
+          arr[i]['type'] = s.substring(0, end).split(',')
+          //arr[i].rent = arr[i].rent.toFixed(2)
+          var simg = arr[i]['img']
+          var endimg = arr[i]['img'].length
+          arr[i]['img'] = simg.substring(0, endimg).split(',')
+        }
 		
         that.setData({
-          //houses: arr,
-          houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
+          houses: arr,
+          //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
           //itemcnt: arr.length
           itemcnt: 1
         })
@@ -150,10 +152,12 @@ Page({
   onReachBottom: function () {
     var temp = that.data.houses;
     // 获取后面二十条
+    this.data.itemcnt = this.data.itemcnt + 5
+    console.log(this.data.itemcnt)
     wx.showLoading({
       title: '加载中',
     })
-    var url = "你的服务器链接"
+    var url = "http://www.semmy.cn/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
@@ -180,12 +184,15 @@ Page({
                 }
             }
             arr[i]['type'] = s.substring(0, end).split('，')
-            arr[i].rent = arr[i].rent.toFixed(2)
+            //arr[i].rent = arr[i].rent.toFixed(2)
+          var simg = arr[i]['img']
+          var endimg = arr[i]['img'].length
+          arr[i]['img'] = simg.substring(0, endimg).split(',')
           }
           var hs = temp.concat(arr) // 将获取的新数据拼接到原列表上
           that.setData({ // 更新渲染页面
             houses: hs,
-            itemcnt: that.data.itemcnt + 20
+            itemcnt: that.data.itemcnt
           })
           wx.hideLoading({})
         }

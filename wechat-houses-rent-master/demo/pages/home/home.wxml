@@ -42,7 +42,7 @@
 
 		<view class="container" data-id="{{item.id}}" bindtap="onItemClick">
 			<view class='container-img'>
-				<image mode="aspectFill" class="img-prev" src='https://sanmizufang.oss-cn-shanghai.aliyuncs.com/avator/imgs/0.jpg' lazy-load="true"></image>
+				<image mode="aspectFill" class="img-prev" src="{{item.img[0]}}" lazy-load="true"></image>
 			</view>
 
 			<view class='container-content'>

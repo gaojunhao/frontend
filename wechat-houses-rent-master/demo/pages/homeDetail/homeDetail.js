@@ -21,9 +21,10 @@ Page({
 
   onLoad: function (option) {
     this.setData({
-      id: option.id,
-      user_ident: app.globalData.ident,
-      user_phone: app.globalData.phone
+      
+      //id: option.id,
+      //user_ident: app.globalData.ident,
+      //user_phone: app.globalData.phone
     })
     that = this
     wx.request({

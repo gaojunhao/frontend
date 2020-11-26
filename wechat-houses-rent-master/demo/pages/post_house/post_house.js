@@ -80,6 +80,7 @@ Page({
   OnPostClick: function (e) {
     var rent = this.data.rent
     var x = rent.split('.')
+    var that = this
     console.log(x)
 
     if(parseInt(rent)>99999 || parseInt(rent)<=0){
@@ -134,6 +135,7 @@ Page({
     this.setData({
       abled: false
     })
+    var tmp_img_paths = ''
     for (var i = 0; i < that.data.imgs.length; i++) {
       //显示消息提示框
       wx.showLoading({
@@ -144,11 +146,10 @@ Page({
   uploadImage(that.data.imgs[i], i, '12345678912'+'/imgs/',
   function (result) {
     console.log("======上传成功图片地址为：", result);
-    if (i == that.data.imgs.length -1)
-      that.data.img_paths = that.data.img_paths + result
-    else
-      that.data.img_paths = that.data.img_paths + result + ','
+    tmp_img_paths = tmp_img_paths + result + ','
+    console.log(tmp_img_paths)
   },
+  
   function (result) {
     console.log("======上传失败======", result);
     //做你具体的业务逻辑操作
@@ -162,8 +163,13 @@ Page({
     })
     return
   }
-)
-      
+)  
+    }
+    for (var i = 0; i < that.data.imgs.length; i++) {
+        if (i == (that.data.imgs.length-1))
+          that.data.img_paths = that.data.img_paths + "https://semmy-1258231127.cos.ap-shanghai.myqcloud.com/19817582544/img/" + i + ".jpg"
+        else
+          that.data.img_paths = that.data.img_paths + "https://semmy-1258231127.cos.ap-shanghai.myqcloud.com/19817582544/img/" + i + ".jpg" + ","
     }
     wx.request({
       url: "http://www.semmy.cn/springmvc/sethouses",
@@ -173,10 +179,11 @@ Page({
         phone: '12345678912',
         ads: this.data.ads,
         maxg: this.data.maxg,
-        mtype: this.data.type,
+        type: this.data.type,
         rent: this.data.rent,
-        img: this.data.img_paths,
-        img_count: this.data.img_count
+        img: that.data.img_paths,
+        img_count: this.data.img_count,
+        status: "待租"
       },
       header: {
         'content-type': 'application/json' // 默认值
