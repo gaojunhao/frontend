@@ -22,33 +22,35 @@ Page({
   onLoad: function (option) {
     this.setData({
       
-      //id: option.id,
-      //user_ident: app.globalData.ident,
-      //user_phone: app.globalData.phone
+      id: option.id,
+      user_ident: app.globalData.ident,
+      user_phone: app.globalData.phone
     })
     that = this
     wx.request({
-      url: "你的服务器链接",
+      url: "http://www.semmy.cn/springmvc/getonehouse?id=" + option.id,
       success(res) {
-        
+        //console.log(res.data)
+        var endimg = res.data.img.length
+        //console.log(res.data.img.substring(0, endimg).split(',')[0])
         var imgs = []
-        for (var i = 1; i <= res.data.pic_cnt; i++) {
-          imgs.push("你的图片链接")
+        for (var i = 0; i < res.data.img_count; i++) {
+          imgs.push(res.data.img.substring(0, endimg).split(',')[i])
         }
 
         that.setData({
           img: imgs,
           id: res.data.id,
-          rent: (res.data.rent).toFixed(2),
+          rent: res.data.rent,
           maxg: res.data.maxg,
           types: res.data.type,
           type: res.data.type.split('，'),
           ads: res.data.ads,
-          hname: res.data.hname,
-          hads: res.data.hostads,
-          hphone: res.data.hphone,
+          hname: res.data.name,
+          hads: res.data.ads,
+          hphone: res.data.phone,
           status: res.data.status,
-          pic_cnt: res.data.pic_cnt,
+          pic_cnt: res.data.img_count,
           avaurl: "你的图片链接"
         })
 

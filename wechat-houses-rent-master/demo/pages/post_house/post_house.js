@@ -3,6 +3,7 @@ var that
 const app = getApp()
 var uploadImage = require('../../utils/uploadFile.js'); 
 var util = require('../../utils/util.js');
+const env = require('../../utils/config.js');
 
 Page({
 
@@ -143,7 +144,7 @@ Page({
         mask: true
       })
 
-  uploadImage(that.data.imgs[i], i, '12345678912'+'/imgs/',
+  uploadImage(that.data.imgs[i], i, app.globalData.phone+'/imgs/',
   function (result) {
     console.log("======上传成功图片地址为：", result);
     tmp_img_paths = tmp_img_paths + result + ','
@@ -167,23 +168,24 @@ Page({
     }
     for (var i = 0; i < that.data.imgs.length; i++) {
         if (i == (that.data.imgs.length-1))
-          that.data.img_paths = that.data.img_paths + "https://semmy-1258231127.cos.ap-shanghai.myqcloud.com/19817582544/img/" + i + ".jpg"
+          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + i + ".jpg"
         else
-          that.data.img_paths = that.data.img_paths + "https://semmy-1258231127.cos.ap-shanghai.myqcloud.com/19817582544/img/" + i + ".jpg" + ","
+          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + i + ".jpg" + ","
     }
     wx.request({
       url: "http://www.semmy.cn/springmvc/sethouses",
       method: 'post',
       data: {
         //phone: app.globalData.phone,
-        phone: '12345678912',
+        phone: app.globalData.phone,
         ads: this.data.ads,
         maxg: this.data.maxg,
         type: this.data.type,
         rent: this.data.rent,
         img: that.data.img_paths,
         img_count: this.data.img_count,
-        status: "待租"
+        status: "待租",
+        avasrc: app.globalData.icon
       },
       header: {
         'content-type': 'application/json' // 默认值
