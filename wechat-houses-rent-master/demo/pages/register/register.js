@@ -161,7 +161,7 @@ Page({
 
     if (data.ident == "2") {
       wx.request({
-        url: app.globalData.url + 'registerowner?op=reg_host&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd,
+        url: app.globalData.url + 'registerowner?op=reg_host&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&avasrc=" + data.avaSrc,
         success(res) {
           console.log(res.data)
           if (res.data == "-1") {
@@ -194,7 +194,7 @@ Page({
     } else {
 
       wx.request({
-        url: app.globalData.url + 'registerhouser?op=reg_guest&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&sex=" + encodeURI(data.gender) + "&uid=" + data.id,
+        url: app.globalData.url + 'registerhouser?op=reg_guest&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&sex=" + encodeURI(data.gender) + "&uid=" + data.id + "&avasrc=" + data.avaSrc,
         success(res) {
           console.log(res.data)
           if (res.data == "-1") {

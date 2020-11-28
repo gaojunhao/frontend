@@ -42,7 +42,7 @@ Page({
       return;
     }
 
-    var url = '你的服务器链接'
+    var url = 'http://www.semmy.cn/springmvc/login?phone=' + this.data.phone + "&pswd=" + this.data.pswd + "&ident=" + this.data.ident
 
     wx.showToast({
       title: '请稍等',
@@ -53,12 +53,14 @@ Page({
     wx.request({
       url: url,
       success(res) {
+        console.log(res.data)
         var s = res.data.split(' ')[0]
         if (s == '1') {
           app.globalData.phone = that.data.phone
           app.globalData.name = res.data.split(' ')[1]
           app.globalData.ident = ident
           app.globalData.login = true
+          app.globalData.icon = res.data.split(' ')[2]
           var pages = getCurrentPages()
           var prevpage = pages[pages.length - 2]
           prevpage.onLoad()

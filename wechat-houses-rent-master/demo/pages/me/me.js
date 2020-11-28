@@ -40,7 +40,7 @@ Page({
       name: getApp().globalData.name,
       ident: getApp().globalData.ident,
       login: app.globalData.login,
-      avaurl: "你的头像图片链接",
+      avaurl: app.globalData.icon,
     })
   },
 
@@ -50,7 +50,7 @@ Page({
     }
     if (this.data.avaupdate) {
       this.setData({
-        avaurl: "你的头像图片链接",
+        avaurl: app.globalData.icon,
         avaupdate: false
       })
     }
