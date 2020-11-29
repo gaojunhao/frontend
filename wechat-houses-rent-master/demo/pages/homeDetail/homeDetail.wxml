@@ -22,8 +22,8 @@
 			<text class="tagText">{{item}}</text>
 		</view>
 	</view>
-
-	<view class='amountBg' bindtap="OnUserClick">
+<!--<view class='amountBg' bindtap="OnUserClick">-->
+	<view class='amountBg'>
 		<view class='img'>
 			<image class="img2" mode="aspectFill" src="{{avaurl}}"></image>
 		</view>
@@ -36,7 +36,7 @@
 			</view>
 
 		</view>
-		<view class="more">查看详情 ></view>
+			<!--<view class="more">查看详情 ></view>-->
 	</view>
 
 </view>

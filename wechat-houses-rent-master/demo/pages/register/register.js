@@ -1,19 +1,21 @@
 // pages/register/register.js
 var uploadImage = require('../../utils/uploadFile.js'); //地址换成你自己存放文件的位置
 var util = require('../../utils/util.js');
+const env = require('../../utils/config.js');
 
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
+  data: { 
     phone: '',
     pswd: '',
     ident: "1",
     id: "",
     gender: "男",
-    avaSrc: ''
+    avasrc: '',
+    tmpiconpath: ''
   },
 
   identChange: function (e) {
@@ -93,6 +95,7 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {
         let imgSrc = res.tempFilePaths[0]
+        that.data.tmpiconpath = imgSrc
         that.setData({
           avaSrc: imgSrc
         })
@@ -156,12 +159,13 @@ Page({
       icon: 'loading',
       duration: 10000
     })
+    
 
 
-
+    data.avasrc = env.uploadImageUrl + 'avator/ava/' + (this.data.ident == '1' ? 'guest' : 'host') + '/' + this.data.phone + ".jpg"
     if (data.ident == "2") {
       wx.request({
-        url: app.globalData.url + 'registerowner?op=reg_host&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&avasrc=" + data.avaSrc,
+        url: app.globalData.url + 'registerowner?op=reg_host&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&avasrc=" + data.avasrc,
         success(res) {
           console.log(res.data)
           if (res.data == "-1") {
@@ -194,7 +198,7 @@ Page({
     } else {
 
       wx.request({
-        url: app.globalData.url + 'registerhouser?op=reg_guest&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&sex=" + encodeURI(data.gender) + "&uid=" + data.id + "&avasrc=" + data.avaSrc,
+        url: app.globalData.url + 'registerhouser?op=reg_guest&phone=' + data.phone + "&name=" + encodeURI(data.name) + "&ads=" + encodeURI(data.ads) + "&pswd=" + data.pswd + "&sex=" + encodeURI(data.gender) + "&uid=" + data.id + "&avasrc=" + data.avasrc,
         success(res) {
           console.log(res.data)
           if (res.data == "-1") {
@@ -224,7 +228,7 @@ Page({
       })
     }
 
-    uploadImage(that.data.avaSrc, this.data.phone, 'avator/ava/' + (this.data.ident == '1' ? 'guest' : 'host') + '/',
+    uploadImage(that.data.tmpiconpath, this.data.phone, 'avator/ava/' + (this.data.ident == '1' ? 'guest' : 'host') + '/',
       function (result) {
         console.log("======上传成功图片地址为：", result);
         //做你具体的业务逻辑操作

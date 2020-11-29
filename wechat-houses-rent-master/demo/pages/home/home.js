@@ -107,7 +107,7 @@ Page({
                 break;
               }
           }
-          arr[i]['type'] = s.substring(0, end).split(',')
+          arr[i]['type'] = s.substring(0, end).split('，')
           //arr[i].rent = arr[i].rent.toFixed(2)
           var simg = arr[i]['img']
           var endimg = arr[i]['img'].length

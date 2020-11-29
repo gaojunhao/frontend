@@ -30,7 +30,8 @@ Page({
     wx.request({
       url: "http://www.semmy.cn/springmvc/getonehouse?id=" + option.id,
       success(res) {
-        //console.log(res.data)
+        console.log(res.data)
+        console.log(res.data.avasrc)
         var endimg = res.data.img.length
         //console.log(res.data.img.substring(0, endimg).split(',')[0])
         var imgs = []
@@ -51,7 +52,7 @@ Page({
           hphone: res.data.phone,
           status: res.data.status,
           pic_cnt: res.data.img_count,
-          avaurl: "你的图片链接"
+          avaurl: res.data.avasrc
         })
 
       },
