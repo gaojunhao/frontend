@@ -14,13 +14,6 @@
 		<view class="inputView3">
 			<text class="label1">租金(元/月)： </text> <input maxlength="8" class="inputView2" type="digit" bindinput="OnRentInput" />
 		</view>
-
-	<view style='height:84rpx; background:#fff; border-bottom:1rpx solid #dfdbdc; line-height:84rpx;'>
-  <view class="select" style='display:inline-block; text-indent:25rpx; float:left;'>选择地址</view>
-  <picker mode="region" bindchange="bindRegionChange" value="{{detailed}}" custom-item="{{customItem}}" name="detailed" style='display:inline-block; width:71%; margin-left:36rpx; height:75rpx; letter-spacing:2rpx; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
-    <view class="picker {{clas}}" >{{detailed}}</view>
-  </picker>
-	</view>
 	</view>
 
 	<block>

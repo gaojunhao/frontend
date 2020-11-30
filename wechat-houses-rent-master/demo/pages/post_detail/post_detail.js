@@ -17,13 +17,13 @@ Page({
   onLoad: function (options) {
     that = this
     wx.request({
-      url: '你的服务器链接',
+      url: 'http://www.semmy.cn/springmvc/getOneTip?id=' + options.id,
       success(res) {
         that.setData({
           id: options.id,
           phone: res.data.phone,
           text: res.data.text,
-          date: res.data.ptime,
+          date: res.data.date,
           name: res.data.name,
           user_phone: app.globalData.phone,
           abled: true

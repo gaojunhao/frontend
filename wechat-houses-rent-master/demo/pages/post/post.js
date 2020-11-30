@@ -8,12 +8,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ident: app.globalData.ident
+    ident: app.globalData.ident,
+    itemcnt: 0
   },
 
   getData() {
     wx.request({
-      url: '你的服务器链接',
+      url: 'http://www.semmy.cn/springmvc/getAllTips?itemcnt=' + this.data.itemcnt,
       success(res) {
         console.log(res.data)
         var temp = res.data

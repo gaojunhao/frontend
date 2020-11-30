@@ -5,10 +5,10 @@
 <view wx:for="{{posts}}" class='container' data-id="{{item.id}}" bindtap='onItemClick'>
 	<view class='container-content'>
 		<view class='user-info'>
-			<image class='user-head' src='https://irimskydb.oss-cn-beijing.aliyuncs.com/avator/ava/guest/{{item.phone}}.jpg' mode='aspectFill'></image>
+			<image class='user-head' src='https://sanmizufang.oss-cn-shanghai.aliyuncs.com/avator/ava/host/12345678911.jpg' mode='aspectFill'></image>
 			<view class='user-name-time'>
 				<view class='user-name'>{{item.name}}</view>
-				<view class='user-publish-time'>{{item.ptime}}</view>
+				<view class='user-publish-time'>{{item.date}}</view>
 			</view>
 		</view>
 		<view class='content'>
