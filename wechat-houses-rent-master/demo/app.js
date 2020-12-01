@@ -11,7 +11,7 @@ App({
 
     this.globalData = {
       url: 'http://www.semmy.cn/springmvc/',
-      pic_url: '你的图片链接',
+      pic_url: '',
       login: false
     }
   }

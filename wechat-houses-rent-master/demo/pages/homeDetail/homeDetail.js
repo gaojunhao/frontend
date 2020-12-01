@@ -177,6 +177,7 @@ Page({
       })
       return
     }
+    console.log(this.data.img)
     wx.navigateTo({
       url: '../update_house/update_house?id=' + this.data.id + '&ads=' + this.data.ads + '&type=' + this.data.types + '&pic_cnt=' + this.data.pic_cnt,
     })

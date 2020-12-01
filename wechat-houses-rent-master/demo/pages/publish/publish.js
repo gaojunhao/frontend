@@ -42,16 +42,20 @@ Page({
       abled: false
     })
     wx.request({
-      url: '你的服务器链接',
+      url: 'http://www.semmy.cn/springmvc/publish',
       method: 'POST',
       header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
       },
       data: {
+        phone: app.globalData.phone,
         text: that.data.content,
-        phone: app.globalData.phone
+        date: new Date(),
+        name: app.globalData.name,
+        icon: app.globalData.icon 
       },
       success(res) {
+        console.log(res.data)
         setTimeout(function (e) {
           var pages = getCurrentPages()
           var prevPage = pages[pages.length - 2]

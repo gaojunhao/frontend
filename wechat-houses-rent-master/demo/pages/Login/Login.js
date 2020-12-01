@@ -1,4 +1,5 @@
 // pages/Login/Login.js
+const env = require('../../utils/config.js');
 Page({
 
   /**
@@ -61,6 +62,7 @@ Page({
           app.globalData.ident = ident
           app.globalData.login = true
           app.globalData.icon = res.data.split(' ')[2]
+          app.globalData.pic_url = env.uploadImageUrl + that.data.phone + '/imgs'
           var pages = getCurrentPages()
           var prevpage = pages[pages.length - 2]
           prevpage.onLoad()

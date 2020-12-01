@@ -65,10 +65,10 @@
 			<image class="btnicon" src="../../images/topic-detail/phone.png"></image>
 			电话
 		</view>
-
+<!--
 		<view class="buttonType">
 			<image class="btnicon" src="../../images/topic-detail/preview.png" bindtap="OnReqClick"></image>
 			看房
-		</view>
+		</view>-->
 	</view>
 </view>

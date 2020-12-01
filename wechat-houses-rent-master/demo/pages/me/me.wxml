@@ -59,13 +59,13 @@
 		<text class='itemName'>租赁记录</text>
 		<view class='right'>></view>
 	</view>-->
+	<!--
 	<view class='hr'></view>
-	<!-- 产品意见 -->
 	<view class='item' bindtap='onHistoryClick' wx:if="{{ident=='guest'}}">
 		<image class='icon' src='../../images/me/history.png' style="width:22px;height:21px;"></image>
 		<text class='itemName'>发贴历史</text>
 		<view class='right'>></view>
-	</view>
+	</view>-->
 	<view class='hr'></view>
 	<view class='item' bindtap='outClick'>
 		<image class='icon' src='../../images/me/out.png' style="width:22px;height:21px;"></image>

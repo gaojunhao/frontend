@@ -24,9 +24,11 @@ Page({
       type: options.type,
       pic_cnt: options.pic_cnt
     })
+    console.log(this.data.pic_cnt)
+    console.log(app.globalData.pic_url)
     var imgs = []
-    for (var i = 1; i <= this.data.pic_cnt; i++)
-      imgs.push(app.globalData.pic_url + this.data.id + '/' + i + '.jpg?' + Math.random() / 9999)
+    for (var i = 0; i < this.data.pic_cnt; i++)
+      imgs.push(app.globalData.pic_url + '/' + i + '.jpg')
     this.setData({
       imgs: imgs,
       imgs_ori: imgs
