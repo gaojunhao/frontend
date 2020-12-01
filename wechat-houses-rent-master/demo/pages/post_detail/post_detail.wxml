@@ -2,7 +2,7 @@
 <view class='container'>
 	<view class='container-content'>
 		<view class='user-info'>
-			<image class='user-head' src='https://irimskydb.oss-cn-beijing.aliyuncs.com/avator/ava/guest/{{phone}}.jpg' mode='aspectFill'></image>
+			<image class='user-head' src='{{icon}}' mode='aspectFill'></image>
 			<view class='user-name-time'>
 				<view class='user-name'>{{name}}（{{phone}}）</view>
 				<view class='user-publish-time'>{{date}}</view>

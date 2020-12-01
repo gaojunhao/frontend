@@ -1,6 +1,6 @@
 <!--pages/post/post.wxml-->
 
-<button class="add-button" type="primary" bindtap="onPublishClick" wx:if="{{ident=='guest'}}">+</button>
+<button class="add-button" type="primary" bindtap="onPublishClick" wx:if="{{ident=='guest'}}">++++</button>
 
 <view wx:for="{{posts}}" class='container' data-id="{{item.id}}" bindtap='onItemClick'>
 	<view class='container-content'>

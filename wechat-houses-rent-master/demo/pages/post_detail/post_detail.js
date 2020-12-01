@@ -26,6 +26,7 @@ Page({
           date: res.data.date,
           name: res.data.name,
           user_phone: app.globalData.phone,
+          icon: res.data.icon,
           abled: true
         })
 
