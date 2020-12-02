@@ -178,8 +178,15 @@ Page({
       return
     }
     console.log(this.data.img)
+    var img_str = ''
+    for (var i = 0; i < this.data.img.length; i++) {
+      if(i == this.data.img.length-1)
+        img_str = img_str + this.data.img[i]
+      else
+        img_str = img_str + this.data.img[i] + ','
+    }
     wx.navigateTo({
-      url: '../update_house/update_house?id=' + this.data.id + '&ads=' + this.data.ads + '&type=' + this.data.types + '&pic_cnt=' + this.data.pic_cnt,
+      url: '../update_house/update_house?id=' + this.data.id + '&ads=' + this.data.ads + '&type=' + this.data.types + '&pic_cnt=' + this.data.pic_cnt + '&img_str=' + img_str,
     })
   },
 

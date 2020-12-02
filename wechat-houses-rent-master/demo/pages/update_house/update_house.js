@@ -2,6 +2,7 @@
 const app = getApp()
 var that
 var uploadImage = require('../../utils/uploadFile.js'); //地址换成你自己存放文件的位置
+const { formatTime } = require('../../utils/util.js');
 var util = require('../../utils/util.js');
 
 Page({
@@ -10,7 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    abled: true
+    abled: true,
+    img_str: '',
+    img_paths: ''
   },
 
   /**
@@ -22,13 +25,14 @@ Page({
       id: options.id,
       ads: options.ads,
       type: options.type,
-      pic_cnt: options.pic_cnt
+      pic_cnt: options.pic_cnt,
+      img_str: options.img_str
     })
     console.log(this.data.pic_cnt)
     console.log(app.globalData.pic_url)
-    var imgs = []
-    for (var i = 0; i < this.data.pic_cnt; i++)
-      imgs.push(app.globalData.pic_url + '/' + i + '.jpg')
+    var imgs = this.data.img_str.split(',')
+    //for (var i = 0; i < this.data.pic_cnt; i++)
+      //imgs.push(app.globalData.pic_url + '/' + i + '.jpg')
     this.setData({
       imgs: imgs,
       imgs_ori: imgs
@@ -75,6 +79,7 @@ Page({
         })
       }
     })
+    console.log("##uploadimg##")
     console.log(that.data.imgs)
   },
 
@@ -86,6 +91,8 @@ Page({
       imgs: this.data.imgs,
       pic_cnt: this.data.pic_cnt - 1
     })
+    console.log("##RemoveImg##")
+    console.log(that.data.imgs)
   },
 
   updateClick: function (e) {
@@ -142,8 +149,49 @@ Page({
     this.setData({
       abled: false
     })
+    for (var i = 0; i < that.data.imgs.length; i++) {
+      //显示消息提示框
+      wx.showLoading({
+        title: '上传中' + (i + 1),
+        mask: true
+      })
+      //console.log(that.data.imgs[i].split('.'))
+      //if (that.data.imgs[i] == that.data.imgs_ori[i])
+      if (that.data.imgs[i].split('.')[0] == "https://sanmizufang")
+        continue
+      var now_time =  new Date().getTime()
+      that.data.imgs[i] = app.globalData.pic_url + '/' + now_time + '.jpg'
+      uploadImage(that.data.imgs[i], now_time, app.globalData.phone+'/imgs/',
+        function (result) {
+          console.log("======上传成功图片地址为：", result);
+          //做你具体的业务逻辑操作
+
+        },
+        function (result) {
+          console.log("======上传失败======", result);
+          //做你具体的业务逻辑操作
+          wx.showToast({
+            title: '图片上传失败！',
+            icon: 'none'
+          })
+          wx.hideLoading()
+          this.setData({
+            abled: true
+          })
+          return
+        }
+      )
+    }
+    for (var i = 0; i < that.data.imgs.length; i++) {
+        if (i == (that.data.imgs.length-1))
+          that.data.img_paths = that.data.img_paths + that.data.imgs[i]
+        else
+          that.data.img_paths = that.data.img_paths + that.data.imgs[i] + ","
+    }
+    console.log("start...")
+    console.log(that.data.img_paths)
     wx.request({
-      url: app.globalData.url + 'op=update_house&ads=' + encodeURI(this.data.ads) + '&type=' + encodeURI(this.data.type) + '&rent=' + this.data.rent + '&piccnt=' + this.data.pic_cnt + '&maxg=' + this.data.maxg + '&hid=' + this.data.id,
+      url: app.globalData.url + 'update_house?ads=' + encodeURI(this.data.ads) + '&type=' + encodeURI(this.data.type) + '&rent=' + this.data.rent + '&piccnt=' + this.data.pic_cnt + '&maxg=' + this.data.maxg + '&hid=' + this.data.id + 'img_paths=' + this.data.img_paths,
       success(res) {
         if (res.data == -1) {
           wx.showToast({
@@ -152,36 +200,8 @@ Page({
           })
           return
         }
-        var id = that.data.id
-        for (var i = 0; i < that.data.imgs.length; i++) {
-          //显示消息提示框
-          wx.showLoading({
-            title: '上传中' + (i + 1),
-            mask: true
-          })
-          if (that.data.imgs[i] == that.data.imgs_ori[i])
-            continue
-          uploadImage(that.data.imgs[i].split('?')[0], (i + 1).toString(), 'pics/' + id + '/',
-            function (result) {
-              console.log("======上传成功图片地址为：", result);
-              //做你具体的业务逻辑操作
-
-            },
-            function (result) {
-              console.log("======上传失败======", result);
-              //做你具体的业务逻辑操作
-              wx.showToast({
-                title: '图片上传失败！',
-                icon: 'none'
-              })
-              wx.hideLoading()
-              this.setData({
-                abled: true
-              })
-              return
-            }
-          )
-        }
+        //var id = that.data.id
+        
         setTimeout(function () {
           var pages = getCurrentPages()
           wx.navigateBack({
