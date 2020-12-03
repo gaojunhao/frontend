@@ -47,10 +47,11 @@
 <view class="longer-line"></view>
 <view class="tabbar">
 	<view wx:if="{{user_phone==hphone && user_ident=='host'}}" class="btnView">
+		<!--
 		<view class="buttonType">
 			<image class="btnicon" src="../../images/topic-detail/hetong2.png" bindtap="OnRentClick"></image>
 			登记
-		</view>
+		</view>-->
 		<view class="buttonType">
 			<image class="btnicon" bindtap="OnEditClick" src="../../images/topic-detail/edit.png"></image>
 			编辑

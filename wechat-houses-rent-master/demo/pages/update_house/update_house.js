@@ -160,7 +160,6 @@ Page({
       if (that.data.imgs[i].split('.')[0] == "https://sanmizufang")
         continue
       var now_time =  new Date().getTime()
-      that.data.imgs[i] = app.globalData.pic_url + '/' + now_time + '.jpg'
       uploadImage(that.data.imgs[i], now_time, app.globalData.phone+'/imgs/',
         function (result) {
           console.log("======上传成功图片地址为：", result);
@@ -181,6 +180,7 @@ Page({
           return
         }
       )
+      that.data.imgs[i] = app.globalData.pic_url + '/' + now_time + '.jpg'
     }
     for (var i = 0; i < that.data.imgs.length; i++) {
         if (i == (that.data.imgs.length-1))
@@ -188,10 +188,27 @@ Page({
         else
           that.data.img_paths = that.data.img_paths + that.data.imgs[i] + ","
     }
-    console.log("start...")
+    
     console.log(that.data.img_paths)
     wx.request({
-      url: app.globalData.url + 'update_house?ads=' + encodeURI(this.data.ads) + '&type=' + encodeURI(this.data.type) + '&rent=' + this.data.rent + '&piccnt=' + this.data.pic_cnt + '&maxg=' + this.data.maxg + '&hid=' + this.data.id + 'img_paths=' + this.data.img_paths,
+      //url: app.globalData.url + 'update_house?ads=' + encodeURI(this.data.ads) + '&type=' + encodeURI(this.data.type) + '&rent=' + this.data.rent + '&piccnt=' + this.data.pic_cnt + '&maxg=' + this.data.maxg + '&hid=' + this.data.id + 'img_paths=' + this.data.img_paths,
+      url: app.globalData.url + 'updatehouse',
+      method: 'post',
+      data: {
+        //phone: app.globalData.phone,
+        phone: app.globalData.phone,
+        ads: this.data.ads,
+        maxg: this.data.maxg,
+        type: this.data.type,
+        rent: this.data.rent,
+        img: this.data.img_paths,
+        img_count: this.data.pic_cnt,
+        status: "待租",
+        avasrc: app.globalData.icon
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
       success(res) {
         if (res.data == -1) {
           wx.showToast({
@@ -200,15 +217,20 @@ Page({
           })
           return
         }
-        //var id = that.data.id
+        var id = that.data.id
+        console.log("start...")
+        console.log(id)
         
         setTimeout(function () {
           var pages = getCurrentPages()
-          wx.navigateBack({
-            delta: 1
+          wx.navigateTo({
+            url: "../homeDetail/homeDetail?id=" + id
           })
-          var prevPage = pages[pages.length - 2]
-          prevPage.onLoad()
+          /*wx.navigateBack({
+            delta: 1
+          })*/
+          //var prevPage = pages[pages.length - 2]
+          //prevPage.onLoad()
         }, 2000)
 
         wx.showToast({

@@ -214,8 +214,9 @@ Page({
             title: '处理中',
           })
           wx.request({
-            url: "你的服务器链接",
+            url: app.globalData.url + 'deletehouse?id=' + this.data.id + '&phone=' + this.data.phone,
             success(res) {
+              console.log(res.data)
               if (res.data == 0) {
 
                 setTimeout(
