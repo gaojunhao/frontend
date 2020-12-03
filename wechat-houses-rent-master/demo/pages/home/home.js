@@ -25,6 +25,9 @@ Page({
     this.setData({
       ident: app.globalData.ident
     })
+    var now_time = new Date()
+    
+    console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
 	
 	
     var cnt = 0
@@ -78,6 +81,7 @@ Page({
    * 获取初始列表数据
    */
   getData: function () {
+    this.data.itemcnt = 0
     that.setData({
       houses: [],
     })
@@ -118,7 +122,7 @@ Page({
           houses: arr,
           //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
           //itemcnt: arr.length
-          itemcnt: 1
+          itemcnt: 0
         })
         wx.stopPullDownRefresh();
         wx.hideLoading({})

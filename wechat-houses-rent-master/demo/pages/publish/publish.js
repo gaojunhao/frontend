@@ -50,7 +50,7 @@ Page({
       data: {
         phone: app.globalData.phone,
         text: that.data.content,
-        date: new Date().toLocaleDateString,
+        date: new Date().toLocaleDateString() + " " + new Date().getUTCHours() + ":" + new Date().getUTCMinutes() + ":" + new Date().getUTCSeconds(),
         name: app.globalData.name,
         icon: app.globalData.icon 
       },

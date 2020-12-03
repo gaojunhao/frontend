@@ -218,9 +218,18 @@ Page({
           })
           return
         }
-        setTimeout(function () {
+        /*setTimeout(function () {
           wx.navigateBack()
-        }, 2000)
+        }, 2000)*/
+        setTimeout(
+          function () {
+            var pages = getCurrentPages()
+            var prevPage = pages[pages.length - 2] // 获取上一页
+            prevPage.onLoad()
+            wx.navigateBack({})
+          },
+          2000
+        )
         wx.showToast({
           title: '发布成功！',
         })

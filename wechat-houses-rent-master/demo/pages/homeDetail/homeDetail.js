@@ -1,12 +1,13 @@
 var that
 const app = getApp()
+const env = require('./homeDetail.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    user_phone: '18052786989',
+    user_phone: '',
     user_ident: 'host',
     id: '',
     phone: '',
@@ -191,6 +192,8 @@ Page({
   },
 
   OnDeleteClick: function (e) {
+    app.globalData.id = this.data.id
+    app.globalData.phone = this.data.user_phone
     if (!app.globalData.login) {
       wx.showToast({
         title: '您尚未登录！',
@@ -213,9 +216,12 @@ Page({
           wx.showLoading({
             title: '处理中',
           })
+          console.log(app.globalData.url)
           wx.request({
-            url: app.globalData.url + 'deletehouse?id=' + this.data.id + '&phone=' + this.data.phone,
+            url: app.globalData.url + 'deletehouse?id=' + app.globalData.id + '&phone=' + app.globalData.phone,
             success(res) {
+              console.log("delete house...")
+              console.log(res)
               console.log(res.data)
               if (res.data == 0) {
 
@@ -240,6 +246,7 @@ Page({
 
             }
           })
+          //wx.hideLoading()
         }
       }
     })

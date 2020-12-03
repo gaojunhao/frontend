@@ -29,7 +29,6 @@ Page({
           icon: res.data.icon,
           abled: true
         })
-
       }
     })
   },
@@ -60,13 +59,16 @@ Page({
   },
 
   onOnDeleteClick: function (e) {
+    app.globalData.id = that.data.id
+    app.globalData.phone = that.data.phone
+    console.log(app.globalData.id)
     wx.showModal({
       title: '删除',
       content: '确认删除该贴子？',
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
-          var url = '你的服务器链接'
+          var url = 'http://www.semmy.cn/springmvc/delOneTip?id=' + app.globalData.id + '&phone=' +app.globalData.phone
           wx.showLoading({
             title: '处理中',
           })
