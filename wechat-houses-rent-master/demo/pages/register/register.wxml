@@ -50,7 +50,7 @@
 				<radio value="1" class="radiopad" checked="true">男</radio>
 				<radio value="2" class="radiopad">女</radio>
 			</radio-group>
-		</view>->
+		</view>
 
 		<view class="ava">
 			<label>选择头像：</label>

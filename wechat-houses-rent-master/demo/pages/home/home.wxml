@@ -1,24 +1,7 @@
 <!--miniprogram/pages/home/home.wxml-->
+<!--
 <view>
-	<view>
-		<view class="weui-search-bar">
-
-			<view class="weui-search-bar__form">
-				<!-- 搜索框 -->
-				<view class="weui-search-bar__box">
-					<icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-					<input type="text" class="weui-search-bar__input" placeholder="请输入房屋名称或房型关键词" bindinput="OnSearchInput" />
-				</view>
-			</view>
-			<!-- 搜索按钮,调用搜索查询方法 -->
-			<view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
-		</view>
-	</view>
-</view>
-
-<view>
-	<view>
-		<view class="weui-elect-bar">
+			<view class="weui-elect-bar">
 			<view class="elect-bar-inner">
 				<checkbox-group class="elect-bar-inner" bindchange="OnCheckChange">
 					<checkbox>显示已租出</checkbox>
@@ -32,6 +15,38 @@
 			</view>
 		</view>
 	</view>
+	-->
+	<!--
+<view class="weui-search-bar">
+<view class="weui-search-bar__form">
+
+	<view class="weui-search-bar__box">
+		<icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+		<input type="text" class="weui-search-bar__input" placeholder="请输入房屋名称或房型关键词" bindinput="OnSearchInput" />
+	</view>
+</view>
+
+<view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
+</view>
+-->
+
+<view class="weui-search-bar">
+	<view class="weui-address-bar__cancel-btn" bindtap='OnSearchClick'>地址</view>
+<!--搜索按钮,调用搜索查询方法-->
+<view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
+</view>
+
+<view class="weui-search-bar-inside">
+	<!--	
+<view class="weui-search-bar__form">
+搜索框
+	<view class="weui-search-bar__box">
+		<icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+		<input type="text" class="weui-search-bar__input" placeholder="请输入房屋名称或房型关键词" bindinput="OnSearchInput" />
+	</view>
+</view>
+
+<view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>-->
 </view>
 
 
@@ -66,8 +81,8 @@
 
 					<view class='font-rent'>{{item.rent}} <text class="font-rent-unit">元/月</text></view>
 				</view>
-			</view>
 		</view>
+	</view>
 		<view class='container-line'></view>
 	</block>
 </block>
