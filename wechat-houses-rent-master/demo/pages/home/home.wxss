@@ -148,9 +148,9 @@
 }
 
 .weui-icon-search_in-box {
-  position: absolute;
-  left: 10px;
-  top: 7px;
+  position: relative;
+  margin-left: 5px;
+  margin-top: 7px;
 }
 
 .weui-search-bar__form {
@@ -179,14 +179,14 @@
 }
 
 .weui-address-bar__cancel-btn {
-  margin-left: 10px;
+  margin-left: calc(12vw);
   line-height: 28px;
   color: #09BB07;
   white-space: nowrap;
 }
 
 .weui-search-bar__cancel-btn {
-  margin-left: 10px;
+  margin-left: calc(35vw);
   line-height: 28px;
   color: #09BB07;
   white-space: nowrap;

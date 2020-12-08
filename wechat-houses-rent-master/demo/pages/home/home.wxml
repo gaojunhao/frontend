@@ -29,15 +29,17 @@
 <view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
 </view>
 -->
-
+<view class="weui-search-bar-inside"></view>
 <view class="weui-search-bar">
-	<view class="weui-address-bar__cancel-btn" bindtap='OnSearchClick'>地址</view>
+	<view class="weui-address-bar__cancel-btn" bindtap='OnAddressClick'>位置</view>
+	<icon class="weui-icon-search_in-box" type="search" size="14"></icon>
 <!--搜索按钮,调用搜索查询方法-->
 <view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
+<icon class="weui-icon-search_in-box" type="search" size="14"></icon>
 </view>
-
+<!--
 <view class="weui-search-bar-inside">
-	<!--	
+		
 <view class="weui-search-bar__form">
 搜索框
 	<view class="weui-search-bar__box">
@@ -46,8 +48,8 @@
 	</view>
 </view>
 
-<view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>-->
-</view>
+<view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
+</view>-->
 
 
 <button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>

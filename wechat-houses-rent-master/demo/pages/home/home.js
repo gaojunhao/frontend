@@ -226,10 +226,17 @@ Page({
   },
 
   OnSearchClick: function (e) {
-    that.setData({
-      houses: []
+    console.log("OnSearchClick")
+    wx.navigateTo({
+      url: "../search/search"
     })
-    that.getData()
+  },
+
+  OnAddressClick: function (e) {
+    console.log("OnAddressClick")
+    wx.navigateTo({
+      url: "../address/address"
+    })
   },
 
   OnCheckChange: function (e) {
