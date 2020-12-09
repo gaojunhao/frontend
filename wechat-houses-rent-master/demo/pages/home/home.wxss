@@ -113,7 +113,7 @@
   display: -webkit-flex;
   display: flex;
   box-sizing: border-box;
-  background-color: #EFEFF4;
+  background-color: #ffffff;
   border-top: 1rpx solid #D7D6DC;
   border-bottom: 1rpx solid #D7D6DC;
 }
@@ -151,6 +151,16 @@
   position: relative;
   margin-left: 5px;
   margin-top: 7px;
+}
+.weui-icon-address_in-box {
+  position: relative;
+  margin-left: 5px;
+  margin-top: 10px;
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 10px 10px 0 10px;
+border-color: #bdbbbb transparent transparent transparent;
 }
 
 .weui-search-bar__form {

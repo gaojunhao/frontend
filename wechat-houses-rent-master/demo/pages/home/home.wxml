@@ -32,7 +32,7 @@
 <view class="weui-search-bar-inside"></view>
 <view class="weui-search-bar">
 	<view class="weui-address-bar__cancel-btn" bindtap='OnAddressClick'>位置</view>
-	<icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+	<icon class="weui-icon-address_in-box" type="address" size="14"></icon>
 <!--搜索按钮,调用搜索查询方法-->
 <view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
 <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
