@@ -10,7 +10,7 @@ App({
     }
 
     this.globalData = {
-      url: 'http://www.semmy.cn/springmvc/',
+      url: 'http://www.semmy.fun/springmvc/',
       pic_url: '',
       login: false
     }

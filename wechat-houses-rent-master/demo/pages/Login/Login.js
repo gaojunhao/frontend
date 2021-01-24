@@ -43,7 +43,7 @@ Page({
       return;
     }
 
-    var url = 'http://www.semmy.cn/springmvc/login?phone=' + this.data.phone + "&pswd=" + this.data.pswd + "&ident=" + this.data.ident
+    var url = 'http://www.semmy.fun/springmvc/login?phone=' + this.data.phone + "&pswd=" + this.data.pswd + "&ident=" + this.data.ident
 
     wx.showToast({
       title: '请稍等',

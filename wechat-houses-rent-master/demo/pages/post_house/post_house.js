@@ -190,7 +190,7 @@ Page({
     }
     console.log(app.globalData.icon)
     wx.request({
-      url: "http://www.semmy.cn/springmvc/sethouses",
+      url: "http://www.semmy.fun/springmvc/sethouses",
       method: 'post',
       data: {
         //phone: app.globalData.phone,

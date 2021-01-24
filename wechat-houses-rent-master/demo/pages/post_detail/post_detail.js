@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
     that = this
     wx.request({
-      url: 'http://www.semmy.cn/springmvc/getOneTip?id=' + options.id,
+      url: 'http://www.semmy.fun/springmvc/getOneTip?id=' + options.id,
       success(res) {
         that.setData({
           id: options.id,
@@ -68,7 +68,7 @@ Page({
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
-          var url = 'http://www.semmy.cn/springmvc/delOneTip?id=' + app.globalData.id + '&phone=' +app.globalData.phone
+          var url = 'http://www.semmy.fun/springmvc/delOneTip?id=' + app.globalData.id + '&phone=' +app.globalData.phone
           wx.showLoading({
             title: '处理中',
           })

@@ -89,7 +89,7 @@ Page({
       title: '加载中',
     })
 
-    var url = "http://www.semmy.cn/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
@@ -161,7 +161,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    var url = "http://www.semmy.cn/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {

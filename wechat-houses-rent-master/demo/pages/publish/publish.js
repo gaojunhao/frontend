@@ -42,7 +42,7 @@ Page({
       abled: false
     })
     wx.request({
-      url: 'http://www.semmy.cn/springmvc/publish',
+      url: 'http://www.semmy.fun/springmvc/publish',
       method: 'POST',
       header: {
         "Content-Type": "application/json"

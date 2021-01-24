@@ -14,7 +14,7 @@ Page({
 
   getData() {
     wx.request({
-      url: 'http://www.semmy.cn/springmvc/getAllTips?itemcnt=' + this.data.itemcnt,
+      url: 'http://www.semmy.fun/springmvc/getAllTips?itemcnt=' + this.data.itemcnt,
       success(res) {
         console.log(res.data)
         var temp = res.data

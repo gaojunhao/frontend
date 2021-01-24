@@ -29,7 +29,7 @@ Page({
     })
     that = this
     wx.request({
-      url: "http://www.semmy.cn/springmvc/getonehouse?id=" + option.id,
+      url: "http://www.semmy.fun/springmvc/getonehouse?id=" + option.id,
       success(res) {
         console.log(res.data)
         console.log(res.data.avasrc)
