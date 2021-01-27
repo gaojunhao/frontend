@@ -1,11 +1,16 @@
 /* miniprogram/pages/home/home.wxss */
 
 .menu-po{
-  position: relative;
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
-  bottom: 0;
+}
+.menu-table{
+  position: relative;
+  left: 0;
+  top: 90rpx;
+  right: 0;
 }
 .menu{
   background-color: #fff;
@@ -23,8 +28,8 @@
   justify-content: center;
 }
 .menu-nav image{
-  width: 32rpx;
-  height: 32rpx;
+  width: 28rpx;
+  height: 28rpx;
 }
 .menu-nav text{
   color: #696969;

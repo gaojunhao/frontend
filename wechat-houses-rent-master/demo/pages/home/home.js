@@ -70,7 +70,8 @@ Page({
                 { id: 5, name: '五室以上' }
             ],
             rentType: [
-              { id: 0, name: '整租' },
+              { id: 0, name: '不限' },
+              { id: 1, name: '整租' },
               { id: 1, name: '合租' }
           ],
     houses: [],
@@ -197,6 +198,56 @@ Page({
     })
   },
 
+  getDataquyu: function (e) {
+    this.data.itemcnt = 0
+    console.log(e);
+    that.setData({
+      houses: [],
+    })
+    wx.showLoading({
+      title: '加载中',
+    })
+  
+    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    wx.request({
+      url: url,
+      success(res) {
+        console.log(res.data)
+        var arr = res.data
+    
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i].ads.length > 30) {
+            arr[i].ads = arr[i].ads.substring(0, 28) + " …"
+          }
+  
+          var s = arr[i]['type']
+          var end = arr[i]['type'].length
+          if (arr[i]['type'].length > 12) {
+            end = 13
+            for (var j = end; j >= 0; j--)
+              if (s[j] == '，') {
+                end = j;
+                break;
+              }
+          }
+          arr[i]['type'] = s.substring(0, end).split('，')
+          //arr[i].rent = arr[i].rent.toFixed(2)
+          var simg = arr[i]['img']
+          var endimg = arr[i]['img'].length
+          arr[i]['img'] = simg.substring(0, endimg).split(',')
+        }
+    
+        that.setData({
+          houses: arr,
+          //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
+          //itemcnt: arr.length
+          itemcnt: 0
+        })
+        wx.stopPullDownRefresh();
+        wx.hideLoading({})
+      }
+    })
+  },
   /**
    * item 点击
    */
@@ -384,7 +435,7 @@ ditieClick: function(e){
 },
 quyuClick: function(e){
         var rowNum = e.currentTarget.dataset.hi;
-        console.log(rowNum);
+        this.getDataquyu(rowNum);
         var menuSrc = "meunShow[0].isShows";
         this.setData({
           [menuSrc]: true

@@ -53,6 +53,40 @@
 <view class="weui-search-bar__cancel-btn" bindtap='OnSearchClick'>搜索</view>
 </view>-->
 <!-- 下拉菜单 -->
+<view class="menu-table">
+<block wx:for='{{houses}}' wx:key="item">
+		<view class="container" data-id="{{item.id}}" bindtap="onItemClick">
+			<view class='container-img'>
+				<image mode="aspectFill" class="img-prev" src="{{item.img[0]}}" lazy-load="true"></image>
+			</view>
+
+			<view class='container-content'>
+				<view class='house-title'>
+					<view class='house-ads'>
+						<view class='user-name'>{{item.ads}}</view>
+					</view>
+				</view>
+
+				<view class='content'>
+
+					<text class='content-maxg'>最大房客数：{{item.maxg}}</text>
+
+					<view class="tagView">
+						<text wx:if="{{item.status=='待租'}}" class="tagText-n">待租</text>
+						<text wx:else class="tagText-r">已租</text>
+						<view wx:for="{{item.type}}" wx:key="tag" wx:for-item="tag">
+							<text class="tagText">{{tag}}</text>
+						</view>
+					</view>
+
+					<view class='font-rent'>{{item.rent}} <text class="font-rent-unit">元/月</text></view>
+				</view>
+		</view>
+	</view>
+		<view class='container-line'></view>
+</block>
+</view>
+<button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>
 <view class='menu-po'>
         <!-- 导航栏 -->
         <view class='menu'>
@@ -90,42 +124,6 @@
 							<text class='meun-city-txt meun-city-txt-price' bindtap="rentTypeClick" data-hi="{{ index }}" wx:for="{{ rentType }}" wx:key="id">{{ item.name }}</text>
             </view>
         </view>
-
-    </view> 
-
-<button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>
-
-<block wx:for='{{houses}}' wx:key="item">
-	<block wx:if="{{item.status=='待租' || showRent==1}}">
-
-		<view class="container" data-id="{{item.id}}" bindtap="onItemClick">
-			<view class='container-img'>
-				<image mode="aspectFill" class="img-prev" src="{{item.img[0]}}" lazy-load="true"></image>
-			</view>
-
-			<view class='container-content'>
-				<view class='house-title'>
-					<view class='house-ads'>
-						<view class='user-name'>{{item.ads}}</view>
-					</view>
-				</view>
-
-				<view class='content'>
-
-					<text class='content-maxg'>最大房客数：{{item.maxg}}</text>
-
-					<view class="tagView">
-						<text wx:if="{{item.status=='待租'}}" class="tagText-n">待租</text>
-						<text wx:else class="tagText-r">已租</text>
-						<view wx:for="{{item.type}}" wx:key="tag" wx:for-item="tag">
-							<text class="tagText">{{tag}}</text>
-						</view>
-					</view>
-
-					<view class='font-rent'>{{item.rent}} <text class="font-rent-unit">元/月</text></view>
-				</view>
 		</view>
-	</view>
-		<view class='container-line'></view>
-	</block>
-</block>
+		
+
