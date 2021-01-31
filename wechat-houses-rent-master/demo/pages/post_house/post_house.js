@@ -15,32 +15,111 @@ Page({
     maxg: '0',
     rent: '0.00',
     abled: true,
-  },
-
-  bindRegionChange: function (e) {
-    var that = this
-    //为了让选择框有个默认值，
-    that.setData({
-      clas: ''
-    })
-　　　//下拉框所选择的值
-    console.log('picker发送选择改变，携带值为', e.detail.value)
- 
-    this.setData({
-      //拼的字符串传后台
-      detailed: e.detail.value[0] + "," + e.detail.value[1] + "," + e.detail.value[2],
-      //下拉框选中的值
-      region: e.detail.value
-    })
+    buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
+    show:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    selectDitie: ['1号线', '2号线', '3号线', '4号线', '5号线', '6号线', '7号线', '8号线', '9号线', '10号线', '11号线', '12号线', '13号线', '14号线', '15号线', '16号线', '17号线', '浦江线'],//下拉列表的数据
+    selectData: ['黄浦', '静安', '长宁', '普陀', '徐汇', '浦东', '杨浦', '虹口', '宝山', '闵行', '松江', '嘉定', '青浦', '奉贤', '崇明', '金山'],
+    selectSex: ['不限', '男', '女'],
+    index:0//选择的下拉列表下标
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    that = this
+    that = this;
+    this.data.buttons[0].checked = true;
+    this.setData({
+      buttons: this.data.buttons,
+    });
   },
 
+  // 点击下拉显示框
+  selectTap(){
+    this.setData({
+      show: !this.data.show
+    });
+  },
+  // 点击下拉列表
+  optionTap(e){
+    let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+    this.setData({
+      index:Index,
+      show:!this.data.show
+    });
+  },
+
+    // 点击下拉显示框
+    selectTapditie(){
+      this.setData({
+        showditie: !this.data.showditie
+      });
+    },
+    // 点击下拉列表
+    optionTapditie(e){
+      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+      this.setData({
+        index:Index,
+        showditie:!this.data.showditie
+      });
+    },
+
+    // 点击下拉显示框
+    selectTapsex(){
+      this.setData({
+        showsex: !this.data.showsex
+      });
+    },
+    // 点击下拉列表
+    optionTapsex(e){
+      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+      this.setData({
+        index:Index,
+        showsex:!this.data.showsex
+      });
+    },
+
+  radioButtonTap: function (e) {
+    console.log(e)
+    let id = e.currentTarget.dataset.id
+    console.log(id)
+    for (let i = 0; i < this.data.buttons.length; i++) {
+      if (this.data.buttons[i].id == id) {
+        //当前点击的位置为true即选中
+        this.data.buttons[i].checked = true;
+      }
+      else {
+        //其他的位置为false
+        this.data.buttons[i].checked = false;
+      }
+    }
+    this.setData({
+      buttons: this.data.buttons,
+    })
+  },
+
+  checkButtonTap:function(e){
+    console.log(e)
+    let id = e.currentTarget.dataset.id
+    console.log(id)
+    for (let i = 0; i < this.data.buttons.length; i++) {
+      if (this.data.buttons[i].id == id) {
+        if (this.data.buttons[i].checked == true) {
+          this.data.buttons[i].checked = false;
+         
+        } else {
+          this.data.buttons[i].checked = true;
+          
+        }
+      }
+    }
+   this.setData({
+     buttons: this.data.buttons,
+    })
+    
+  },
 
   OnAdsInput: function (e) {
     this.setData({
