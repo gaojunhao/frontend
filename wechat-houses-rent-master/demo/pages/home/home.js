@@ -252,11 +252,28 @@ Page({
    * item 点击
    */
   onItemClick: function (event) {
+    var menuSrcsa = "meunShow[0].isShows";
+    var menuSrcsb = "meunShow[1].isShows";
+    var menuSrcsc = "meunShow[2].isShows";
+    var menuSrcsd = "meunShow[3].isShows";
+    console.log([menuSrcsa].value)
+    if([menuSrcsa].value || [menuSrcsb] || [menuSrcsc] || [menuSrcsd]) {
+      // 循环data中设置的meunShow
+      for (var n = 0; n < this.data.meunShow.length; n++){
+        // 拼接 ，使我们可以获取到menuShow里面每一个isSHows
+        var menuSrcs = "meunShow[" + n + "].isShows";
+            // 初始化，每次点击时先全部隐藏，但是重复点击不会隐藏
+            this.setData({
+                [menuSrcs]: true
+            });
+    };
+    } else {
     var id = event.currentTarget.dataset.id;
     console.log(id);
     wx.navigateTo({
       url: "../homeDetail/homeDetail?id=" + id
     })
+  }
   },
 
   /**

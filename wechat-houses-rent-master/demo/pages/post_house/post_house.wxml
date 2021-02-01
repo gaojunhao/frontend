@@ -1,18 +1,27 @@
 <!--pages/post_house/post_house.wxml-->
-<view class="container">
+<view class="container" bindtap="containertap">
 
 	<view class="inputView">
 		<view class="inputView3">
 			<text class="label1">租赁方式： </text> <block wx:for="{{buttons}}" wx:key="buttons"> <button class='{{item.checked?"checked_button":"normal_button"}}' data-id='{{item.id}}' bindtap='radioButtonTap'>{{item.name}}</button></block>
 		</view>
 		<view class="inputView3">
-			<text class="label1">区域： </text> <input class="inputView2" type="text" bindinput="OnMaxgInput" />
+			<text class="label2">区域： </text> 
+		<view class='select_box'>
+    <view class='select' catchtap='selectTap'>
+        <text class='select_text'>{{selectquyu[indexquyu]}}</text>
+        <image class='select_img {{showquyu&&"select_img_rotate"}}' src='/images/san1.png'></image>         
+    </view>
+    <view class='option_box' style='height:{{showquyu?(selectquyu.length>5?300:selectquyu.length*60):0}}rpx;'>
+        <text class='option' style='{{index==selectquyu.length-1&&"border:0;"}}' wx:for='{{selectquyu}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+    </view>
+		</view>
 		</view>
 		<view class="inputView3">
 			<text class="label2">附近地铁： </text>
 			<view class='select_box'>
     <view class='select' catchtap='selectTapditie'>
-        <text class='select_text'>{{selectDitie[index]}}</text>
+        <text class='select_text'>{{selectDitie[indexditie]}}</text>
         <image class='select_img {{show&&"select_img_rotate"}}' src='/images/san1.png'></image>         
     </view>
     <view class='option_box' style='height:{{showditie?(selectDitie.length>5?300:selectDitie.length*60):0}}rpx;'>
@@ -21,37 +30,34 @@
 		</view>
 		</view>
 		<view class="inputView3">
-			<text class="label1">所在小区： </text> <input class="inputView2" type="text" bindinput="OnMaxgInput" />
+			<text class="label1">所在小区： </text> <input class="inputView5" type="text" bindinput="OnMaxgInput" />
 		</view>
 		<view class="inputView3">
-			<text class="label1">所在楼层： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" />
+			<text class="label1">所在楼层： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" /> <text class="label1">层</text>
 		</view>
 		<view class="inputView3">
-			<text class="label1">房型： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" />
+			<text class="label1">房型： </text> <input maxlength="2" class="inputView5" type="digit" bindinput="OnRentInput" />
 		</view>
 		<view class="inputView3">
-			<text class="label1">电梯： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" />
-		</view>
-		<view class="inputView3">
-			<text class="label1">房间面积： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" />
-		</view>
-		<view class="inputView3">
-			<text class="label2">区域： </text> 
-		<view class='select_box'>
-    <view class='select' catchtap='selectTap'>
-        <text class='select_text'>{{selectData[index]}}</text>
-        <image class='select_img {{show&&"select_img_rotate"}}' src='/images/san1.png'></image>         
+			<text class="label2">电梯： </text>
+			<view class='select_box'>
+    <view class='select' catchtap='selectTapdianti'>
+        <text class='select_text'>{{selectdianti[indexdianti]}}</text>
+        <image class='select_img {{showdianti&&"select_img_rotate"}}' src='/images/san1.png'></image>         
     </view>
-    <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+    <view class='option_box' style='height:{{showdianti?(selectdianti.length>5?300:selectdianti.length*60):0}}rpx;'>
+        <text class='option' style='{{index==selectdianti.length-1&&"border:0;"}}' wx:for='{{selectdianti}}' wx:key='this' data-index='{{index}}' catchtap='optionTapdianti'>{{item}}</text>
     </view>
 		</view>
+		</view>
+		<view class="inputView3">
+			<text class="label1">房间面积： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" /> <text class="label1">平方米</text>
 		</view>
 		<view class="inputView3">
 			<text class="label2">性别要求： </text>
 			<view class='select_box'>
     <view class='select' catchtap='selectTapsex'>
-        <text class='select_text'>{{selectSex[index]}}</text>
+        <text class='select_text'>{{selectSex[indexsex]}}</text>
         <image class='select_img {{showsex&&"select_img_rotate"}}' src='/images/san1.png'></image>         
     </view>
     <view class='option_box' style='height:{{showsex?(selectSex.length>5?300:selectSex.length*60):0}}rpx;'>
@@ -63,7 +69,16 @@
 			<text class="label1">租金(元/月)： </text> <input maxlength="8" class="inputView2" type="digit" bindinput="OnRentInput" />
 		</view>
 		<view class="inputView3">
-			<text class="label1">付款方式： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" />
+			<text class="label2">付款方式： </text>
+			<view class='select_box'>
+    <view class='select' catchtap='selectTapfukuan'>
+        <text class='select_text'>{{selectfukuan[indexfukuan]}}</text>
+        <image class='select_img {{showfukuan&&"select_img_rotate"}}' src='/images/san1.png'></image>         
+    </view>
+    <view class='option_box' style='height:{{showfukuan?(selectfukuan.length>5?300:selectfukuan.length*60):0}}rpx;'>
+        <text class='option' style='{{index==selectfukuan.length-1&&"border:0;"}}' wx:for='{{selectfukuan}}' wx:key='this' data-index='{{index}}' catchtap='optionTapfukuan'>{{item}}</text>
+    </view>
+		</view>
 		</view>
 		
 	</view>

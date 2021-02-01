@@ -16,13 +16,21 @@ Page({
     rent: '0.00',
     abled: true,
     buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
-    show:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     selectDitie: ['1号线', '2号线', '3号线', '4号线', '5号线', '6号线', '7号线', '8号线', '9号线', '10号线', '11号线', '12号线', '13号线', '14号线', '15号线', '16号线', '17号线', '浦江线'],//下拉列表的数据
-    selectData: ['黄浦', '静安', '长宁', '普陀', '徐汇', '浦东', '杨浦', '虹口', '宝山', '闵行', '松江', '嘉定', '青浦', '奉贤', '崇明', '金山'],
+    selectquyu: ['黄浦', '静安', '长宁', '普陀', '徐汇', '浦东', '杨浦', '虹口', '宝山', '闵行', '松江', '嘉定', '青浦', '奉贤', '崇明', '金山'],
     selectSex: ['不限', '男', '女'],
-    index:0//选择的下拉列表下标
+    selectdianti: ['有', '无'],
+    selectfukuan: ['押一付三', '押一付一'],
+    indexquyu:0,//选择的下拉列表下标
+    indexdianti:0,//选择的下拉列表下标
+    indexditie:0,//选择的下拉列表下标
+    indexsex:0,//选择的下拉列表下标
+    indexfukuan:0,//选择的下拉列表下标
   },
 
   /**
@@ -36,18 +44,28 @@ Page({
     });
   },
 
+  containertap(){
+    this.setData({
+      showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    });
+  },
+
   // 点击下拉显示框
   selectTap(){
     this.setData({
-      show: !this.data.show
+      showquyu: !this.data.showquyu
     });
   },
   // 点击下拉列表
   optionTap(e){
     let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
     this.setData({
-      index:Index,
-      show:!this.data.show
+      indexquyu:Index,
+      showquyu:!this.data.showquyu
     });
   },
 
@@ -61,7 +79,7 @@ Page({
     optionTapditie(e){
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
-        index:Index,
+        indexditie:Index,
         showditie:!this.data.showditie
       });
     },
@@ -76,8 +94,38 @@ Page({
     optionTapsex(e){
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
-        index:Index,
+        indexsex:Index,
         showsex:!this.data.showsex
+      });
+    },
+
+    // 点击下拉显示框
+    selectTapdianti(){
+      this.setData({
+        showdianti: !this.data.showdianti
+      });
+    },
+    // 点击下拉列表
+    optionTapdianti(e){
+      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+      this.setData({
+        indexdianti:Index,
+        showdianti:!this.data.showdianti
+      });
+    },
+
+    // 点击下拉显示框
+    selectTapfukuan(){
+      this.setData({
+        showfukuan: !this.data.showfukuan
+      });
+    },
+    // 点击下拉列表
+    optionTapfukuan(e){
+      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+      this.setData({
+        indexfukuan:Index,
+        showfukuan:!this.data.showfukuan
       });
     },
 
