@@ -81,7 +81,7 @@ Page({
     keyword: '',
     showRent: 0,
     itemcnt: 0,
-    ident: 'host'
+    ident: 'host',
   },
 
   /**
@@ -252,12 +252,7 @@ Page({
    * item 点击
    */
   onItemClick: function (event) {
-    var menuSrcsa = "meunShow[0].isShows";
-    var menuSrcsb = "meunShow[1].isShows";
-    var menuSrcsc = "meunShow[2].isShows";
-    var menuSrcsd = "meunShow[3].isShows";
-    console.log([menuSrcsa].value)
-    if([menuSrcsa].value || [menuSrcsb] || [menuSrcsc] || [menuSrcsd]) {
+    if(!this.data.meunShow[0].isShows || !this.data.meunShow[1].isShows || !this.data.meunShow[2].isShows || !this.data.meunShow[3].isShows) {
       // 循环data中设置的meunShow
       for (var n = 0; n < this.data.meunShow.length; n++){
         // 拼接 ，使我们可以获取到menuShow里面每一个isSHows

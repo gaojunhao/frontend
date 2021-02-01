@@ -36,7 +36,16 @@
 			<text class="label1">所在楼层： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" /> <text class="label1">层</text>
 		</view>
 		<view class="inputView3">
-			<text class="label1">房型： </text> <input maxlength="2" class="inputView5" type="digit" bindinput="OnRentInput" />
+			<text class="label2">房型： </text>
+			<view class='select_box'>
+    <view class='select' catchtap='selectTapfangxing'>
+        <text class='select_text'>{{selectfangxing[indexfangxing]}}</text>
+        <image class='select_img {{showfangxing&&"select_img_rotate"}}' src='/images/san1.png'></image>         
+    </view>
+    <view class='option_box' style='height:{{showfangxing?(selectfangxing.length>5?300:selectfangxing.length*60):0}}rpx;'>
+        <text class='option' style='{{index==selectfangxing.length-1&&"border:0;"}}' wx:for='{{selectfangxing}}' wx:key='this' data-index='{{index}}' catchtap='optionTapfangxing'>{{item}}</text>
+    </view>
+		</view>
 		</view>
 		<view class="inputView3">
 			<text class="label2">电梯： </text>

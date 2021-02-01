@@ -69,11 +69,10 @@
 
 				<view class='content'>
 
-					<text class='content-maxg'>最大房客数：{{item.maxg}}</text>
+					<text class='content-maxg'>所在楼层：{{item.maxg}}</text>
 
 					<view class="tagView">
-						<text wx:if="{{item.status=='待租'}}" class="tagText-n">待租</text>
-						<text wx:else class="tagText-r">已租</text>
+						<text class="tagText-n">{{item.ditie}}</text>
 						<view wx:for="{{item.type}}" wx:key="tag" wx:for-item="tag">
 							<text class="tagText">{{tag}}</text>
 						</view>
@@ -93,7 +92,7 @@
             <view class='menu-list'>
                 <view class='menu-nav' wx:for="{{ msgList }}" wx:for-index="idx" wx:key="key" data-hi="{{ idx }}" bindtap="menuClick">
                     <text class='menu-text'>{{ item.name }}</text>
-                    <image class='menu-image' src='/images/san1.png'></image>
+                    <image class='menu-image {{!meunShow[idx].isShows&&"select_img_rotate"}}' src='/images/san1.png'></image>
                 </view>
             </view>
         </view>

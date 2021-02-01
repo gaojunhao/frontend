@@ -21,16 +21,19 @@ Page({
     showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+    showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     selectDitie: ['1号线', '2号线', '3号线', '4号线', '5号线', '6号线', '7号线', '8号线', '9号线', '10号线', '11号线', '12号线', '13号线', '14号线', '15号线', '16号线', '17号线', '浦江线'],//下拉列表的数据
     selectquyu: ['黄浦', '静安', '长宁', '普陀', '徐汇', '浦东', '杨浦', '虹口', '宝山', '闵行', '松江', '嘉定', '青浦', '奉贤', '崇明', '金山'],
     selectSex: ['不限', '男', '女'],
     selectdianti: ['有', '无'],
     selectfukuan: ['押一付三', '押一付一'],
+    selectfangxing: ['一室', '二室', '三室', '四室', '五室', '五室以上'],
     indexquyu:0,//选择的下拉列表下标
     indexdianti:0,//选择的下拉列表下标
     indexditie:0,//选择的下拉列表下标
     indexsex:0,//选择的下拉列表下标
     indexfukuan:0,//选择的下拉列表下标
+    indexfangxing:0,//选择的下拉列表下标
   },
 
   /**
@@ -51,12 +54,18 @@ Page({
       showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
       showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
       showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     });
   },
 
   // 点击下拉显示框
   selectTap(){
     this.setData({
+      showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+      showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
       showquyu: !this.data.showquyu
     });
   },
@@ -72,6 +81,11 @@ Page({
     // 点击下拉显示框
     selectTapditie(){
       this.setData({
+        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
         showditie: !this.data.showditie
       });
     },
@@ -87,6 +101,11 @@ Page({
     // 点击下拉显示框
     selectTapsex(){
       this.setData({
+        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
         showsex: !this.data.showsex
       });
     },
@@ -102,6 +121,11 @@ Page({
     // 点击下拉显示框
     selectTapdianti(){
       this.setData({
+        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
         showdianti: !this.data.showdianti
       });
     },
@@ -117,6 +141,11 @@ Page({
     // 点击下拉显示框
     selectTapfukuan(){
       this.setData({
+        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
         showfukuan: !this.data.showfukuan
       });
     },
@@ -126,6 +155,26 @@ Page({
       this.setData({
         indexfukuan:Index,
         showfukuan:!this.data.showfukuan
+      });
+    },
+
+    // 点击下拉显示框
+    selectTapfangxing(){
+      this.setData({
+        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
+        showfangxing: !this.data.showfangxing
+      });
+    },
+    // 点击下拉列表
+    optionTapfangxing(e){
+      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
+      this.setData({
+        indexfangxing:Index,
+        showfangxing:!this.data.showfangxing
       });
     },
 
@@ -139,8 +188,7 @@ Page({
         this.data.buttons[i].checked = true;
       }
       else {
-        //其他的位置为false
-        this.data.buttons[i].checked = false;
+        //其他的位置为false        this.data.buttons[i].checked = false;
       }
     }
     this.setData({

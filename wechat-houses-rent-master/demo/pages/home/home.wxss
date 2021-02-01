@@ -27,16 +27,20 @@
   align-items: center;
   justify-content: center;
 }
-.menu-nav image{
+.menu-image{
   width: 28rpx;
   height: 28rpx;
+  display: block;
+  transition:transform 0.3s;
 }
-.menu-nav text{
+.menu-text{
   color: #696969;
   font-size: 14px;
 }
 
-
+.select_img_rotate{
+  transform:rotate(180deg); 
+}
 
 .menu-if{
   background-color: #ffffff;
