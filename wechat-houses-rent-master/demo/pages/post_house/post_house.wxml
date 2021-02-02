@@ -30,10 +30,10 @@
 		</view>
 		</view>
 		<view class="inputView3">
-			<text class="label1">所在小区： </text> <input class="inputView5" type="text" bindinput="OnMaxgInput" />
+			<text class="label1">所在小区： </text> <input class="inputView5" type="text" bindinput="OnxiaoquInput" />
 		</view>
 		<view class="inputView3">
-			<text class="label1">所在楼层： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" /> <text class="label1">层</text>
+			<text class="label1">所在楼层： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnloucengInput" /> <text class="label1">层</text>
 		</view>
 		<view class="inputView3">
 			<text class="label2">房型： </text>
@@ -60,7 +60,7 @@
 		</view>
 		</view>
 		<view class="inputView3">
-			<text class="label1">房间面积： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnRentInput" /> <text class="label1">平方米</text>
+			<text class="label1">房间面积： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnfangjiandaxiaoInput" /> <text class="label1">平方米</text>
 		</view>
 		<view class="inputView3">
 			<text class="label2">性别要求： </text>

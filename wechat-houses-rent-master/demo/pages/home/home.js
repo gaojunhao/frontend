@@ -168,19 +168,6 @@ Page({
           if (arr[i].ads.length > 30) {
             arr[i].ads = arr[i].ads.substring(0, 28) + " …"
           }
-
-          var s = arr[i]['type']
-          var end = arr[i]['type'].length
-          if (arr[i]['type'].length > 12) {
-            end = 13
-            for (var j = end; j >= 0; j--)
-              if (s[j] == '，') {
-                end = j;
-                break;
-              }
-          }
-          arr[i]['type'] = s.substring(0, end).split('，')
-          //arr[i].rent = arr[i].rent.toFixed(2)
           var simg = arr[i]['img']
           var endimg = arr[i]['img'].length
           arr[i]['img'] = simg.substring(0, endimg).split(',')

@@ -7,14 +7,23 @@ const env = require('../../utils/config.js');
 Page({
 
   data: {
+    rent: 0,
+    zulintype: '',
+    quyu: '',
+    ditie: '',
+    address: '',
+    xiaoqu: '',
+    louceng: 0,
+    fangjiantype: '',
+    dianti: '', 
+    fangjiandaxiao: 0,
+    sex: '',
+    fukuantype: '',
     img_count: 0,
     imgs: [],
     img_paths: '',
-    ads: '',
-    type: '',
-    maxg: '0',
-    rent: '0.00',
-    abled: true,
+    status: true,
+    abled: false,
     buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -74,7 +83,8 @@ Page({
     let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
     this.setData({
       indexquyu:Index,
-      showquyu:!this.data.showquyu
+      showquyu:!this.data.showquyu,
+      quyu: this.data.selectquyu[Index],
     });
   },
 
@@ -94,7 +104,8 @@ Page({
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
         indexditie:Index,
-        showditie:!this.data.showditie
+        showditie:!this.data.showditie,
+        ditie: this.data.selectDitie[Index],
       });
     },
 
@@ -114,7 +125,8 @@ Page({
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
         indexsex:Index,
-        showsex:!this.data.showsex
+        showsex:!this.data.showsex,
+        sex: this.data.selectSex[Index],
       });
     },
 
@@ -134,7 +146,8 @@ Page({
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
         indexdianti:Index,
-        showdianti:!this.data.showdianti
+        showdianti:!this.data.showdianti,
+        dianti: this.data.selectdianti[Index],
       });
     },
 
@@ -154,7 +167,8 @@ Page({
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
         indexfukuan:Index,
-        showfukuan:!this.data.showfukuan
+        showfukuan:!this.data.showfukuan,
+        fukuantype: this.data.selectfukuan[Index],
       });
     },
 
@@ -174,7 +188,8 @@ Page({
       let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
       this.setData({
         indexfangxing:Index,
-        showfangxing:!this.data.showfangxing
+        showfangxing:!this.data.showfangxing,
+        fangjiantype: this.data.selectfangxing[Index],
       });
     },
 
@@ -188,12 +203,18 @@ Page({
         this.data.buttons[i].checked = true;
       }
       else {
-        //其他的位置为false        this.data.buttons[i].checked = false;
+        this.data.buttons[i].checked = false;
       }
     }
     this.setData({
       buttons: this.data.buttons,
     })
+    if(this.data.buttons[0].checked){
+        this.data.zulintype = '整租';
+    }
+    else{
+        this.data.zulintype = '合租';
+    }
   },
 
   checkButtonTap:function(e){
@@ -229,15 +250,27 @@ Page({
     })
   },
 
-  OnMaxgInput: function (e) {
+  OnloucengInput: function (e) {
     this.setData({
-      maxg: e.detail.value
+      louceng: e.detail.value
+    })
+  },
+
+  OnxiaoquInput: function (e) {
+    this.setData({
+      xiaoqu: e.detail.value
     })
   },
 
   OnRentInput: function (e) {
     this.setData({
       rent: e.detail.value
+    })
+  },
+
+  OnfangjiandaxiaoInput: function (e) {
+    this.setData({
+      fangjiandaxiao: e.detail.value
     })
   },
 
@@ -368,15 +401,22 @@ Page({
       url: "http://www.semmy.fun/springmvc/sethouses",
       method: 'post',
       data: {
-        //phone: app.globalData.phone,
         phone: app.globalData.phone,
-        ads: this.data.ads,
-        maxg: this.data.maxg,
-        type: this.data.type,
         rent: this.data.rent,
+        zulintype: this.data.zulintype,
+        quyu: this.data.quyu,
+        ditie: this.data.ditie,
+        address: this.data.address,
+        xiaoqu: this.data.xiaoqu,
+        louceng: this.data.louceng,
+        fangjiantype: this.data.fangjiantype,
+        dianti: this.data.dianti, 
+        fangjiandaxiao: this.data.fangjiandaxiao,
+        sex: this.data.sex,
+        fukuantype: this.data.fukuantype,
         img: that.data.img_paths,
         img_count: this.data.img_count,
-        status: "待租",
+        status: true,
         avasrc: app.globalData.icon
       },
       header: {
