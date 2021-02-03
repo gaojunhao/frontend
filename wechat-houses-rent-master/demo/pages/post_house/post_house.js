@@ -22,7 +22,7 @@ Page({
     img_count: 0,
     imgs: [],
     img_paths: '',
-    status: true,
+    status: '',
     abled: false,
     buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -416,7 +416,7 @@ Page({
         fukuantype: this.data.fukuantype,
         img: that.data.img_paths,
         img_count: this.data.img_count,
-        status: true,
+        status: '待租',
         avasrc: app.globalData.icon
       },
       header: {
