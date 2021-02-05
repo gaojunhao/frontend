@@ -18,7 +18,8 @@
     "pages/post_house/post_house",
     "pages/history/history",
     "pages/address/address",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/authorize/authorize"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

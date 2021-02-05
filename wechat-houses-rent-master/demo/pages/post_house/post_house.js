@@ -23,7 +23,7 @@ Page({
     imgs: [],
     img_paths: '',
     status: '',
-    abled: false,
+    abled: true,
     buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
