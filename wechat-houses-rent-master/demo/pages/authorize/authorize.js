@@ -1,4 +1,5 @@
 // pages/authorize/authorize.js
+const app = getApp()
 Page({
 
   /**
@@ -18,13 +19,15 @@ Page({
     wx.getSetting({
         success: function (res) {
             if (res.authSetting['scope.userInfo']) {
+              console.log('hhhh')
                 wx.getUserInfo({
                     success: function (res) {
                         //从数据库获取用户信息
+                        console.log(res.userInfo)
                         that.queryUsreInfo();
                         //用户已经授权过
                         wx.switchTab({
-                            url: '/pages/index/index'
+                            url: '/pages/me/me'
                         })
                     }
                 });
@@ -37,6 +40,7 @@ Page({
     if (e.detail.userInfo) {
         //用户按了允许授权按钮
         var that = this;
+        console.log(app.globalData.openid)
         //插入登录的用户的相关信息到数据库
         wx.request({
             url: app.globalData.urlPath + 'user/add',
@@ -58,7 +62,7 @@ Page({
         });
         //授权成功后，跳转进入小程序首页
         wx.switchTab({
-            url: '/pages/index/index'  
+            url: '/pages/me/me'  
         })
     } else {
         //用户按了拒绝按钮
@@ -77,6 +81,7 @@ Page({
 },
 //获取用户信息接口
 queryUsreInfo: function () {
+  console.log("hello gjh")
     wx.request({
         url: app.globalData.urlPath + 'user/userInfo',
         data: {

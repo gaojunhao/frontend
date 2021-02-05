@@ -167,7 +167,7 @@ Page({
   clickUser: function (e) {
     if (!app.globalData.login) {
       wx.navigateTo({
-        url: '../Log/Login',
+        url: '../authorize/authorize',
       })
       return
     }
