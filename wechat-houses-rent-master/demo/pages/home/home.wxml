@@ -20,7 +20,7 @@
 
 					<view class="tagView">
 						<text class="tagText-n">{{item.ditie}}</text>
-						<text class="tagText">{{item.dianti}}</text>
+						<text class="tagText">{{item.dianti}}电梯</text>
 					</view>
 				</view>
 
@@ -30,7 +30,7 @@
 		<view class='container-line'></view>
 </block>
 </view>
-<button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>
+<!--<button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>-->
 <view class='menu-po'>
         <!-- 导航栏 -->
         <view class='menu'>
@@ -46,26 +46,26 @@
             <view class="meun-txt" hidden='{{ meunShow[0].isShows ? true : false }}'>
                 <view class='menu-text-list'>
                     <view class='menu-text-list-left over-auto'>
-                        <text wx:for="{{ areaLise }}" wx:key="name" class='meun-city-txt' bindtap="rowClick"  data-hi="{{ index }}">{{ item.name }}</text>
+                        <text wx:for="{{ areaLise }}" wx:key="areaLise" class='{{item.checked?"meun-city-txt-click":"meun-city-txt"}}' bindtap="rowClick"  data-hi="{{ item.id }}">{{ item.name }}</text>
                     </view>
                     <view class='menu-text-list-rig over-auto' hidden='{{ rigShow ? true : fasle }}'>
                         <view class='menu-city' hidden='{{ rowShow[0].isShows ? true : fasle }}'>
-                            <text wx:for="{{ rowLise.row_ditie.name }}" wx:key="item" class='meun-city-txt' bindtap="ditieClick" data-hi="{{ index }}">{{ item }}</text>
+                            <text wx:for="{{ row_ditie}}" wx:key="row_ditie" class='{{item.checked?"meun-city-txt-click":"meun-city-txt"}}' bindtap="ditieClick" data-hi="{{ item.id }}">{{ item.name }}</text>
                         </view>
                         <view class='menu-city' hidden='{{ rowShow[1].isShows ? true : fasle }}'>
-                            <text wx:for="{{ rowLise.row_quyu.name }}" wx:key="item" class='meun-city-txt' bindtap="quyuClick" data-hi="{{ index }}">{{ item }}</text>
+                            <text wx:for="{{ row_quyu }}" wx:key="row_quyu" class='{{item.checked?"meun-city-txt-click":"meun-city-txt"}}' bindtap="quyuClick" data-hi="{{ item.id }}">{{ item.name }}</text>
                         </view>
                     </view>
                 </view> 
             </view>
             <view class="meun-txt over-auto" hidden='{{ meunShow[1].isShows ? true : false }}'>
-                <text wx:for="{{ price }}" wx:key="id" class='meun-city-txt meun-city-txt-price' bindtap="priceClick" data-hi="{{ index }}">{{ item.name }}</text>
+                <text wx:for="{{ price }}" wx:key="price" class='{{item.checked?"meun-city-txt-click meun-city-txt-price":"meun-city-txt meun-city-txt-price"}}' bindtap="priceClick" data-hi="{{ item.id }}">{{ item.name }}</text>
             </view>
             <view class="meun-txt over-auto" hidden='{{ meunShow[2].isShows ? true : false }}'>
-                <text class='meun-city-txt meun-city-txt-price' bindtap="roomModelClick" data-hi="{{ index }}" wx:for="{{ roomModel }}" wx:key="id">{{ item.name }}</text>
+                <text wx:for="{{ roomModel }}" wx:key="roomModel" class='{{item.checked?"meun-city-txt-click meun-city-txt-price":"meun-city-txt meun-city-txt-price"}}' bindtap="roomModelClick" data-hi="{{ item.id }}">{{ item.name }}</text>
             </view>
             <view class="meun-txt" hidden='{{ meunShow[3].isShows ? true : false }}'>
-							<text class='meun-city-txt meun-city-txt-price' bindtap="rentTypeClick" data-hi="{{ index }}" wx:for="{{ rentType }}" wx:key="id">{{ item.name }}</text>
+                <text wx:for="{{ rentType }}" wx:key="rentType" class='{{item.checked?"meun-city-txt-click meun-city-txt-price":"meun-city-txt meun-city-txt-price"}}' bindtap="rentTypeClick" data-hi="{{ item.id }}">{{ item.name }}</text>
             </view>
         </view>
 		</view>

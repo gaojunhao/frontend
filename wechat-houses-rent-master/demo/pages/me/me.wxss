@@ -137,3 +137,18 @@
   width: 0;
   height: 0;
 }
+
+.add-button {
+  position: fixed;
+  left: 83%;
+  top: 91%;
+  border: 0 solid #ffffff;
+  text-align: center;
+  width: 75rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  padding: 0px;
+  font-size: 23px;
+  border-radius: 250rpx;
+  box-shadow: 1rpx 1rpx 2rpx 2rpx rgba(28, 4, 51, 0.371);
+}

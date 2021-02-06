@@ -2,6 +2,7 @@
 
 .header {
   margin: 90rpx 0 90rpx 50rpx;
+  border-bottom: 1px solid #ccc;
   text-align: center;
   width: 650rpx;
   height: 300rpx;
@@ -28,4 +29,15 @@
   border-radius: 80rpx;
   margin: 70rpx 50rpx;
   font-size: 35rpx;
+}
+
+.inputView5{
+  background-color: rgb(156, 161, 158);
+  border-color: rgb(23, 187, 91);
+  margin-top: 40rpx;
+  width: 60%;
+  height: 50rpx;
+  padding: 10rpx 10rpx;
+  border-radius: 5px;
+  line-height: 44px; 
 }

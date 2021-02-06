@@ -11,7 +11,6 @@ Page({
     zulintype: '',
     quyu: '',
     ditie: '',
-    address: '',
     xiaoqu: '',
     louceng: 0,
     fangjiantype: '',
@@ -24,6 +23,7 @@ Page({
     img_paths: '',
     status: '',
     abled: true,
+    contact: '',
     buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -250,6 +250,12 @@ Page({
     })
   },
 
+  OncontactInput: function (e) {
+    this.setData({
+      contact: e.detail.value
+    })
+  },
+
   OnloucengInput: function (e) {
     this.setData({
       louceng: e.detail.value
@@ -303,47 +309,8 @@ Page({
   },
 
   OnPostClick: function (e) {
-    var rent = this.data.rent
-    var x = rent.split('.')
     var that = this
-    console.log(x)
 
-    if(parseInt(rent)>99999 || parseInt(rent)<=0){
-      wx.showToast({
-        title: '租金范围为 0 ~ 99999',
-        icon: 'none'
-      })
-      return
-    }
-    
-    if (x.length > 2) {
-      wx.showToast({
-        title: '请输入正确的金额格式',
-        icon: 'none'
-      })
-      return
-    }
-    if (x.length == 2 && (x[1].length > 2 || x[1].length == 0)) {
-      wx.showToast({
-        title: '请输入正确的金额格式',
-        icon: 'none'
-      })
-      return
-    }
-    if (x[0].length == 0) {
-      wx.showToast({
-        title: '请输入正确的金额格式',
-        icon: 'none'
-      })
-      return
-    }
-    if (this.data.ads == '' || this.data.maxg == '' || this.data.rent == '') {
-      wx.showToast({
-        title: '请输入完整信息',
-        icon: 'none'
-      })
-      return
-    }
     if(this.data.img_count==0)
     {
       wx.showToast({
@@ -352,8 +319,6 @@ Page({
       })
       return
     }
-    this.data.type = this.data.type.replace(',','，')
-    this.data.ads = this.data.ads.replace('\n',' ')
     wx.showLoading({
       title: '处理中……',
     })
@@ -396,7 +361,6 @@ Page({
         else
           that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + i + ".jpg" + ","
     }
-    console.log(app.globalData.icon)
     wx.request({
       url: "http://www.semmy.fun/springmvc/sethouses",
       method: 'post',
@@ -406,7 +370,6 @@ Page({
         zulintype: this.data.zulintype,
         quyu: this.data.quyu,
         ditie: this.data.ditie,
-        address: this.data.address,
         xiaoqu: this.data.xiaoqu,
         louceng: this.data.louceng,
         fangjiantype: this.data.fangjiantype,
@@ -414,6 +377,7 @@ Page({
         fangjiandaxiao: this.data.fangjiandaxiao,
         sex: this.data.sex,
         fukuantype: this.data.fukuantype,
+        contact: this.data.contact,
         img: that.data.img_paths,
         img_count: this.data.img_count,
         status: '待租',

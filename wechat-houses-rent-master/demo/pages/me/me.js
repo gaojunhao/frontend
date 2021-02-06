@@ -32,13 +32,9 @@ Page({
     if (!app.globalData.login) {
       return
     }
-
-    var identity = (getApp().globalData.ident == 'guest') ? '租赁者' : '房主'
+    console.log(app.globalData.name)
     this.setData({
-      identity: identity,
-      phone: getApp().globalData.phone,
-      name: getApp().globalData.name,
-      ident: getApp().globalData.ident,
+      name: app.globalData.name,
       login: app.globalData.login,
       avaurl: app.globalData.icon,
     })
@@ -108,6 +104,11 @@ Page({
     }
   },
 
+  OnPostHouseClick: function (e) {
+    wx.navigateTo({
+      url: '../post_house/post_house',
+    })
+  },
   /**
    * 收藏列表
    */
@@ -171,9 +172,10 @@ Page({
       })
       return
     }
+  /*
     wx.navigateTo({
-      url: '../../pages/user_info/user?phone=' + app.globalData.phone + "&ident=" + app.globalData.ident,
-    })
+      url: '../../pages/user_info/user?icon=' + app.globalData.icon,
+    })*/
   },
 
   /**

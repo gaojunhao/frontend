@@ -3,15 +3,17 @@
     <view class='header'>
         <image src='/images/logo.jpg'></image>
     </view>
-
+ 
     <view class='content'>
         <view>申请获取以下权限</view>
         <text>获得你的公开信息(昵称，头像等)</text>
+        <text>请输入手机号：</text> <input class="inputView5" type="text" maxlength="11" bindinput="OnphoneInput"/>
+        <text>（此手机号用于联系租客/房东，不会暴露给中介）</text>
     </view>
-
+ 
     <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
         授权登录
     </button>
 </view>
-
+ 
 <view wx:else>请升级微信版本</view>

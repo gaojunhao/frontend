@@ -16,10 +16,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       user_phone: app.globalData.phone,
-      phone: options.phone,
-      ident: options.ident,
-      identity: options.ident=='host'?'房主':'租赁者',
-      avaurl: "https://sanmizufang.oss-cn-shanghai.aliyuncs.com/avator/ava/" + options.ident + '/' + options.phone + '.jpg',
+      avaurl: app.globalData.icon,
     })
     that = this
     console.log(this.data.avaurl)

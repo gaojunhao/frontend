@@ -28,14 +28,12 @@ Page({
             // 西安市区
             areaLise: [
                 { id: 0, name: '不限' },
-                { id: 0, name: '地铁' },
-                { id: 1, name: '区域' }
+                { id: 1, name: '地铁' },
+                { id: 2, name: '区域' }
             ],
             // 市区街道
-            rowLise: {
-                row_ditie: { id: 0, name: ['1号线', '2号线', '3号线', '4号线', '5号线', '6号线', '7号线', '8号线', '9号线', '10号线', '11号线', '12号线', '13号线', '14号线', '15号线', '16号线', '17号线', '浦江线'] },
-                row_quyu: { id: 1, name: ['黄浦', '静安', '长宁', '普陀', '徐汇', '浦东', '杨浦', '虹口', '宝山', '闵行', '松江', '嘉定', '青浦', '奉贤', '崇明', '金山'] }
-            },
+            row_ditie: [{id: 1, name: '1号线'}, {id: 2, name: '2号线'}, {id: 3, name: '3号线'}, {id: 4, name: '4号线'}, {id: 5, name: '5号线'}, {id: 6, name: '6号线'}, {id: 7, name: '7号线'}, {id: 8, name: '8号线'}, {id: 9, name: '9号线'}, {id: 10, name: '10号线'}, {id: 11, name: '11号线'}, {id: 12, name: '12号线'}, {id: 13, name: '13号线'}, {id: 14, name: '14号线'}, {id: 15, name: '15号线'}, {id: 16, name: '16号线'}, {id: 17, name: '17号线'}, {id: 18, name: '浦江线'}],
+            row_quyu: [{id: 1, name: '黄浦'}, {id: 2, name: '静安'}, {id: 3, name: '长宁'}, {id: 4, name: '普陀'}, {id: 5, name: '徐汇'}, {id: 6, name: '浦东'}, {id: 7, name: '杨浦'}, {id: 8, name: '虹口'}, {id: 9, name: '宝山'}, {id: 10, name: '闵行'}, {id: 11, name: '松江'}, {id: 12, name: '嘉定'}, {id: 13, name: '青浦'}, {id: 14, name: '奉贤'}, {id: 15, name: '崇明'}, {id: 16, name: '金山'}],
     
             // 区域模块市区街道隐藏/显示
             rowShow: [
@@ -49,30 +47,30 @@ Page({
     
             // 售价
             price: [
-                { id: 0, name: '不限' },
-                { id: 1, name: '1千以下' },
-                { id: 2, name: '1 - 2千' },
-                { id: 3, name: '2 - 3千' },
-                { id: 4, name: '3 - 4千' },
-                { id: 5, name: '4 - 5千' },
-                { id: 6, name: '5 - 6千' },
-                { id: 7, name: '6 - 7千' },
-                { id: 8, name: '7千以上' },
+                { id: 1, name: '不限' },
+                { id: 2, name: '1千以下' },
+                { id: 3, name: '1 - 2千' },
+                { id: 4, name: '2 - 3千' },
+                { id: 5, name: '3 - 4千' },
+                { id: 6, name: '4 - 5千' },
+                { id: 7, name: '5 - 6千' },
+                { id: 8, name: '6 - 7千' },
+                { id: 9, name: '7千以上' },
             ],
     
             // 房间型号
             roomModel: [
-                { id: 0, name: '不限' },
-                { id: 1, name: '一室' },
-                { id: 2, name: '二室' },
-                { id: 3, name: '三室' },
-                { id: 4, name: '四室' },
-                { id: 5, name: '五室以上' }
+                { id: 1, name: '不限' },
+                { id: 2, name: '一室' },
+                { id: 3, name: '二室' },
+                { id: 4, name: '三室' },
+                { id: 5, name: '四室' },
+                { id: 6, name: '五室以上' }
             ],
             rentType: [
-              { id: 0, name: '不限' },
-              { id: 1, name: '整租' },
-              { id: 1, name: '合租' }
+              { id: 1, name: '不限' },
+              { id: 2, name: '整租' },
+              { id: 3, name: '合租' }
           ],
     houses: [],
     all_houses: [],
@@ -90,52 +88,8 @@ Page({
   onLoad: function (options) {
     that = this
     that.getData()
-    this.setData({
-      ident: app.globalData.ident
-    })
-    var now_time = new Date()
-    
+    var now_time = new Date()     
     console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
-	
-	
-    var cnt = 0
-    if (app.globalData.ident == 'host') { // 查询房主是否有新的看房请求
-      wx.request({
-        url: "你的服务器链接",
-        success(res) {
-          console.log(res.data)
-          cnt = res.data
-          if (cnt > 0) {
-            wx.showTabBarRedDot({
-              index: 2,
-            })
-          } else {
-            wx.hideTabBarRedDot({
-              index: 2,
-            })
-          }
-        }
-      })
-
-    } 
-    else { // 查询租赁者是否有新的看房记录
-      wx.request({
-        url: "你的服务器链接",
-        success(res){
-          if(res.data==1) // 有
-          {
-            wx.showTabBarRedDot({
-              index: 2,
-            })
-          } else { // 无
-            wx.hideTabBarRedDot({
-              index: 2,
-            })
-          }
-        }
-      })
-    }
-
   },
 
   onShow: function () {
@@ -165,9 +119,6 @@ Page({
         var arr = res.data
 		
         for (var i = 0; i < arr.length; i++) {
-          if (arr[i].ads.length > 30) {
-            arr[i].ads = arr[i].ads.substring(0, 28) + " …"
-          }
           var simg = arr[i]['img']
           var endimg = arr[i]['img'].length
           arr[i]['img'] = simg.substring(0, endimg).split(',')
@@ -201,23 +152,7 @@ Page({
       success(res) {
         console.log(res.data)
         var arr = res.data
-    
         for (var i = 0; i < arr.length; i++) {
-          if (arr[i].ads.length > 30) {
-            arr[i].ads = arr[i].ads.substring(0, 28) + " …"
-          }
-  
-          var s = arr[i]['type']
-          var end = arr[i]['type'].length
-          if (arr[i]['type'].length > 12) {
-            end = 13
-            for (var j = end; j >= 0; j--)
-              if (s[j] == '，') {
-                end = j;
-                break;
-              }
-          }
-          arr[i]['type'] = s.substring(0, end).split('，')
           //arr[i].rent = arr[i].rent.toFixed(2)
           var simg = arr[i]['img']
           var endimg = arr[i]['img'].length
@@ -400,12 +335,46 @@ Page({
   rowClick: function(e){
       // 限制第一个 '不限' 不能点击
       if (e.currentTarget.dataset.hi == 0){
+        for (let i = 0; i < this.data.areaLise.length; i++) {
+          if (this.data.areaLise[i].id == 0) {
+            //当前点击的位置为true即选中
+            this.data.areaLise[i].checked = true;
+          }
+          else {
+            this.data.areaLise[i].checked = false;
+          }
+        }
       var menuSrc = "meunShow[0].isShows";
         this.setData({
+          areaLise: this.data.areaLise,
           [menuSrc]: true
       });
+      for (let i = 0; i < this.data.row_ditie.length; i++) {
+        this.data.row_ditie[i].checked = false;
+    }
+    this.setData({
+      row_ditie: this.data.row_ditie
+    });
+    for (let i = 0; i < this.data.row_quyu.length; i++) {
+      this.data.row_quyu[i].checked = false;
+  }
+  this.setData({
+    row_quyu: this.data.row_quyu
+  });
     };
       if (e.currentTarget.dataset.hi != 0){
+        for (let i = 0; i < this.data.areaLise.length; i++) {
+          if (this.data.areaLise[i].id == e.currentTarget.dataset.hi) {
+            //当前点击的位置为true即选中
+            this.data.areaLise[i].checked = true;
+          }
+          else {
+            this.data.areaLise[i].checked = false;
+          }
+        }
+        this.setData({
+          areaLise: this.data.areaLise
+        });
           // 获取wxml  data-hi="{{ index }}" 传过来的索引
           var rowNum = e.currentTarget.dataset.hi;
           // 同筛选导航栏事件，因第一个为不限不可点击， 所以减一
@@ -426,7 +395,24 @@ Page({
   },
 ditieClick: function(e){
         var rowNum = e.currentTarget.dataset.hi;
-        console.log(rowNum);
+        for (let i = 0; i < this.data.row_ditie.length; i++) {
+          if (this.data.row_ditie[i].id == rowNum) {
+            //当前点击的位置为true即选中
+            this.data.row_ditie[i].checked = true;
+          }
+          else {
+            this.data.row_ditie[i].checked = false;
+          }
+        }
+        this.setData({
+          row_ditie: this.data.row_ditie,
+        })
+        for (let i = 0; i < this.data.row_quyu.length; i++) {
+            this.data.row_quyu[i].checked = false;
+        }
+        this.setData({
+          row_quyu: this.data.row_quyu
+        });
         var menuSrc = "meunShow[0].isShows";
         this.setData({
           [menuSrc]: true
@@ -435,6 +421,24 @@ ditieClick: function(e){
 quyuClick: function(e){
         var rowNum = e.currentTarget.dataset.hi;
         this.getDataquyu(rowNum);
+        for (let i = 0; i < this.data.row_quyu.length; i++) {
+          if (this.data.row_quyu[i].id == rowNum) {
+            //当前点击的位置为true即选中
+            this.data.row_quyu[i].checked = true;
+          }
+          else {
+            this.data.row_quyu[i].checked = false;
+          }
+        }
+        this.setData({
+          row_quyu: this.data.row_quyu,
+        })
+        for (let i = 0; i < this.data.row_ditie.length; i++) {
+          this.data.row_ditie[i].checked = false;
+      }
+      this.setData({
+        row_ditie: this.data.row_ditie
+      });
         var menuSrc = "meunShow[0].isShows";
         this.setData({
           [menuSrc]: true
@@ -443,6 +447,18 @@ quyuClick: function(e){
 priceClick: function(e){
   var rowNum = e.currentTarget.dataset.hi;
   console.log(rowNum);
+  for (let i = 0; i < this.data.price.length; i++) {
+    if (this.data.price[i].id == rowNum) {
+      //当前点击的位置为true即选中
+      this.data.price[i].checked = true;
+    }
+    else {
+      this.data.price[i].checked = false;
+    }
+  }
+  this.setData({
+    price: this.data.price,
+  })
   var menuSrc = "meunShow[1].isShows";
   this.setData({
     [menuSrc]: true
@@ -451,6 +467,18 @@ priceClick: function(e){
 roomModelClick: function(e){
   var rowNum = e.currentTarget.dataset.hi;
   console.log(rowNum);
+  for (let i = 0; i < this.data.roomModel.length; i++) {
+    if (this.data.roomModel[i].id == rowNum) {
+      //当前点击的位置为true即选中
+      this.data.roomModel[i].checked = true;
+    }
+    else {
+      this.data.roomModel[i].checked = false;
+    }
+  }
+  this.setData({
+    roomModel: this.data.roomModel,
+  })
   var menuSrc = "meunShow[2].isShows";
   this.setData({
     [menuSrc]: true
@@ -459,6 +487,18 @@ roomModelClick: function(e){
 rentTypeClick: function(e){
   var rowNum = e.currentTarget.dataset.hi;
   console.log(rowNum);
+  for (let i = 0; i < this.data.rentType.length; i++) {
+    if (this.data.rentType[i].id == rowNum) {
+      //当前点击的位置为true即选中
+      this.data.rentType[i].checked = true;
+    }
+    else {
+      this.data.rentType[i].checked = false;
+    }
+  }
+  this.setData({
+    rentType: this.data.rentType,
+  })
   var menuSrc = "meunShow[3].isShows";
   this.setData({
     [menuSrc]: true
