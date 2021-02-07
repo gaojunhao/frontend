@@ -7,6 +7,12 @@ Page({
    */
   data: {
             // 获取设备高度
+            condquyu: '',
+            condditie: '',
+            condweizhi: '不限',
+            condprice: '不限',
+            condroomtype: '不限',
+            condzulintype: '不限',
             appHeight: '',
 
             // 筛选导航栏数据
@@ -87,7 +93,7 @@ Page({
    */
   onLoad: function (options) {
     that = this
-    that.getData()
+    that.getDatacond()
     var now_time = new Date()     
     console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
   },
@@ -136,9 +142,61 @@ Page({
     })
   },
 
-  getDataquyu: function (e) {
+  getDatacond: function () {
+    var quyu = this.data.condquyu;
+    var ditie = this.data.condditie;
+    var weizhi = this.data.condweizhi;
+    var price = this.data.condprice;
+    var roomtype = this.data.condroomtype;
+    var zulintype = this.data.condzulintype;
+
+    var data_quyu = ''
+    var data_ditie = ''
+    var data_weizhi = ''
+    var data_price = ''
+    var data_roomtype = ''
+    var data_zulintype = ''
+    if (weizhi == '不限'){
+      data_quyu = ''
+      data_ditie = ''
+      data_weizhi = ''
+    }
+    if (quyu != ''){
+      data_quyu = '&quyu=' + quyu
+      data_ditie = ''
+      data_weizhi = ''
+    }
+    if (ditie != ''){
+      data_quyu = ''
+      data_ditie = '&ditie=' + ditie
+      data_weizhi = ''
+    }
+    if (price != '不限'){
+      if (price == '1千以下'){
+        data_price = '&rent=1'
+      } else if (price == '1 - 2千'){
+        data_price = '&rent=2'
+      } else if (price == '2 - 3千'){
+        data_price = '&rent=3'
+      } else if (price == '3 - 4千'){
+        data_price = '&rent=4'
+      } else if (price == '4 - 5千'){
+        data_price = '&rent=5'
+      } else if (price == '5 - 6千'){
+        data_price = '&rent=6'
+      } else if (price == '6 - 7千'){
+        data_price = '&rent=7'
+      } else if (price == '7千以上'){
+        data_price = '&rent=8'
+      }
+    }
+    if (roomtype != '不限'){
+        data_roomtype = '&fangjiantype=' + roomtype
+    }
+    if (zulintype != '不限'){
+      data_zulintype = '&zulintype=' + zulintype
+    }
     this.data.itemcnt = 0
-    console.log(e);
     that.setData({
       houses: [],
     })
@@ -146,7 +204,7 @@ Page({
       title: '加载中',
     })
   
-    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
     wx.request({
       url: url,
       success(res) {
@@ -198,7 +256,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading(); //在标题栏中显示加载
-    that.getData();
+    that.getDatacond();
     wx.hideNavigationBarLoading();
   },
 
@@ -206,6 +264,95 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var temp = that.data.houses;
+    this.data.itemcnt = this.data.itemcnt + 5
+    var quyu = this.data.condquyu;
+    var ditie = this.data.condditie;
+    var weizhi = this.data.condweizhi;
+    var price = this.data.condprice;
+    var roomtype = this.data.condroomtype;
+    var zulintype = this.data.condzulintype;
+
+    var data_quyu = ''
+    var data_ditie = ''
+    var data_weizhi = ''
+    var data_price = ''
+    var data_roomtype = ''
+    var data_zulintype = ''
+    if (weizhi == '不限'){
+      data_quyu = ''
+      data_ditie = ''
+      data_weizhi = ''
+    }
+    if (quyu != ''){
+      data_quyu = '&quyu=' + quyu
+      data_ditie = ''
+      data_weizhi = ''
+    }
+    if (ditie != ''){
+      data_quyu = ''
+      data_ditie = '&ditie=' + ditie
+      data_weizhi = ''
+    }
+    if (price != '不限'){
+      if (price == '1千以下'){
+        data_price = '&rent=1'
+      } else if (price == '1 - 2千'){
+        data_price = '&rent=2'
+      } else if (price == '2 - 3千'){
+        data_price = '&rent=3'
+      } else if (price == '3 - 4千'){
+        data_price = '&rent=4'
+      } else if (price == '4 - 5千'){
+        data_price = '&rent=5'
+      } else if (price == '5 - 6千'){
+        data_price = '&rent=6'
+      } else if (price == '6 - 7千'){
+        data_price = '&rent=7'
+      } else if (price == '7千以上'){
+        data_price = '&rent=8'
+      }
+    }
+    if (roomtype != '不限'){
+        data_roomtype = '&fangjiantype=' + roomtype
+    }
+    if (zulintype != '不限'){
+      data_zulintype = '&zulintype=' + zulintype
+    }
+    wx.showLoading({
+      title: '加载中',
+    })
+  
+    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
+    wx.request({
+      url: url,
+      success(res) {
+        if (res.data.length == 0) { // 没有新数据
+          wx.showToast({
+            title: '没有更多数据了',
+          })
+        } else {
+        var arr = res.data
+        for (var i = 0; i < arr.length; i++) {
+          //arr[i].rent = arr[i].rent.toFixed(2)
+          var simg = arr[i]['img']
+          var endimg = arr[i]['img'].length
+          arr[i]['img'] = simg.substring(0, endimg).split(',')
+        }
+        var hs = temp.concat(arr) // 将获取的新数据拼接到原列表上
+        that.setData({
+          houses: hs,
+          //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
+          //itemcnt: arr.length
+          itemcnt: this.data.itemcnt
+        })
+        wx.hideLoading({})
+      }
+      }
+    })
+  },
+
+  onReachBottombak: function () {
     var temp = that.data.houses;
     // 获取后面二十条
     this.data.itemcnt = this.data.itemcnt + 5
@@ -335,6 +482,10 @@ Page({
   rowClick: function(e){
       // 限制第一个 '不限' 不能点击
       if (e.currentTarget.dataset.hi == 0){
+        this.data.condweizhi = '不限'
+        this.data.condquyu = ''
+        this.data.condditie = ''
+        this.getDatacond();
         for (let i = 0; i < this.data.areaLise.length; i++) {
           if (this.data.areaLise[i].id == 0) {
             //当前点击的位置为true即选中
@@ -395,6 +546,10 @@ Page({
   },
 ditieClick: function(e){
         var rowNum = e.currentTarget.dataset.hi;
+        this.data.condweizhi = ''
+        this.data.condquyu = ''
+        this.data.condditie = this.data.row_ditie[rowNum-1].name
+        this.getDatacond();
         for (let i = 0; i < this.data.row_ditie.length; i++) {
           if (this.data.row_ditie[i].id == rowNum) {
             //当前点击的位置为true即选中
@@ -420,7 +575,10 @@ ditieClick: function(e){
 },
 quyuClick: function(e){
         var rowNum = e.currentTarget.dataset.hi;
-        this.getDataquyu(rowNum);
+        this.data.condweizhi = ''
+        this.data.condquyu = this.data.row_quyu[rowNum-1].name
+        this.data.condditie = ''
+        this.getDatacond();
         for (let i = 0; i < this.data.row_quyu.length; i++) {
           if (this.data.row_quyu[i].id == rowNum) {
             //当前点击的位置为true即选中
@@ -446,7 +604,8 @@ quyuClick: function(e){
 },
 priceClick: function(e){
   var rowNum = e.currentTarget.dataset.hi;
-  console.log(rowNum);
+  this.data.condprice = this.data.price[rowNum-1].name;
+  this.getDatacond();
   for (let i = 0; i < this.data.price.length; i++) {
     if (this.data.price[i].id == rowNum) {
       //当前点击的位置为true即选中
@@ -466,7 +625,8 @@ priceClick: function(e){
 },
 roomModelClick: function(e){
   var rowNum = e.currentTarget.dataset.hi;
-  console.log(rowNum);
+  this.data.condroomtype = this.data.roomModel[rowNum-1].name;
+  this.getDatacond();
   for (let i = 0; i < this.data.roomModel.length; i++) {
     if (this.data.roomModel[i].id == rowNum) {
       //当前点击的位置为true即选中
@@ -486,7 +646,8 @@ roomModelClick: function(e){
 },
 rentTypeClick: function(e){
   var rowNum = e.currentTarget.dataset.hi;
-  console.log(rowNum);
+  this.data.condzulintype = this.data.rentType[rowNum-1].name;
+  this.getDatacond();
   for (let i = 0; i < this.data.rentType.length; i++) {
     if (this.data.rentType[i].id == rowNum) {
       //当前点击的位置为true即选中
