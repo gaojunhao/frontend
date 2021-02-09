@@ -92,7 +92,6 @@
 		<view class="inputView3">
 			<text class="label1">联系方式： </text> <input maxlength="11" class="inputView2" type="digit" bindinput="OncontactInput" />
 		</view>
-		
 	</view>
 
 	<block>

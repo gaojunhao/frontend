@@ -43,6 +43,7 @@ Page({
     indexsex:0,//选择的下拉列表下标
     indexfukuan:0,//选择的下拉列表下标
     indexfangxing:0,//选择的下拉列表下标
+    housenum:0
   },
 
   /**
@@ -310,7 +311,14 @@ Page({
 
   OnPostClick: function (e) {
     var that = this
-
+    wx.request({
+      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + this.globalData.phone,
+      success(res) {
+        console.log(res.data)
+        this.data.housenum = res.data
+      }
+    })
+    console.log(this.data.housenum)
     if(this.data.img_count==0)
     {
       wx.showToast({
@@ -333,7 +341,7 @@ Page({
         mask: true
       })
 
-  uploadImage(that.data.imgs[i], i, app.globalData.phone+'/imgs/',
+  uploadImage(that.data.imgs[i], i, app.globalData.phone + '/imgs/' + this.data.housenum + '/',
   function (result) {
     console.log("======上传成功图片地址为：", result);
     tmp_img_paths = tmp_img_paths + result + ','
@@ -357,9 +365,9 @@ Page({
     }
     for (var i = 0; i < that.data.imgs.length; i++) {
         if (i == (that.data.imgs.length-1))
-          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + i + ".jpg"
+          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + i + ".jpg"
         else
-          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + i + ".jpg" + ","
+          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + i + ".jpg" + ","
     }
     wx.request({
       url: "http://www.semmy.fun/springmvc/sethouses",
