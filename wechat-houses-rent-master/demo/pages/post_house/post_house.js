@@ -312,7 +312,7 @@ Page({
   OnPostClick: function (e) {
     var that = this
     wx.request({
-      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + this.globalData.phone,
+      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
       success(res) {
         console.log(res.data)
         this.data.housenum = res.data
