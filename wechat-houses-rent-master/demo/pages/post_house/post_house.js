@@ -365,9 +365,9 @@ Page({
     }
     for (var i = 0; i < that.data.imgs.length; i++) {
         if (i == (that.data.imgs.length-1))
-          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + i + ".jpg"
+          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg"
         else
-          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + i + ".jpg" + ","
+          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg" + ","
     }
     wx.request({
       url: "http://www.semmy.fun/springmvc/sethouses",
