@@ -310,15 +310,10 @@ Page({
   },
 
   OnPostClick: function (e) {
-    var that = this
-    wx.request({
-      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
-      success(res) {
-        console.log(res.data)
-        this.data.housenum = res.data
-      }
-    })
+    this.data.housenum = app.globalData.housenum
+    console.log("###")
     console.log(this.data.housenum)
+    console.log("###")
     if(this.data.img_count==0)
     {
       wx.showToast({
@@ -420,6 +415,7 @@ Page({
         wx.showToast({
           title: '发布成功！',
         })
+        app.globalData.housenum = app.globalData.housenum+1
       },
       fail(res) {
         wx.showToast({

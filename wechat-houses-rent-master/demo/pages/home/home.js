@@ -189,8 +189,6 @@ Page({
       } else if (price == '7千以上'){
         data_price = '&rent=8'
       }
-    } else {
-      data_price = '&rent=9'
     }
     if (roomtype != '不限'){
         data_roomtype = '&fangjiantype=' + roomtype
@@ -207,6 +205,7 @@ Page({
     })
   
     var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
+    console.log(url)
     wx.request({
       url: url,
       success(res) {
@@ -326,15 +325,17 @@ Page({
     })
   
     var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
+    console.log(url)
     wx.request({
       url: url,
       success(res) {
-        if (res.data.length == 0) { // 没有新数据
+        var arr = res.data
+        console.log(arr)
+        if (arr.length == 0) { // 没有新数据
           wx.showToast({
             title: '没有更多数据了',
           })
         } else {
-        var arr = res.data
         for (var i = 0; i < arr.length; i++) {
           //arr[i].rent = arr[i].rent.toFixed(2)
           var simg = arr[i]['img']
@@ -346,7 +347,7 @@ Page({
           houses: hs,
           //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
           //itemcnt: arr.length
-          itemcnt: this.data.itemcnt
+          itemcnt: that.data.itemcnt
         })
         wx.hideLoading({})
       }

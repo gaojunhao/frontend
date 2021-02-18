@@ -33,6 +33,12 @@ Page({
                         that.queryUsreInfo();
                         //用户已经授权过
                         app.globalData.login = true;
+                        wx.request({
+                            url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
+                            success(res) {
+                              app.globalData.housenum = parseInt(res.data.housenum)
+                            }
+                          })
                         setTimeout(
                             function () {
                               var pages = getCurrentPages()
@@ -41,7 +47,7 @@ Page({
                               wx.navigateBack({})
                             },
                             2000
-                          )
+                        )
                     }
                 });
             } else {
@@ -95,6 +101,12 @@ Page({
             },
             2000
           )
+          wx.request({
+            url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
+            success(res) {
+              app.globalData.housenum = parseInt(res.data.housenum)
+            }
+          })
     } else {
         //用户按了拒绝按钮
         wx.showModal({

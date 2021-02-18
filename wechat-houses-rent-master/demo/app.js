@@ -8,11 +8,11 @@ App({
         traceUser: true,
       })
     }
-
-    this.globalData = {
-      url: 'http://www.semmy.fun/springmvc/',
-      pic_url: '',
-      login: false
-    }
+  },
+  globalData: {
+    url: 'http://www.semmy.fun/springmvc/',
+    pic_url: '',
+    login: false,
+    housenum: 0
   }
 })
