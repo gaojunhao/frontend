@@ -189,6 +189,8 @@ Page({
       } else if (price == '7千以上'){
         data_price = '&rent=8'
       }
+    } else {
+      data_price = '&rent=9'
     }
     if (roomtype != '不限'){
         data_roomtype = '&fangjiantype=' + roomtype
