@@ -18,6 +18,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    rent: 0,
+    zulintype: '',
+    quyu: '',
+    ditie: '',
+    xiaoqu: '',
+    louceng: 0,
+    fangjiantype: '',
+    dianti: '', 
+    fangjiandaxiao: 0,
+    sex: '',
+    fukuantype: '',
+    contact: '',
+    img: [],
+    img_count: 0,
     new_request: false,
     new_preview: false,
     avaupdate: false,
@@ -183,6 +197,51 @@ Page({
    */
   onShareAppMessage: function (event) {
     console.log(event);
+  },
+
+  OnEditClick: function (e) {
+    if (!app.globalData.login) {
+      wx.showToast({
+        title: '您尚未登录！',
+        icon: 'none'
+      })
+      return
+    }
+    wx.request({
+      url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
+      success(res) {
+        that.setData({
+          rent: res.data.rent,
+          zulintype: res.data.zulintype,
+          quyu: res.data.quyu,
+          ditie: res.data.ditie,
+          xiaoqu: res.data.xiaoqu,
+          louceng: res.data.louceng,
+          fangjiantype: res.data.fangjiantype,
+          dianti: res.data.dianti,
+          fangjiandaxiao: res.data.fangjiandaxiao,
+          sex: res.data.sex,
+          fukuantype: res.data.fukuantype,
+          contact: res.data.contact,
+          img: res.data.img,
+          img_count: res.data.img_count,
+        })
+      },
+      fail(res) {
+        setTimeout(function (e) {
+          wx.navigateBack({})
+        }, 2000)
+        wx.showToast({
+          title: '该页面不存在',
+          icon: 'none'
+        })
+        return
+      }
+    })
+    console.log(this.data.xiaoqu)
+    wx.navigateTo({
+      url: '../update_house/update_house?rent=' + this.data.rent + '&zulintype=' + this.data.zulintype + '&quyu=' + this.data.quyu + '&ditie=' + this.data.ditie + '&xiaoqu=' + this.data.xiaoqu + '&louceng=' + this.data.louceng + '&fangjiantype=' + this.data.fangjiantype + '&dianti=' + this.data.dianti + '&fangjiandaxiao=' + this.data.fangjiandaxiao + '&sex=' + this.data.sex + '&fukuantype=' + this.data.fukuantype + '&contact=' + this.data.contact + '&img=' + this.data.img + '&img_count=' + this.data.img_count,
+    })
   },
 
   outClick: function () {

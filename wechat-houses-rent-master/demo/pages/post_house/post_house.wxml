@@ -60,7 +60,7 @@
 		</view>
 		</view>
 		<view class="inputView3">
-			<text class="label1">房间面积： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnfangjiandaxiaoInput" /> <text class="label1">平方米</text>
+			<text class="label1">房间面积： </text> <input maxlength="3" class="inputView2" type="digit" bindinput="OnfangjiandaxiaoInput" /> <text class="label1">平方米</text>
 		</view>
 		<view class="inputView3">
 			<text class="label2">性别要求： </text>

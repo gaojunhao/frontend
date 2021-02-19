@@ -85,7 +85,6 @@ Page({
     keyword: '',
     showRent: 0,
     itemcnt: 0,
-    ident: 'host',
   },
 
   /**
@@ -99,9 +98,7 @@ Page({
   },
 
   onShow: function () {
-    this.setData({
-      ident: app.globalData.ident
-    })
+
   },
   
 

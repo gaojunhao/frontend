@@ -8,20 +8,20 @@ Page({
 
   data: {
     rent: 0,
-    zulintype: '',
-    quyu: '',
-    ditie: '',
+    zulintype: '整租',
+    quyu: '黄浦',
+    ditie: '1号线',
     xiaoqu: '',
     louceng: 0,
-    fangjiantype: '',
-    dianti: '', 
+    fangjiantype: '一室',
+    dianti: '有', 
     fangjiandaxiao: 0,
-    sex: '',
-    fukuantype: '',
+    sex: '不限',
+    fukuantype: '押一付三',
     img_count: 0,
     imgs: [],
     img_paths: '',
-    status: '',
+    status: '待租',
     abled: true,
     contact: '',
     buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
@@ -311,9 +311,83 @@ Page({
 
   OnPostClick: function (e) {
     this.data.housenum = app.globalData.housenum
-    console.log("###")
-    console.log(this.data.housenum)
-    console.log("###")
+    if(this.data.xiaoqu=='')
+    {
+      wx.showToast({
+        title: '请填写所在小区',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.louceng==0)
+    {
+      wx.showToast({
+        title: '请填写所在楼层',
+        icon: 'none'
+      })
+      return
+    }
+    if(isNaN(this.data.louceng)){
+      wx.showToast({
+        title: '所在楼层请用数字填写',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.fangjiandaxiao==0)
+    {
+      wx.showToast({
+        title: '请填写房间面积',
+        icon: 'none'
+      })
+      return
+    }
+    if(isNaN(this.data.fangjiandaxiao)){
+      wx.showToast({
+        title: '房间面积请用数字填写',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.rent==0)
+    {
+      wx.showToast({
+        title: '请填写租金',
+        icon: 'none'
+      })
+      return
+    }
+    if(isNaN(this.data.rent)){
+      wx.showToast({
+        title: '租金请用数字填写',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.contact=='')
+    {
+      wx.showToast({
+        title: '请填写联系方式',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.contact.length!=11)
+    {
+      wx.showToast({
+        title: '联系方式请正确填写,应该为11位数字',
+        icon: 'none'
+      })
+      return
+    }
+    if(!(/^\d+$/.test(this.data.contact)))
+    {
+      wx.showToast({
+        title: '联系方式请正确填写,应该为11位数字',
+        icon: 'none'
+      })
+      return
+    }
     if(this.data.img_count==0)
     {
       wx.showToast({

@@ -63,6 +63,11 @@
 		<text class='itemName'>发布房屋</text>
 		<view class='right'>></view>
 	</view>
+	<view class='item' bindtap='OnEditClick'>
+		<image class='icon' src='../../images/topic-detail/edit.png' style="width:22px;height:21px;"></image>
+		<text class='itemName'>修改房屋</text>
+		<view class='right'>></view>
+	</view>
 	<view class='hr'></view>
 	<view class='item' bindtap='outClick'>
 		<image class='icon' src='../../images/me/out.png' style="width:22px;height:21px;"></image>

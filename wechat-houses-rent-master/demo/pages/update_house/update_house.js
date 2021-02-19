@@ -22,15 +22,23 @@ Page({
   onLoad: function (options) {
     that = this
     this.setData({
-      id: options.id,
-      ads: options.ads,
-      type: options.type,
-      pic_cnt: options.pic_cnt,
-      img_str: options.img_str
+      rent: options.rent,
+      zulintype: options.zulintype,
+      quyu: options.quyu,
+      ditie: options.ditie,
+      xiaoqu: options.xiaoqu,
+      louceng: options.louceng,
+      fangjiantype: options.fangjiantype,
+      dianti: options.dianti,
+      fangjiandaxiao: options.fangjiandaxiao,
+      sex: options.sex,
+      fukuantype: options.fukuantype,
+      contact: options.contact,
+      img: options.img,
+      img_count: options.img_count,
     })
-    console.log(this.data.pic_cnt)
-    console.log(app.globalData.pic_url)
-    var imgs = this.data.img_str.split(',')
+
+    var imgs = this.data.img.split(',')
     //for (var i = 0; i < this.data.pic_cnt; i++)
       //imgs.push(app.globalData.pic_url + '/' + i + '.jpg')
     this.setData({
@@ -38,30 +46,6 @@ Page({
       imgs_ori: imgs
     })
 
-  },
-
-  OnAdsInput: function (e) {
-    this.setData({
-      ads: e.detail.value
-    })
-  },
-
-  OnTypeInput: function (e) {
-    this.setData({
-      type: e.detail.value
-    })
-  },
-
-  OnMaxgInput: function (e) {
-    this.setData({
-      maxg: e.detail.value
-    })
-  },
-
-  OnRentInput: function (e) {
-    this.setData({
-      rent: e.detail.value
-    })
   },
 
   UploadImg: function () {
