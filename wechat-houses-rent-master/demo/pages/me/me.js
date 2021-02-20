@@ -1,6 +1,6 @@
 // miniprogram/pages/me/me.js
 var app = getApp();
-var that
+//var that
 Page({
 
   actioncnt: function () {
@@ -42,12 +42,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    that = this
+    var that = this
     if (!app.globalData.login) {
       return
     }
     console.log(app.globalData.name)
-    this.setData({
+    that.setData({
       name: app.globalData.name,
       login: app.globalData.login,
       avaurl: app.globalData.icon,
@@ -55,6 +55,7 @@ Page({
   },
 
   onShow: function (options) {
+    var that = this
     if (!app.globalData.login) {
       return
     }
@@ -200,6 +201,7 @@ Page({
   },
 
   OnEditClick: function (e) {
+    var that = this
     if (!app.globalData.login) {
       wx.showToast({
         title: '您尚未登录！',
@@ -210,6 +212,7 @@ Page({
     wx.request({
       url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
       success(res) {
+        /*
         that.setData({
           rent: res.data.rent,
           zulintype: res.data.zulintype,
@@ -225,6 +228,9 @@ Page({
           contact: res.data.contact,
           img: res.data.img,
           img_count: res.data.img_count,
+        })*/
+        wx.navigateTo({
+          url: '../update_house/update_house?rent=' + res.data.rent + '&zulintype=' + res.data.zulintype + '&quyu=' + res.data.quyu + '&ditie=' + res.data.ditie + '&xiaoqu=' + res.data.xiaoqu + '&louceng=' + res.data.louceng + '&fangjiantype=' + res.data.fangjiantype + '&dianti=' + res.data.dianti + '&fangjiandaxiao=' + res.data.fangjiandaxiao + '&sex=' + res.data.sex + '&fukuantype=' + res.data.fukuantype + '&contact=' + res.data.contact + '&img=' + res.data.img + '&img_count=' + res.data.img_count,
         })
       },
       fail(res) {
@@ -237,14 +243,11 @@ Page({
         })
         return
       }
-    })
-    console.log(this.data.xiaoqu)
-    wx.navigateTo({
-      url: '../update_house/update_house?rent=' + this.data.rent + '&zulintype=' + this.data.zulintype + '&quyu=' + this.data.quyu + '&ditie=' + this.data.ditie + '&xiaoqu=' + this.data.xiaoqu + '&louceng=' + this.data.louceng + '&fangjiantype=' + this.data.fangjiantype + '&dianti=' + this.data.dianti + '&fangjiandaxiao=' + this.data.fangjiandaxiao + '&sex=' + this.data.sex + '&fukuantype=' + this.data.fukuantype + '&contact=' + this.data.contact + '&img=' + this.data.img + '&img_count=' + this.data.img_count,
-    })
+    }) 
   },
 
   outClick: function () {
+    var that = this
     if (!app.globalData.login) {
       wx.showToast({
         title: '您尚未登录！',
