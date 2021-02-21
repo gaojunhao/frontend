@@ -53,7 +53,7 @@
 		<view class="buttonType">
 			<image class="btnicon" src="../../images/topic-detail/hetong2.png" bindtap="OnRentClick"></image>
 			登记
-		</view>
+		</view>-->
 		<view class="buttonType">
 			<image class="btnicon" bindtap="OnEditClick" src="../../images/topic-detail/edit.png"></image>
 			编辑
@@ -61,14 +61,6 @@
 		<view class="buttonType">
 			<image class="btnicon" bindtap="OnDeleteClick" src="../../images/topic-detail/delete.png"></image>
 			删除
-		</view>-->
-		<view class="buttonType" bindtap="OnCollectClick">
-			<image class="btnicon" src='{{collectchecked?"../../images/topic-detail/like.png":"../../images/topic-detail/unlike.png"}}'></image>
-			收藏
-		</view>
-		<view class="buttonType" bindtap="OnPhoneClick">
-			<image class="btnicon" src="../../images/topic-detail/phone.png"></image>
-			电话
 		</view>
 	</view>
 	<!--

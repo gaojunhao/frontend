@@ -1,0 +1,33 @@
+<!--miniprogram/pages/home/home.wxml-->
+<!-- 下拉菜单 -->
+<view class="menu-table">
+<block wx:for='{{houses}}' wx:key="item">
+		<view class="container" data-id="{{item.id}}" bindtap="onItemClick">
+			<view class='container-img'>
+				<image mode="aspectFill" class="img-prev" src="{{item.img[0]}}" lazy-load="true"></image>
+			</view>
+
+			<view class='container-content'>
+				<view class='house-title'>
+					<view class='house-ads'>
+						<view class='user-name'>{{item.xiaoqu}}</view>
+					</view>
+				</view>
+
+				<view class='content'>
+
+					<text class='content-maxg'>所在楼层：{{item.louceng}}</text>
+
+					<view class="tagView">
+						<text class="tagText-n">{{item.ditie}}</text>
+						<text class="tagText">{{item.dianti}}电梯</text>
+					</view>
+				</view>
+
+					<view class='font-rent'>{{item.rent}} <text class="font-rent-unit">元/月</text></view>
+				</view>
+		</view>
+		<view class='container-line'></view>
+</block>
+</view>
+<!--<button class="add-button" type="primary" bindtap="OnPostHouseClick" wx:if="{{ident=='host'}}">+</button>-->

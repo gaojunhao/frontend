@@ -120,8 +120,29 @@ Page({
   },
 
   OnPostHouseClick: function (e) {
-    wx.navigateTo({
-      url: '../post_house/post_house',
+    if (!app.globalData.login) {
+      wx.showToast({
+        title: '您尚未登录！',
+        icon: 'none'
+      })
+      return
+    }
+    wx.request({
+      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
+      success(res) {
+        //app.globalData.housenum = parseInt(res.data.housenum)
+        if (parseInt(res.data.housenum) == 0){
+          wx.navigateTo({
+            url: '../post_house/post_house',
+          })
+        } else {
+          wx.showToast({
+            title: '仅可发布一套房源，如需修改前往<修改房源>',
+            icon: 'none'
+          })
+          return
+        }
+      }
     })
   },
   /**
@@ -200,7 +221,7 @@ Page({
     console.log(event);
   },
 
-  OnEditClick: function (e) {
+  oncolllistClick: function (event) {
     var that = this
     if (!app.globalData.login) {
       wx.showToast({
@@ -210,27 +231,17 @@ Page({
       return
     }
     wx.request({
-      url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
+      url: "http://www.semmy.fun/springmvc/getcollect?phone=" + app.globalData.phone,
       success(res) {
-        /*
-        that.setData({
-          rent: res.data.rent,
-          zulintype: res.data.zulintype,
-          quyu: res.data.quyu,
-          ditie: res.data.ditie,
-          xiaoqu: res.data.xiaoqu,
-          louceng: res.data.louceng,
-          fangjiantype: res.data.fangjiantype,
-          dianti: res.data.dianti,
-          fangjiandaxiao: res.data.fangjiandaxiao,
-          sex: res.data.sex,
-          fukuantype: res.data.fukuantype,
-          contact: res.data.contact,
-          img: res.data.img,
-          img_count: res.data.img_count,
-        })*/
+        if (res.data.collect == "") {
+          wx.showToast({
+            title: '未收藏过房源，请先收藏！',
+            icon: 'none'
+          })
+          return
+        }
         wx.navigateTo({
-          url: '../update_house/update_house?rent=' + res.data.rent + '&zulintype=' + res.data.zulintype + '&quyu=' + res.data.quyu + '&ditie=' + res.data.ditie + '&xiaoqu=' + res.data.xiaoqu + '&louceng=' + res.data.louceng + '&fangjiantype=' + res.data.fangjiantype + '&dianti=' + res.data.dianti + '&fangjiandaxiao=' + res.data.fangjiandaxiao + '&sex=' + res.data.sex + '&fukuantype=' + res.data.fukuantype + '&contact=' + res.data.contact + '&img=' + res.data.img + '&img_count=' + res.data.img_count,
+          url: "../collectlist/collectlist?collect=" + res.data.collect,
         })
       },
       fail(res) {
@@ -243,7 +254,57 @@ Page({
         })
         return
       }
-    }) 
+    })
+  },
+
+  verificationClick: function (event) {
+    var that = this
+    if (!app.globalData.login) {
+      wx.showToast({
+        title: '您尚未登录！',
+        icon: 'none'
+      })
+      return
+    }
+        wx.navigateTo({
+          url: "../verification/verification",
+        })
+  },
+
+  onItemClick: function (event) {
+    var that = this
+    if (!app.globalData.login) {
+      wx.showToast({
+        title: '您尚未登录！',
+        icon: 'none'
+      })
+      return
+    }
+    wx.request({
+      url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
+      success(res) {
+        if (res.data.id == -1) {
+          wx.showToast({
+            title: '未发布过房屋，请先发布！',
+            icon: 'none'
+          })
+          return
+        }
+        wx.navigateTo({
+          url: "../modhomeDetail/modhomeDetail?id=" + res.data.id,
+        })
+      },
+      fail(res) {
+        setTimeout(function (e) {
+          wx.navigateBack({})
+        }, 2000)
+        wx.showToast({
+          title: '该页面不存在',
+          icon: 'none'
+        })
+        return
+      }
+    })
   },
 
   outClick: function () {

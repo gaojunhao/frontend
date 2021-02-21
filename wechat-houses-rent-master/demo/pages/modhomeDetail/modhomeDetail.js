@@ -1,13 +1,12 @@
 var that
 const app = getApp()
-const env = require('./homeDetail.js');
+const env = require('./modhomeDetail.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    collectchecked: false,
     user_phone: '',
     user_ident: 'host',
     id: '',
@@ -71,19 +70,6 @@ Page({
           sex: res.data.sex,
           fukuantype: res.data.fukuantype,
         })
-        wx.request({
-          url: 'http://www.semmy.fun/springmvc/containid?id=' + res.data.id + '&phone=' + app.globalData.phone,
-          success: function (res) {
-            var coll_checked
-            if (res.data.result == "true")
-              coll_checked = true;
-            else
-              coll_checked = false;
-            that.setData({
-              collectchecked: coll_checked
-            })
-          }
-        });
 
       },
       fail(res) {
@@ -99,15 +85,11 @@ Page({
     })
   },
 
+  onShareAppMessage: function () {
 
+  },
+  
   OnPhoneClick: function (e) {
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
     wx.showActionSheet({
       itemList: ['呼叫', '添加联系人'],
       success: function (res) {
@@ -133,40 +115,11 @@ Page({
 
   },
 
-  onShareAppMessage: function () {
-
-  },
-
   OnImgClick: function (e) {
     wx.previewImage({
       urls: this.data.img,
       current: e.currentTarget.dataset.idx
     })
-  },
-
-  OnCollectClick: function (e) {
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
-    var url_coll
-    if (this.data.collectchecked == true){
-      url_coll = 'http://www.semmy.fun/springmvc/delcollect?id=' + this.data.id + '&phone=' + app.globalData.phone;
-    } else {
-      url_coll = 'http://www.semmy.fun/springmvc/addcollect?id=' + this.data.id + '&phone=' + app.globalData.phone;
-    }
-    this.setData({
-      collectchecked: !this.data.collectchecked,
-    })
-    wx.request({
-      url: url_coll,
-      success: function (res) {
-          console.log("收藏/取消收藏房屋成功！");
-      }
-  });
   },
 
   OnReqClick: function (e) {
@@ -259,20 +212,6 @@ Page({
   OnDeleteClick: function (e) {
     app.globalData.id = this.data.id
     app.globalData.phone = this.data.user_phone
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
-    if (this.data.status == '已租出') {
-      wx.showToast({
-        title: '不能删除已租出的房屋',
-        icon: 'none'
-      })
-      return
-    }
     wx.showModal({
       title: '删除',
       content: '确认删除该房屋？',

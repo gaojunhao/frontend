@@ -19,7 +19,10 @@
     "pages/history/history",
     "pages/address/address",
     "pages/search/search",
-    "pages/authorize/authorize"
+    "pages/authorize/authorize",
+    "pages/modhomeDetail/modhomeDetail",
+    "pages/collectlist/collectlist",
+    "pages/verification/verification"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

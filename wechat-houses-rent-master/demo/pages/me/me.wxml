@@ -60,12 +60,25 @@
 	<view class='hr'></view>
 	<view class='item' bindtap='OnPostHouseClick'>
 		<image class='icon' src='../../images/me/rent.png' style="width:22px;height:21px;"></image>
-		<text class='itemName'>发布房屋</text>
+		<text class='itemName'>发布房源</text>
 		<view class='right'>></view>
 	</view>
-	<view class='item' bindtap='OnEditClick'>
+	<view class='hr'></view>
+	<view class='item' bindtap='onItemClick'>
 		<image class='icon' src='../../images/topic-detail/edit.png' style="width:22px;height:21px;"></image>
-		<text class='itemName'>修改房屋</text>
+		<text class='itemName'>修改房源</text>
+		<view class='right'>></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item' bindtap='oncolllistClick'>
+		<image class='icon' src='../../images/topic-detail/hetong.png' style="width:22px;height:21px;"></image>
+		<text class='itemName'>收藏列表</text>
+		<view class='right'>></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item' bindtap='verificationClick'>
+		<image class='icon' src='../../images/topic-detail/phone.png' style="width:22px;height:21px;"></image>
+		<text class='itemName'>绑定手机</text>
 		<view class='right'>></view>
 	</view>
 	<view class='hr'></view>

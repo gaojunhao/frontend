@@ -33,12 +33,6 @@ Page({
                         that.queryUsreInfo();
                         //用户已经授权过
                         app.globalData.login = true;
-                        wx.request({
-                            url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
-                            success(res) {
-                              app.globalData.housenum = parseInt(res.data.housenum)
-                            }
-                          })
                         setTimeout(
                             function () {
                               var pages = getCurrentPages()
@@ -63,11 +57,35 @@ Page({
     })
   },
   bindGetUserInfo: function (e) {
+    if(this.data.phone=='')
+    {
+      wx.showToast({
+        title: '请填写联系方式',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.phone.length!=11)
+    {
+      wx.showToast({
+        title: '联系方式请正确填写,应该为11位数字',
+        icon: 'none'
+      })
+      return
+    }
+    if(!(/^\d+$/.test(this.data.phone)))
+    {
+      wx.showToast({
+        title: '联系方式请正确填写,应该为11位数字',
+        icon: 'none'
+      })
+      return
+    }
     if (e.detail.userInfo) {
         //用户按了允许授权按钮
         var that = this;
         //插入登录的用户的相关信息到数据库
-        
+       
         wx.request({
             url: 'http://www.semmy.fun/springmvc/registeruser',
             method: 'post',
@@ -76,7 +94,8 @@ Page({
                 nickName: e.detail.userInfo.nickName,
                 avatarUrl: e.detail.userInfo.avatarUrl,
                 province:e.detail.userInfo.province,
-                city: e.detail.userInfo.city
+                city: e.detail.userInfo.city,
+                collect: '',
             },
             header: {
                 'content-type': 'application/json'

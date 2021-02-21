@@ -107,7 +107,7 @@
 
 <!--按钮-->
 <view class="loginBtnView">
-	<button class="loginBtn" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="OnPostClick" disabled="{{!abled}}">修改并发布</button>
+	<button class="loginBtn" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="OnPostClick" disabled="{{!abled}}">保存</button>
 </view>
 
 </view>

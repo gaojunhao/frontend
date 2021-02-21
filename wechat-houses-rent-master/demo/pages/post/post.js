@@ -77,9 +77,9 @@ Page({
   },
 
   onItemClick: function (e) {
-    wx.navigateTo({
+   /* wx.navigateTo({
       url: '../../pages/post_detail/post_detail?id=' + e.currentTarget.dataset.id,
-    })
+    })*/
   },
 
   onPullDownRefresh: function () {
@@ -89,6 +89,13 @@ Page({
   },
 
   onPublishClick: function () {
+    if (!app.globalData.login) {
+      wx.showToast({
+        title: '您尚未登录！',
+        icon: 'none'
+      })
+      return
+    }
     wx.navigateTo({
       url: '../publish/publish',
     })

@@ -12,5 +12,5 @@
 </view>
 
 <view class='btn-func'>
-	<button class="btn" bindtap="submit" disabled="{{!abled}}">发布贴子</button>
+	<button class="btn" bindtap="submit" disabled="{{!abled}}">发布帖子</button>
 </view>
