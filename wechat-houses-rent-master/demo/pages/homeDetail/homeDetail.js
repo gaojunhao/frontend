@@ -99,6 +99,11 @@ Page({
     })
   },
 
+  OnMapClick: function () {
+    wx.navigateTo({
+      url: '../map/map',
+    })
+  },
 
   OnPhoneClick: function (e) {
     if (!app.globalData.login) {
@@ -136,6 +141,8 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+
 
   OnImgClick: function (e) {
     wx.previewImage({

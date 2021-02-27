@@ -155,6 +155,51 @@ queryUsreInfo: function () {
     });
 },
 
+getPhoneNumber: function (e) {
+  var ivObj = e.detail.iv
+  var telObj = e.detail.encryptedData
+  console.log('iv=', ivObj)
+  console.log('encryptedData', telObj)
+  //------执行Login---------
+  wx.login({
+   success: res => {
+    console.log('code转换', res.code);
+ 
+　　　　　　//用code传给服务器调换session_key
+wx.request({
+  url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxdf33872822175f36&secret=8a13ec90b1fd2048188bfdbd37fe7004&js_code='+ res.code + '&grant_type=authorization_code', //接口地址
+
+  success: function (res) {
+   console.log("openid=", res.data.openid)
+   console.log("session_key=", res.data.session_key)
+   wx.request({
+    url: 'https://www.semmy.fun/springmvc/getphone?session_key=' + res.data.session_key + '&encryptedData=' + telObj + '&iv=' + ivObj, //接口地址
+    success: function (res) {
+     //phoneObj = res.data.phoneNumber;
+     console.log("手机号=", res.data)
+     /*wx.setStorage({  //存储数据并准备发送给下一页使用
+      key: "phoneObj",
+      data: res.data.phoneNumber,
+     })*/
+    }
+   })
+  }
+ })
+ 
+    //-----------------是否授权，授权通过进入主页面，授权拒绝则停留在登陆界面
+    if (e.detail.errMsg == 'getPhoneNumber:user deny') { //用户点击拒绝
+     wx.navigateTo({
+      url: '../index/index',
+     })
+    } else { //允许授权执行跳转
+     wx.navigateTo({
+      url: '../test/test',
+     })
+    }
+   }
+  });
+},
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

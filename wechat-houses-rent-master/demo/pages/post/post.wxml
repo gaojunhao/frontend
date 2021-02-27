@@ -1,5 +1,5 @@
 <!--pages/post/post.wxml-->
-
+<view class='page'>
 <button class="add-button" type="primary" bindtap="onPublishClick" >+</button>
 
 <view wx:for="{{posts}}" class='container' data-id="{{item.id}}" bindtap='onItemClick'>
@@ -19,4 +19,5 @@
 	</view>
 
 	<view class='container-line'></view>
+</view>
 </view>

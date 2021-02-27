@@ -1,0 +1,11 @@
+<!--pages/map/map.wxml-->
+<map 
+  id="wxdf33872822175f36"
+  subkey="ICBBZ-243C6-DW7SC-EQUZG-MKAXH-ZVBP4"
+  longitude="121.400753"
+  latitude="31.122776" 
+  scale="14"
+  layer-style="1"
+  class="bgMap"
+  markers="{{markers}}"
+></map>

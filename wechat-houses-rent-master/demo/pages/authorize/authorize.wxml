@@ -9,7 +9,7 @@
         <text>获得你的公开信息(昵称，头像等)</text>
         <text>请输入手机号(该手机号用于联系房东/租客)：</text> <input class="inputView5" type="text" maxlength="11" bindinput="OnphoneInput"/>
     </view>
- 
+    <button class='bottom' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权手机号</button>
     <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
         授权登录
     </button>

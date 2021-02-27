@@ -1,4 +1,5 @@
 <!--miniprogram/pages/homeDetail/homeDetail.wxml-->
+<view class="page">
 <swiper indicator-dots="true">
 	<swiper-item wx:for="{{img}}" wx:key="item" wx:idx="idx">
 		<image mode="aspectFill" class="img-top" src="{{item}}" data-idx="{{idx}}" bindtap="OnImgClick"></image>
@@ -9,11 +10,74 @@
 	<view class="rentView">
 		<text class="rent">{{rent}}</text><text class="rentunit"> 元/月</text>
 	</view>
+</view>
+	<!--
 	<view class="adsView">
-		{{ads}}
-	</view>
+		{{xiaoqu}}
+	</view>-->
 
 	<view class="container-line"></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/zulintype.jpeg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>租赁方式：{{zulintype}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/quyu.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>所在区域：{{quyu}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/ditie.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>附近地铁：{{ditie}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item' bindtap='OnMapClick'>
+		<image class='icon' src='../../images/topic-detail/xiaoqu.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>所在小区：{{xiaoqu}}</text>
+		<view class='right'>地图></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/louceng.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>所在楼层：{{louceng}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/fangjiantype.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>房间数量：{{fangjiantype}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/dianti.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>有无电梯：{{dianti}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/fangjiandaxiao.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>房间面积：{{fangjiandaxiao}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/sex.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>性别要求：{{sex}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<view class='item'>
+		<image class='icon' src='../../images/topic-detail/fukuantype.jpg' style="width:22px;height:21px;"></image>
+		<text class='itemName'>付款方式：{{fukuantype}}</text>
+		<view class='right'></view>
+	</view>
+	<view class='hr'></view>
+	<!--
 	<view class="maxgView">租赁方式：{{zulintype}}</view>
 	<view class="maxgView">所在区域：{{quyu}}</view>
 	<view class="maxgView">附近地铁：{{ditie}}</view>
@@ -23,9 +87,9 @@
 	<view class="maxgView">有无电梯：{{dianti}}</view>
 	<view class="maxgView">房间面积：{{fangjiandaxiao}}</view>
 	<view class="maxgView">性别要求：{{sex}}</view>
-	<view class="maxgView">付款方式：{{fukuantype}}</view>
+	<view class="maxgView">付款方式：{{fukuantype}}</view>-->
 <!--<view class='amountBg' bindtap="OnUserClick">-->
-	<view class='amountBg'>
+<!--	<view class='amountBg'>
 		<view class='img'>
 			<image class="img2" mode="aspectFill" src="{{avaurl}}"></image>
 		</view>
@@ -38,10 +102,11 @@
 			</view>
 
 		</view>
-			<!--<view class="more">查看详情 ></view>-->
+			<!--<view class="more">查看详情 ></view>
 	</view>
+-->
 
-</view>
+
 
 
 <view class="transparent"></view>
@@ -84,4 +149,5 @@
 		</view>
 	</view>
 	-->
+</view>
 </view>
