@@ -1,9 +1,9 @@
 <!--pages/map/map.wxml-->
 <map 
-  id="wxdf33872822175f36"
+  id="map"
   subkey="ICBBZ-243C6-DW7SC-EQUZG-MKAXH-ZVBP4"
-  longitude="121.400753"
-  latitude="31.122776" 
+  longitude="{{longitude}}"
+  latitude="{{latitude}}" 
   scale="14"
   layer-style="1"
   class="bgMap"

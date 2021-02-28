@@ -5,17 +5,18 @@ var uploadImage = require('../../utils/uploadFile.js');
 var util = require('../../utils/util.js');
 const env = require('../../utils/config.js');
 Page({
-
   data: {
-    rent: 0,
+    showClearBtn: false,
+    isWaring: false,
+    rent: '',
     zulintype: '整租',
     quyu: '黄浦',
     ditie: '1号线',
     xiaoqu: '',
-    louceng: 0,
+    louceng: '',
     fangjiantype: '一室',
     dianti: '有', 
-    fangjiandaxiao: 0,
+    fangjiandaxiao: '',
     sex: '不限',
     fukuantype: '押一付三',
     img_count: 0,
@@ -24,7 +25,7 @@ Page({
     status: '待租',
     abled: true,
     contact: '',
-    buttons: [{ id: 1, name: '整租' }, { id: 2, name: '合租' }],
+    selectzulin: ['整租', '合租'],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -37,6 +38,7 @@ Page({
     selectdianti: ['有', '无'],
     selectfukuan: ['押一付三', '押一付一'],
     selectfangxing: ['一室', '二室', '三室', '四室', '五室', '五室以上'],
+    indexzulin:0,//选择的下拉列表下标
     indexquyu:0,//选择的下拉列表下标
     indexdianti:0,//选择的下拉列表下标
     indexditie:0,//选择的下拉列表下标
@@ -49,236 +51,90 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+bindzulintypeChange: function(e) {
+    this.setData({
+      indexzulin: e.detail.value
+    })
+},
+bindquyuChange: function(e) {
+    this.setData({
+      indexquyu: e.detail.value
+    })
+},
+bindditieChange: function(e) {
+    this.setData({
+      indexditie: e.detail.value
+    })
+},
+bindfangxingChange: function(e) {
+  this.setData({
+    indexfangxing: e.detail.value
+  })
+},
+binddiantiChange: function(e) {
+  this.setData({
+    indexdianti: e.detail.value
+  })
+},
+bindsexChange: function(e) {
+  this.setData({
+    indexsex: e.detail.value
+  })
+},
+bindfukuanChange: function(e) {
+  this.setData({
+    indexfukuan: e.detail.value
+  })
+},
+oncontactInput(evt) {
+  this.data.contact = evt.detail.value;
+  this.setData({
+      contact: this.data.contact,
+      showClearBtn: !!this.data.contact.length,
+      isWaring: false,
+  });
+},
+onxiaoquInput(evt) {
+  this.data.xiaoqu = evt.detail.value;
+  this.setData({
+      xiaoqu: this.data.xiaoqu,
+      showClearBtn: !!this.data.xiaoqu.length,
+      isWaring: false,
+  });
+},
+onloucengInput(evt) {
+  this.data.louceng = evt.detail.value;
+  this.setData({
+      louceng: this.data.louceng,
+      showClearBtn: !!this.data.louceng.length,
+      isWaring: false,
+  });
+},
+onfangjiandaxiaoInput(evt) {
+  this.data.fangjiandaxiao = evt.detail.value;
+  this.setData({
+      fangjiandaxiao: this.data.fangjiandaxiao,
+      showClearBtn: !!this.data.fangjiandaxiao.length,
+      isWaring: false,
+  });
+},
+onrentInput(evt) {
+  this.data.rent = evt.detail.value;
+  this.setData({
+      rent: this.data.rent,
+      showClearBtn: !!this.data.rent.length,
+      isWaring: false,
+  });
+},
+onClearcontact() {
+  this.setData({
+      contact: '',
+      showClearBtn: false,
+      isWaring: false,
+  });
+},
+onLoad: function (options) {
     that = this;
-    this.data.buttons[0].checked = true;
-    this.setData({
-      buttons: this.data.buttons,
-    });
-  },
-
-  containertap(){
-    this.setData({
-      showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-    });
-  },
-
-  // 点击下拉显示框
-  selectTap(){
-    this.setData({
-      showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-      showquyu: !this.data.showquyu
-    });
-  },
-  // 点击下拉列表
-  optionTap(e){
-    let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-    this.setData({
-      indexquyu:Index,
-      showquyu:!this.data.showquyu,
-      quyu: this.data.selectquyu[Index],
-    });
-  },
-
-    // 点击下拉显示框
-    selectTapditie(){
-      this.setData({
-        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showditie: !this.data.showditie
-      });
-    },
-    // 点击下拉列表
-    optionTapditie(e){
-      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-      this.setData({
-        indexditie:Index,
-        showditie:!this.data.showditie,
-        ditie: this.data.selectDitie[Index],
-      });
-    },
-
-    // 点击下拉显示框
-    selectTapsex(){
-      this.setData({
-        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showsex: !this.data.showsex
-      });
-    },
-    // 点击下拉列表
-    optionTapsex(e){
-      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-      this.setData({
-        indexsex:Index,
-        showsex:!this.data.showsex,
-        sex: this.data.selectSex[Index],
-      });
-    },
-
-    // 点击下拉显示框
-    selectTapdianti(){
-      this.setData({
-        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showdianti: !this.data.showdianti
-      });
-    },
-    // 点击下拉列表
-    optionTapdianti(e){
-      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-      this.setData({
-        indexdianti:Index,
-        showdianti:!this.data.showdianti,
-        dianti: this.data.selectdianti[Index],
-      });
-    },
-
-    // 点击下拉显示框
-    selectTapfukuan(){
-      this.setData({
-        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfangxing:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfukuan: !this.data.showfukuan
-      });
-    },
-    // 点击下拉列表
-    optionTapfukuan(e){
-      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-      this.setData({
-        indexfukuan:Index,
-        showfukuan:!this.data.showfukuan,
-        fukuantype: this.data.selectfukuan[Index],
-      });
-    },
-
-    // 点击下拉显示框
-    selectTapfangxing(){
-      this.setData({
-        showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showsex:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showdianti:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfukuan:false,//控制下拉列表的显示隐藏，false隐藏、true显示
-        showfangxing: !this.data.showfangxing
-      });
-    },
-    // 点击下拉列表
-    optionTapfangxing(e){
-      let Index=e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-      this.setData({
-        indexfangxing:Index,
-        showfangxing:!this.data.showfangxing,
-        fangjiantype: this.data.selectfangxing[Index],
-      });
-    },
-
-  radioButtonTap: function (e) {
-    console.log(e)
-    let id = e.currentTarget.dataset.id
-    console.log(id)
-    for (let i = 0; i < this.data.buttons.length; i++) {
-      if (this.data.buttons[i].id == id) {
-        //当前点击的位置为true即选中
-        this.data.buttons[i].checked = true;
-      }
-      else {
-        this.data.buttons[i].checked = false;
-      }
-    }
-    this.setData({
-      buttons: this.data.buttons,
-    })
-    if(this.data.buttons[0].checked){
-        this.data.zulintype = '整租';
-    }
-    else{
-        this.data.zulintype = '合租';
-    }
-  },
-
-  checkButtonTap:function(e){
-    console.log(e)
-    let id = e.currentTarget.dataset.id
-    console.log(id)
-    for (let i = 0; i < this.data.buttons.length; i++) {
-      if (this.data.buttons[i].id == id) {
-        if (this.data.buttons[i].checked == true) {
-          this.data.buttons[i].checked = false;
-         
-        } else {
-          this.data.buttons[i].checked = true;
-          
-        }
-      }
-    }
-   this.setData({
-     buttons: this.data.buttons,
-    })
-    
-  },
-
-  OnAdsInput: function (e) {
-    this.setData({
-      ads: e.detail.value
-    })
-  },
-
-  OnTypeInput: function (e) {
-    this.setData({
-      type: e.detail.value
-    })
-  },
-
-  OncontactInput: function (e) {
-    this.setData({
-      contact: e.detail.value
-    })
-  },
-
-  OnloucengInput: function (e) {
-    this.setData({
-      louceng: e.detail.value
-    })
-  },
-
-  OnxiaoquInput: function (e) {
-    this.setData({
-      xiaoqu: e.detail.value
-    })
-  },
-
-  OnRentInput: function (e) {
-    this.setData({
-      rent: e.detail.value
-    })
-  },
-
-  OnfangjiandaxiaoInput: function (e) {
-    this.setData({
-      fangjiandaxiao: e.detail.value
-    })
   },
 
   UploadImg: function () {
@@ -444,16 +300,16 @@ Page({
       data: {
         phone: app.globalData.phone,
         rent: this.data.rent,
-        zulintype: this.data.zulintype,
-        quyu: this.data.quyu,
-        ditie: this.data.ditie,
+        zulintype: this.data.selectzulin[this.data.indexzulin],
+        quyu: this.data.selectquyu[this.data.indexquyu],
+        ditie: this.data.selectDitie[this.data.indexditie],
         xiaoqu: this.data.xiaoqu,
         louceng: this.data.louceng,
-        fangjiantype: this.data.fangjiantype,
-        dianti: this.data.dianti, 
+        fangjiantype: this.data.selectfangxing[this.data.indexfangxing],
+        dianti: this.data.selectdianti[this.data.indexdianti], 
         fangjiandaxiao: this.data.fangjiandaxiao,
-        sex: this.data.sex,
-        fukuantype: this.data.fukuantype,
+        sex: this.data.selectSex[this.data.indexsex],
+        fukuantype: this.data.selectfukuan[this.data.indexfukuan],
         contact: this.data.contact,
         img: that.data.img_paths,
         img_count: this.data.img_count,

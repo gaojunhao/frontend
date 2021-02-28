@@ -100,8 +100,22 @@ Page({
   },
 
   OnMapClick: function () {
+    wx.serviceMarket.invokeService({
+      service: "wxc1c68623b7bdea7b",
+      api: "poiSearch",
+      data: {
+        keyword: "华宝小区",
+        boundary: "region(上海)"
+      }
+    }).then(res=>{
+      console.log(res.data)
+    }).catch(err=>{
+      console.error(err)
+    })
+    var latitude = 31.122776
+    var longitude = 121.400753
     wx.navigateTo({
-      url: '../map/map',
+      url: '../map/map?latitude=' + latitude + '&longitude=' + longitude,
     })
   },
 

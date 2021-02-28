@@ -1,5 +1,4 @@
 {
-  "usingComponents": {"van-area": "../../dist/area/index"},
   "navigationBarTitleText": "发布新房",
   "navigationBarBackgroundColor": "#5495e6",
   "navigationBarTextStyle": "white"

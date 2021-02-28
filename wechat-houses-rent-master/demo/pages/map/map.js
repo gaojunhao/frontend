@@ -1,26 +1,36 @@
 // pages/map/map.js
-var that = this
+var markers1 = {
+  id: 3,
+  latitude: 0,
+  longitude: 0,
+  iconPath: '../../images/location.png',
+}
+var allMarkers = [markers1]
 Page({
 
   /**
-   * 页面的初始数据
-   */
+   * 页面的初始数据 31.122776 121.400753
+   */ 
+
   data: {
-    markers: [{
-      id: 1,
-      latitude: 23.099994,
-      longitude: 113.344520,
-      name: 'T.I.T 创意园',
-      iconPath: '../../images/location.png'
-    }]
+    markers: [],
+    longitude: 0,
+    latitude: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    allMarkers[0].latitude = options.latitude
+    allMarkers[0].longitude = options.longitude
+    const markers = allMarkers
+    const latitude = options.latitude
+    const longitude = options.longitude
     this.setData({
-      markers: this.data.markers
+      markers,
+      latitude,
+      longitude,
     })
   },
 
