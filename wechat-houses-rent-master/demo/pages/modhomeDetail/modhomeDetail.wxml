@@ -4,6 +4,11 @@
 		<image mode="aspectFill" class="img-top" src="{{item}}" data-idx="{{idx}}" bindtap="OnImgClick"></image>
 	</swiper-item>
 </swiper>
+<view class="info-container">
+	<view class="rentView">
+		<text class="rent">{{rent}}</text><text class="rentunit"> 元/月</text>
+	</view>
+</view>
 <!--
 <view class="info-container">
 	<view class="rentView">
@@ -62,10 +67,10 @@
 		<view class='right'></view>
 	</view>
 	<view class='hr'></view>
-	<view class='item' bindtap='OnMapClick'>
+	<view class='item'>
 		<image class='icon' src='../../images/topic-detail/xiaoqu.jpg' style="width:22px;height:21px;"></image>
 		<text class='itemName'>所在小区：{{xiaoqu}}</text>
-		<view class='right'>地图></view>
+		<view class='right'></view>
 	</view>
 	<view class='hr'></view>
 	<view class='item'>

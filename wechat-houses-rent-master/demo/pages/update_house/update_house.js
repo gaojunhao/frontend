@@ -300,8 +300,16 @@ onClearcontact() {
       wx.showLoading({
         title: '上传中' + (i + 1),
         mask: true
-      })
-
+      })/*
+  wx.downloadFile({
+        url: that.data.imgs[i], //仅为示例，并非真实的资源
+        success (res) {
+          // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+          if (res.statusCode === 200) {
+            console.log("print:",res.tempFilePath)
+          }
+        }
+      })*/
   uploadImage(that.data.imgs[i], i, app.globalData.phone + '/imgs/' + this.data.housenum + '/',
   function (result) {
     console.log("======上传成功图片地址为：", result);
@@ -334,6 +342,7 @@ onClearcontact() {
       url: "http://www.semmy.fun/springmvc/updatehouse",
       method: 'post',
       data: {
+        id: this.data.id,
         phone: app.globalData.phone,
         rent: this.data.rent,
         zulintype: this.data.selectzulin[this.data.indexzulin],
@@ -356,32 +365,30 @@ onClearcontact() {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res.data)
-        var id = res.data.substring(0, res.data.length - 2)
-        console.log(id)
-        if (id == 'error') {
+        /*
+        if (res.data != 'update house success') {
           wx.showToast({
             title: '数据库系统错误！',
             icon: 'none'
           })
           return
-        }
+        }*/
         /*setTimeout(function () {
           wx.navigateBack()
         }, 2000)*/
+        console.log(res.data)
         setTimeout(
           function () {
             var pages = getCurrentPages()
             var prevPage = pages[pages.length - 3] // 获取上一页
             prevPage.onLoad()
-            wx.navigateBack({})
+            wx.navigateBack({delta: 2})
           },
           2000
         )
         wx.showToast({
           title: '发布成功！',
         })
-        app.globalData.housenum = app.globalData.housenum+1
       },
       fail(res) {
         wx.showToast({

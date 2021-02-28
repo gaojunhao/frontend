@@ -27,9 +27,10 @@ Page({
   },
 
   onLoad: function (option) {
+    console.log(option)
+    console.log(option.id)
     this.setData({
       id: option.id,
-      user_ident: app.globalData.ident,
       user_phone: app.globalData.phone
     })
     that = this
@@ -287,11 +288,7 @@ Page({
             wx.request({
               url: app.globalData.url + 'deletehouse?id=' + app.globalData.id + '&phone=' + app.globalData.phone,
               success(res) {
-                console.log("delete house...")
-                console.log(res)
-                console.log(res.data)
                 if (res.data == 0) {
-  
                   setTimeout(
                     function () {
                       var pages = getCurrentPages()
@@ -304,6 +301,7 @@ Page({
                   wx.showToast({
                     title: '删除成功',
                   })
+                  app.globalData.housenum = app.globalData.housenum-1
                 } else {
                   wx.showToast({
                     title: '系统错误！',
