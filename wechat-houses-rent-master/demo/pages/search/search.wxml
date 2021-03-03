@@ -1,2 +1,29 @@
 <!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<view class="page" data-weui-theme="{{theme}}">
+	<view class="page__bd">
+		<view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+			<form class="weui-search-bar__form">
+				<view class="weui-search-bar__box">
+					<i class="weui-icon-search"></i>
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <span class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></span>
+				</view>
+				<label class="weui-search-bar__label" bindtap="showInput">
+					<i class="weui-icon-search"></i>
+                    <span class="weui-search-bar__text">搜索</span>
+				</label>
+			</form>
+            <view class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+		</view>
+		<view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <view class="weui-panel__bd">
+      <block wx:for='{{searchresult}}' wx:key="item">
+				<view class="weui-media-box weui-media-box_text" data-location="{{item.location}}" data-title="{{item.title}}" bindtap="clickitem">
+					<h4 class="weui-media-box__title" >{{item.title}}</h4>
+					<view class="weui-media-box__desc">{{item.address}}</view>
+				</view>
+    </block>
+  </view>
+		</view>
+	</view>
+</view>

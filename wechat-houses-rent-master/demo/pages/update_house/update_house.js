@@ -29,6 +29,7 @@ Page({
     status: '待租',
     abled: true,
     contact: '',
+    location: '',
     selectzulin: ['整租', '合租'],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -139,6 +140,7 @@ onClearcontact() {
   onLoad: function (options) {
     that = this
     this.setData({
+      location: options.location,
       id: options.id,
       indexzulin: this.data.selectzulin.indexOf(options.zulintype),
       indexquyu: this.data.selectquyu.indexOf(options.quyu),
@@ -359,7 +361,8 @@ onClearcontact() {
         img: that.data.img_paths,
         img_count: this.data.img_count,
         status: '待租',
-        avasrc: app.globalData.icon
+        avasrc: app.globalData.icon,
+        location: this.data.location,
       },
       header: {
         'content-type': 'application/json' // 默认值

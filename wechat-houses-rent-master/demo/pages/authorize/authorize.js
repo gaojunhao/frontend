@@ -172,8 +172,19 @@ wx.request({
   success: function (res) {
    console.log("openid=", res.data.openid)
    console.log("session_key=", res.data.session_key)
+   console.log("encryptedData=", telObj)
+   console.log("iv", ivObj)
    wx.request({
-    url: 'https://www.semmy.fun/springmvc/getphone?session_key=' + res.data.session_key + '&encryptedData=' + telObj + '&iv=' + ivObj, //接口地址
+    url: 'http://www.semmy.fun/springmvc/getphone',
+    method: 'post',
+    data: {
+      session_key: res.data.session_key,
+      encryptedData: telObj,
+      iv: ivObj, 
+    },
+    header: {
+      'content-type': 'application/json'
+    },
     success: function (res) {
      //phoneObj = res.data.phoneNumber;
      console.log("手机号=", res.data)
@@ -192,9 +203,10 @@ wx.request({
       url: '../index/index',
      })
     } else { //允许授权执行跳转
-     wx.navigateTo({
+      console.log("允许授权执行跳转")
+     /*wx.navigateTo({
       url: '../test/test',
-     })
+     })*/
     }
    }
   });

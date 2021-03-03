@@ -1,18 +1,63 @@
 // pages/search/search.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    inputShowed: false,
+    inputVal: "",
+    searchresult: [],
+},
+showInput: function () {
+    this.setData({
+        inputShowed: true
+    });
+},
+hideInput: function () {
+    this.setData({
+        inputVal: "",
+        inputShowed: false
+    });
+},
+clearInput: function () {
+    this.setData({
+        inputVal: ""
+    });
+},
+inputTyping: function (e) {
+  this.setData({
+    inputVal: e.detail.value
+});
+  wx.serviceMarket.invokeService({
+    service: "wxc1c68623b7bdea7b",
+    api: "poiSearch",
+    data: {
+      keyword: e.detail.value,
+      boundary: "region(上海)"
+    }
+  }).then(res=>{
+    console.log(res.data.data)
+    this.setData({
+      searchresult: res.data.data
+  });
+  }).catch(err=>{
+    console.error(err)
+  })
+},
 
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
+  },
+
+  clickitem: function (e) {
+    var pages = getCurrentPages()
+    var prevPage = pages[pages.length - 2] // 获取上一页
+    prevPage.setData({
+      xiaoqu: e.currentTarget.dataset.title,
+      location: e.currentTarget.dataset.location,
+    })
+    wx.navigateBack({})
   },
 
   /**

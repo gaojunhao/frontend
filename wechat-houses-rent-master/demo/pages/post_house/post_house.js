@@ -25,6 +25,7 @@ Page({
     status: '待租',
     abled: true,
     contact: '',
+    location: '',
     selectzulin: ['整租', '合租'],
     showquyu:false,//控制下拉列表的显示隐藏，false隐藏、true显示
     showditie:false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -91,14 +92,6 @@ oncontactInput(evt) {
   this.setData({
       contact: this.data.contact,
       showClearBtn: !!this.data.contact.length,
-      isWaring: false,
-  });
-},
-onxiaoquInput(evt) {
-  this.data.xiaoqu = evt.detail.value;
-  this.setData({
-      xiaoqu: this.data.xiaoqu,
-      showClearBtn: !!this.data.xiaoqu.length,
       isWaring: false,
   });
 },
@@ -294,6 +287,7 @@ onLoad: function (options) {
         else
           that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg" + ","
     }
+    console.log(this.data.location)
     wx.request({
       url: "http://www.semmy.fun/springmvc/sethouses",
       method: 'post',
@@ -314,7 +308,8 @@ onLoad: function (options) {
         img: that.data.img_paths,
         img_count: this.data.img_count,
         status: '待租',
-        avasrc: app.globalData.icon
+        avasrc: app.globalData.icon,
+        location: "weizhi",
       },
       header: {
         'content-type': 'application/json' // 默认值

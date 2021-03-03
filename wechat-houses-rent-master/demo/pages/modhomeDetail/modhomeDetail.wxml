@@ -9,44 +9,6 @@
 		<text class="rent">{{rent}}</text><text class="rentunit"> 元/月</text>
 	</view>
 </view>
-<!--
-<view class="info-container">
-	<view class="rentView">
-		<text class="rent">{{rent}}</text><text class="rentunit"> 元/月</text>
-	</view>
-	<view class="adsView">
-		{{ads}}
-	</view>
-
-	<view class="container-line"></view>
-	<view class="maxgView">租赁方式：{{zulintype}}</view>
-	<view class="maxgView">所在区域：{{quyu}}</view>
-	<view class="maxgView">附近地铁：{{ditie}}</view>
-	<view class="maxgView">所在小区：{{xiaoqu}}</view>
-	<view class="maxgView">所在楼层：{{louceng}}</view>
-	<view class="maxgView">房间数量：{{fangjiantype}}</view>
-	<view class="maxgView">有无电梯：{{dianti}}</view>
-	<view class="maxgView">房间面积：{{fangjiandaxiao}}</view>
-	<view class="maxgView">性别要求：{{sex}}</view>
-	<view class="maxgView">付款方式：{{fukuantype}}</view>
-<!--<view class='amountBg' bindtap="OnUserClick">
-	<view class='amountBg'>
-		<view class='img'>
-			<image class="img2" mode="aspectFill" src="{{avaurl}}"></image>
-		</view>
-		<view class='account'>
-			<view class='name'>
-				{{hname}}
-			</view>
-			<view class='address'>
-				{{hads}}
-			</view>
-
-		</view>
-			<!--<view class="more">查看详情 ></view>
-	</view>
-
-</view>-->
 
 <view class="container-line"></view>
 	<view class='item'>
