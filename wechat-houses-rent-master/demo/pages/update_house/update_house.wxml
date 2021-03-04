@@ -51,6 +51,7 @@
 							</view>
 						</view>
 					</view>
+				</view>
 					<view class="weui-cells weui-cells_after-title">
             <navigator url="../search/search" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__bd">所在小区</view>
@@ -159,7 +160,6 @@
 			<a class="weui-btn weui-btn_primary" bindtap="OnPostClick">重新发布</a>
 		</view>
 	<!--</view>-->
-</view>
 </view>
 <!--
 <view class="container" bindtap="containertap">

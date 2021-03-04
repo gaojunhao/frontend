@@ -1,28 +1,18 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/Login/Login",
     "pages/update_house/update_house",
     "pages/post/post",
     "pages/publish/publish",
-    "pages/update_user/update_user",
-    "pages/user_info/user",
     "pages/post_detail/post_detail",
-    "pages/register/register",
-    "pages/rentout/rentout",
-    "pages/register_rentout/register_rentout",
     "pages/me/me",
-    "pages/preview/preview",
-    "pages/request/request",
     "pages/homeDetail/homeDetail",
     "pages/post_house/post_house",
-    "pages/history/history",
     "pages/address/address",
     "pages/search/search",
     "pages/authorize/authorize",
     "pages/modhomeDetail/modhomeDetail",
     "pages/collectlist/collectlist",
-    "pages/verification/verification",
     "pages/map/map"
   ],
   "window": {

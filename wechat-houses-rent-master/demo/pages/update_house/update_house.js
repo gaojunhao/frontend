@@ -95,14 +95,6 @@ oncontactInput(evt) {
       isWaring: false,
   });
 },
-onxiaoquInput(evt) {
-  this.data.xiaoqu = evt.detail.value;
-  this.setData({
-      xiaoqu: this.data.xiaoqu,
-      showClearBtn: !!this.data.xiaoqu.length,
-      isWaring: false,
-  });
-},
 onloucengInput(evt) {
   this.data.louceng = evt.detail.value;
   this.setData({
@@ -138,6 +130,7 @@ onClearcontact() {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log()
     that = this
     this.setData({
       location: options.location,
@@ -166,7 +159,6 @@ onClearcontact() {
     })
 
     var imgs = this.data.img.split(',')
-    console.log(imgs)
     //for (var i = 0; i < this.data.pic_cnt; i++)
       //imgs.push(app.globalData.pic_url + '/' + i + '.jpg')
     this.setData({
@@ -190,7 +182,6 @@ onClearcontact() {
         })
       }
     })
-    console.log(that.data.imgs)
   },
 
   RemoveImg: function (event) {
