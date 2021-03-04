@@ -28,6 +28,7 @@ Page({
     fangjiandaxiao: '',
     sex: '',
     fukuantype: '',
+    location: '',
   },
 
   onLoad: function (option) {
@@ -70,6 +71,7 @@ Page({
           fangjiandaxiao: res.data.fangjiandaxiao,
           sex: res.data.sex,
           fukuantype: res.data.fukuantype,
+          location: res.data.location,
         })
         wx.request({
           url: 'http://www.semmy.fun/springmvc/containid?id=' + res.data.id + '&phone=' + app.globalData.phone,
@@ -100,20 +102,9 @@ Page({
   },
 
   OnMapClick: function () {
-    wx.serviceMarket.invokeService({
-      service: "wxc1c68623b7bdea7b",
-      api: "poiSearch",
-      data: {
-        keyword: "华宝小区",
-        boundary: "region(上海)"
-      }
-    }).then(res=>{
-      console.log(res.data)
-    }).catch(err=>{
-      console.error(err)
-    })
-    var latitude = 31.122776
-    var longitude = 121.400753
+    console.log(this.data.location)
+    var latitude = this.data.location.split(',')[0]
+    var longitude = this.data.location.split(',')[1]
     wx.navigateTo({
       url: '../map/map?latitude=' + latitude + '&longitude=' + longitude,
     })

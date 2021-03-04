@@ -340,6 +340,7 @@ onClearcontact() {
         else
           that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg" + ","
     }
+    location = this.data.location.lat + ',' + this.data.location.lng
     wx.request({
       url: "http://www.semmy.fun/springmvc/updatehouse",
       method: 'post',
@@ -362,7 +363,7 @@ onClearcontact() {
         img_count: this.data.img_count,
         status: '待租',
         avasrc: app.globalData.icon,
-        location: this.data.location,
+        location: location,
       },
       header: {
         'content-type': 'application/json' // 默认值

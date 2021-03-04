@@ -287,7 +287,8 @@ onLoad: function (options) {
         else
           that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg" + ","
     }
-    console.log(this.data.location)
+    console.log(this.data.location.lat)
+    var location = this.data.location.lat + ',' + this.data.location.lng
     wx.request({
       url: "http://www.semmy.fun/springmvc/sethouses",
       method: 'post',
@@ -309,7 +310,7 @@ onLoad: function (options) {
         img_count: this.data.img_count,
         status: '待租',
         avasrc: app.globalData.icon,
-        location: "weizhi",
+        location: location,
       },
       header: {
         'content-type': 'application/json' // 默认值

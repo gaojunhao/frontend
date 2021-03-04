@@ -24,6 +24,7 @@ Page({
     fangjiandaxiao: '',
     sex: '',
     fukuantype: '',
+    location: '',
   },
 
   onLoad: function (option) {
@@ -67,6 +68,7 @@ Page({
           fangjiandaxiao: res.data.fangjiandaxiao,
           sex: res.data.sex,
           fukuantype: res.data.fukuantype,
+          location: res.data.location,
         })
         wx.request({
           url: 'http://www.semmy.fun/springmvc/containid?id=' + res.data.id + '&phone=' + app.globalData.phone,
