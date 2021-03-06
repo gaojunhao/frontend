@@ -76,12 +76,6 @@
 		<view class='right'>></view>
 	</view>
 	<view class='hr'></view>
-	<view class='item' bindtap='verificationClick'>
-		<image class='icon' src='../../images/topic-detail/phone.png' style="width:22px;height:21px;"></image>
-		<text class='itemName'>绑定手机</text>
-		<view class='right'>></view>
-	</view>
-	<view class='hr'></view>
 	<view class='item' bindtap='outClick'>
 		<image class='icon' src='../../images/me/out.png' style="width:22px;height:21px;"></image>
 		<text class='itemName'>退出登录</text>

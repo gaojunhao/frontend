@@ -38,25 +38,12 @@
 						</view>
 					</view>
 				</view>
-				<view class="weui-cells weui-cells_form">
-					<view class="weui-cell weui-cell_active {{isWaring ? 'weui-cell_warn' : ''}}">
-						<view class="weui-cell__hd"><label class="weui-label">手机号</label></view>
-						<view class="weui-cell__bd weui-flex">
-							<input 
-                                class="weui-input" 
-                                type="text" 
-                                placeholder="请输入11位数手机号" 
-                                placeholder-class="weui-input__placeholder"
-                                value="{{contact}}"
-																bindinput="oncontactInput"
-																maxlength="11"
-                            />
-							<view wx:if="{{showClearBtn}}" class="weui-btn_reset weui-btn_icon weui-btn_input-clear" bindtap="onClearcontact">
-								<i class="weui-icon-clear"></i>
-							</view>
-						</view>
-					</view>
-				</view>
+				<view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">手机号</view>
+                <view class="weui-cell__ft">{{contact}}</view>
+            </view>
+        </view>
 				<view class="weui-cells weui-cells_after-title">
             <navigator url="../search/search" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__bd">所在小区</view>
@@ -166,115 +153,3 @@
 		</view>
 	<!--</view>-->
 </view>
-<!--
-<view class="container" bindtap="containertap">
-	<view class="inputView">
-		<view class="inputView3">
-			<text class="label1">租赁方式： </text> <block wx:for="{{buttons}}" wx:key="buttons"> <button class='{{item.checked?"checked_button":"normal_button"}}' data-id='{{item.id}}' bindtap='radioButtonTap'>{{item.name}}</button></block>
-		</view>
-		<view class="inputView3">
-			<text class="label2">区域： </text> 
-		<view class='select_box'>
-    <view class='select' catchtap='selectTap'>
-        <text class='select_text'>{{selectquyu[indexquyu]}}</text>
-        <image class='select_img {{showquyu&&"select_img_rotate"}}' src='/images/san1.png'></image>         
-    </view>
-    <view class='option_box' style='height:{{showquyu?(selectquyu.length>5?300:selectquyu.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectquyu.length-1&&"border:0;"}}' wx:for='{{selectquyu}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
-    </view>
-		</view>
-		</view>
-		<view class="inputView3">
-			<text class="label2">附近地铁： </text>
-			<view class='select_box'>
-    <view class='select' catchtap='selectTapditie'>
-        <text class='select_text'>{{selectDitie[indexditie]}}</text>
-        <image class='select_img {{show&&"select_img_rotate"}}' src='/images/san1.png'></image>         
-    </view>
-    <view class='option_box' style='height:{{showditie?(selectDitie.length>5?300:selectDitie.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectDitie.length-1&&"border:0;"}}' wx:for='{{selectDitie}}' wx:key='this' data-index='{{index}}' catchtap='optionTapditie'>{{item}}</text>
-    </view>
-		</view>
-		</view>
-		<view class="inputView3">
-			<text class="label1">所在小区： </text> <input class="inputView5" type="text" bindinput="OnxiaoquInput" />
-		</view>
-		<view class="inputView3">
-			<text class="label1">所在楼层： </text> <input maxlength="2" class="inputView2" type="digit" bindinput="OnloucengInput" /> <text class="label1">层</text>
-		</view>
-		<view class="inputView3">
-			<text class="label2">房型： </text>
-			<view class='select_box'>
-    <view class='select' catchtap='selectTapfangxing'>
-        <text class='select_text'>{{selectfangxing[indexfangxing]}}</text>
-        <image class='select_img {{showfangxing&&"select_img_rotate"}}' src='/images/san1.png'></image>         
-    </view>
-    <view class='option_box' style='height:{{showfangxing?(selectfangxing.length>5?300:selectfangxing.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectfangxing.length-1&&"border:0;"}}' wx:for='{{selectfangxing}}' wx:key='this' data-index='{{index}}' catchtap='optionTapfangxing'>{{item}}</text>
-    </view>
-		</view>
-		</view>
-		<view class="inputView3">
-			<text class="label2">电梯： </text>
-			<view class='select_box'>
-    <view class='select' catchtap='selectTapdianti'>
-        <text class='select_text'>{{selectdianti[indexdianti]}}</text>
-        <image class='select_img {{showdianti&&"select_img_rotate"}}' src='/images/san1.png'></image>         
-    </view>
-    <view class='option_box' style='height:{{showdianti?(selectdianti.length>5?300:selectdianti.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectdianti.length-1&&"border:0;"}}' wx:for='{{selectdianti}}' wx:key='this' data-index='{{index}}' catchtap='optionTapdianti'>{{item}}</text>
-    </view>
-		</view>
-		</view>
-		<view class="inputView3">
-			<text class="label1">房间面积： </text> <input maxlength="3" class="inputView2" type="digit" bindinput="OnfangjiandaxiaoInput" /> <text class="label1">平方米</text>
-		</view>
-		<view class="inputView3">
-			<text class="label2">性别要求： </text>
-			<view class='select_box'>
-    <view class='select' catchtap='selectTapsex'>
-        <text class='select_text'>{{selectSex[indexsex]}}</text>
-        <image class='select_img {{showsex&&"select_img_rotate"}}' src='/images/san1.png'></image>         
-    </view>
-    <view class='option_box' style='height:{{showsex?(selectSex.length>5?300:selectSex.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectSex.length-1&&"border:0;"}}' wx:for='{{selectSex}}' wx:key='this' data-index='{{index}}' catchtap='optionTapsex'>{{item}}</text>
-    </view>
-		</view>
-		</view>
-		<view class="inputView3">
-			<text class="label1">租金(元/月)： </text> <input maxlength="8" class="inputView2" type="digit" bindinput="OnRentInput" />
-		</view>
-		<view class="inputView3">
-			<text class="label2">付款方式： </text>
-			<view class='select_box'>
-    <view class='select' catchtap='selectTapfukuan'>
-        <text class='select_text'>{{selectfukuan[indexfukuan]}}</text>
-        <image class='select_img {{showfukuan&&"select_img_rotate"}}' src='/images/san1.png'></image>         
-    </view>
-    <view class='option_box' style='height:{{showfukuan?(selectfukuan.length>5?300:selectfukuan.length*60):0}}rpx;'>
-        <text class='option' style='{{index==selectfukuan.length-1&&"border:0;"}}' wx:for='{{selectfukuan}}' wx:key='this' data-index='{{index}}' catchtap='optionTapfukuan'>{{item}}</text>
-    </view>
-		</view>
-		</view>
-		<view class="inputView3">
-			<text class="label1">联系方式： </text> <input maxlength="11" class="inputView2" type="digit" bindinput="OncontactInput" />
-		</view>
-	</view>
-
-	<block>
-		<scroll-view class="image-group" scroll-x="true">
-			<view wx:for='{{imgs}}' wx:for-index='idx' wx:key="item">
-				<image src='{{item}}' class="img_upload" mode="aspectFill">
-				</image>
-				<icon type='clear' bindtap='RemoveImg' data-index="{{idx}}" class="pos"></icon>
-			</view>
-			<image wx:if="{{img_count!=6}}" class="add_icon" mode="aspectFill" src="../../images/post-house/add-icon1.png" bindtap="UploadImg"></image>
-		</scroll-view>
-	</block>
-
-	<view class="loginBtnView">
-		<button class="loginBtn" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="OnPostClick" disabled="{{!abled}}">发布</button>
-	</view>
-
-</view>
--->

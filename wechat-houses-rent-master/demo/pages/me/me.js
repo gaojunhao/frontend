@@ -2,18 +2,6 @@
 var app = getApp();
 //var that
 Page({
-
-  actioncnt: function () {
-    wx.showActionSheet({
-      itemList: ['群聊', '好友', '朋友圈'],
-      success: function (res) {
-        console.log(res.tapIndex)
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      }
-    })
-  },
   /**
    * 页面的初始数据
    */
@@ -46,7 +34,6 @@ Page({
     if (!app.globalData.login) {
       return
     }
-    console.log(app.globalData.name)
     that.setData({
       name: app.globalData.name,
       login: app.globalData.login,
@@ -55,7 +42,6 @@ Page({
   },
 
   onShow: function (options) {
-    var that = this
     if (!app.globalData.login) {
       return
     }
@@ -68,55 +54,7 @@ Page({
     this.setData({
       phone: getApp().globalData.phone,
       name: getApp().globalData.name,
-      ident: getApp().globalData.ident,
-
     })
-    var cnt = 0
-    if (app.globalData.ident == 'host') {
-      wx.request({
-        url: "你的服务器链接",
-        success(res) {
-          console.log(res.data)
-          cnt = res.data
-          if (cnt > 0) {
-            wx.showTabBarRedDot({
-              index: 2,
-            })
-            that.setData({
-              new_request: true
-            })
-          } else {
-            wx.hideTabBarRedDot({
-              index: 2,
-            })
-            that.setData({
-              new_request: false
-            })
-          }
-        }
-      })
-    } else {
-      wx.request({
-        url: "你的服务器链接",
-        success(res) {
-          if (res.data == 1) {
-            wx.showTabBarRedDot({
-              index: 2,
-            })
-            that.setData({
-              new_preview: true
-            })
-          } else {
-            wx.hideTabBarRedDot({
-              index: 2,
-            })
-            that.setData({
-              new_preview: false
-            })
-          }
-        }
-      })
-    }
   },
 
   OnPostHouseClick: function (e) {
@@ -130,7 +68,6 @@ Page({
     wx.request({
       url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
       success(res) {
-        //app.globalData.housenum = parseInt(res.data.housenum)
         if (parseInt(res.data.housenum) == 0){
           wx.navigateTo({
             url: '../post_house/post_house',
@@ -145,61 +82,63 @@ Page({
       }
     })
   },
-  /**
-   * 收藏列表
-   */
-  onReqClick: function (event) {
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
-    wx.navigateTo({
-      url: '../request/request',
-    })
-  },
 
-  onPrevClick: function (event) {
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
+  getPhoneNumber: function (e) {
+    var ivObj = e.detail.iv
+    var telObj = e.detail.encryptedData
+    console.log('iv=', ivObj)
+    console.log('encryptedData', telObj)
+    //------执行Login---------
+    wx.login({
+     success: res => {
+      console.log('code转换', res.code);
+   
+  　　　　　　//用code传给服务器调换session_key
+  wx.request({
+    url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxdf33872822175f36&secret=8a13ec90b1fd2048188bfdbd37fe7004&js_code='+ res.code + '&grant_type=authorization_code', //接口地址
+  
+    success: function (res) {
+     console.log("openid=", res.data.openid)
+     console.log("session_key=", res.data.session_key)
+     console.log("encryptedData=", telObj)
+     console.log("iv", ivObj)
+     wx.request({
+      url: 'http://www.semmy.fun/springmvc/getphone',
+      method: 'post',
+      data: {
+        session_key: res.data.session_key,
+        encryptedData: telObj,
+        iv: ivObj, 
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+       //phoneObj = res.data.phoneNumber;
+       console.log("手机号=", res.data)
+       /*wx.setStorage({  //存储数据并准备发送给下一页使用
+        key: "phoneObj",
+        data: res.data.phoneNumber,
+       })*/
+      }
+     })
     }
-    wx.navigateTo({
-      url: '../preview/preview',
-    })
+   })
+   
+      //-----------------是否授权，授权通过进入主页面，授权拒绝则停留在登陆界面
+      if (e.detail.errMsg == 'getPhoneNumber:user deny') { //用户点击拒绝
+       wx.navigateTo({
+        url: '../index/index',
+       })
+      } else { //允许授权执行跳转
+        console.log("允许授权执行跳转")
+       /*wx.navigateTo({
+        url: '../test/test',
+       })*/
+      }
+     }
+    });
   },
-
-  onOnRentClick: function (e) {
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
-    wx.navigateTo({
-      url: '../rentout/rentout',
-    })
-  },
-
-  onHistoryClick: function (e) {
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
-    wx.navigateTo({
-      url: '../history/history',
-    })
-  },
-
 
   clickUser: function (e) {
     if (!app.globalData.login) {
@@ -208,10 +147,6 @@ Page({
       })
       return
     }
-  /*
-    wx.navigateTo({
-      url: '../../pages/user_info/user?icon=' + app.globalData.icon,
-    })*/
   },
 
   /**
@@ -255,20 +190,6 @@ Page({
         return
       }
     })
-  },
-
-  verificationClick: function (event) {
-    var that = this
-    if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
-      })
-      return
-    }
-        wx.navigateTo({
-          url: "../verification/verification",
-        })
   },
 
   onItemClick: function (event) {
@@ -332,7 +253,6 @@ Page({
       },
       500
     )
-
     this.onShow()
   }
 })

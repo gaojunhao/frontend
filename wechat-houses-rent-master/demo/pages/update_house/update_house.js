@@ -50,7 +50,7 @@ Page({
     indexsex:0,//选择的下拉列表下标
     indexfukuan:0,//选择的下拉列表下标
     indexfangxing:0,//选择的下拉列表下标
-    housenum:0
+    houseindex:0
   },
   bindzulintypeChange: function(e) {
     this.setData({
@@ -87,6 +87,7 @@ bindfukuanChange: function(e) {
     indexfukuan: e.detail.value
   })
 },
+/*
 oncontactInput(evt) {
   this.data.contact = evt.detail.value;
   this.setData({
@@ -94,7 +95,7 @@ oncontactInput(evt) {
       showClearBtn: !!this.data.contact.length,
       isWaring: false,
   });
-},
+},*/
 onloucengInput(evt) {
   this.data.louceng = evt.detail.value;
   this.setData({
@@ -119,13 +120,14 @@ onrentInput(evt) {
       isWaring: false,
   });
 },
+/*
 onClearcontact() {
   this.setData({
       contact: '',
       showClearBtn: false,
       isWaring: false,
   });
-},
+},*/
   /**
    * 生命周期函数--监听页面加载
    */
@@ -155,7 +157,8 @@ onClearcontact() {
       fangjiantype: options.fangjiantype,
       dianti: options.dianti,
       sex: options.sex,
-      fukuantype: options.fukuantype
+      fukuantype: options.fukuantype,
+      houseindex: options.houseindex
     })
 
     var imgs = this.data.img.split(',')
@@ -168,22 +171,42 @@ onClearcontact() {
   },
 
   UploadImg: function () {
-    var imgs = that.data.imgs
+    app.globalData.imgs = that.data.imgs
+    app.globalData.houseindex = that.data.houseindex
     wx.chooseImage({
-      count: 6 - imgs.length,
+      count: 6 - app.globalData.imgs.length,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
         let imgSrc = res.tempFilePaths
-        imgs = imgs.concat(imgSrc)
-        that.setData({
-          img_count: imgs.length,
-          imgs: imgs
-        })
+        uploadImage(imgSrc[0], new Date().getTime(), app.globalData.phone + '/imgs/' + app.globalData.houseindex + '/',
+        function (result) {
+          console.log("======上传成功图片地址为：", result);
+          app.globalData.imgs = app.globalData.imgs.concat(result)
+          console.log(app.globalData.imgs)
+          that.setData({
+            img_count: app.globalData.imgs.length,
+            imgs: app.globalData.imgs
+          })
+        },
+        
+        function (result) {
+          console.log("======上传失败======", result);
+          //做你具体的业务逻辑操作
+          wx.showToast({
+            title: '图片上传失败！',
+            icon: 'none'
+          })
+          wx.hideLoading()
+          that.setData({
+            abled: true
+          })
+          return
+        }
+      )
       }
     })
   },
-
   RemoveImg: function (event) {
     var position = event.currentTarget.dataset.index;
     this.data.imgs.splice(position, 1);
@@ -195,7 +218,6 @@ onClearcontact() {
   },
 
   OnPostClick: function (e) {
-    this.data.housenum = app.globalData.housenum
     if(this.data.xiaoqu=='')
     {
       wx.showToast({
@@ -249,30 +271,7 @@ onClearcontact() {
       })
       return
     }
-    if(this.data.contact=='')
-    {
-      wx.showToast({
-        title: '请填写联系方式',
-        icon: 'none'
-      })
-      return
-    }
-    if(this.data.contact.length!=11)
-    {
-      wx.showToast({
-        title: '联系方式请正确填写,应该为11位数字',
-        icon: 'none'
-      })
-      return
-    }
-    if(!(/^\d+$/.test(this.data.contact)))
-    {
-      wx.showToast({
-        title: '联系方式请正确填写,应该为11位数字',
-        icon: 'none'
-      })
-      return
-    }
+
     if(this.data.img_count==0)
     {
       wx.showToast({
@@ -287,51 +286,15 @@ onClearcontact() {
     this.setData({
       abled: false
     })
-    var tmp_img_paths = ''
-    for (var i = 0; i < that.data.imgs.length; i++) {
       //显示消息提示框
-      wx.showLoading({
-        title: '上传中' + (i + 1),
-        mask: true
-      })/*
-  wx.downloadFile({
-        url: that.data.imgs[i], //仅为示例，并非真实的资源
-        success (res) {
-          // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-          if (res.statusCode === 200) {
-            console.log("print:",res.tempFilePath)
-          }
-        }
-      })*/
-  uploadImage(that.data.imgs[i], i, app.globalData.phone + '/imgs/' + this.data.housenum + '/',
-  function (result) {
-    console.log("======上传成功图片地址为：", result);
-    tmp_img_paths = tmp_img_paths + result + ','
-    console.log(tmp_img_paths)
-  },
-  
-  function (result) {
-    console.log("======上传失败======", result);
-    //做你具体的业务逻辑操作
-    wx.showToast({
-      title: '图片上传失败！',
-      icon: 'none'
-    })
-    wx.hideLoading()
-    that.setData({
-      abled: true
-    })
-    return
-  }
-)  
-    }
-    for (var i = 0; i < that.data.imgs.length; i++) {
-        if (i == (that.data.imgs.length-1))
-          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg"
-        else
-          that.data.img_paths = that.data.img_paths + env.uploadImageUrl + app.globalData.phone + "/imgs/" + this.data.housenum + "/" + i + ".jpg" + ","
-    }
-    location = this.data.location.lat + ',' + this.data.location.lng
+      for (var i = 0; i < that.data.imgs.length; i++) {
+          if (i == (that.data.imgs.length-1))
+            that.data.img_paths = that.data.img_paths + that.data.imgs[i]
+          else
+            that.data.img_paths = that.data.img_paths + that.data.imgs[i] + ","
+      }
+      console.log(that.data.img_paths)
+    //location = this.data.location.lat + ',' + this.data.location.lng
     wx.request({
       url: "http://www.semmy.fun/springmvc/updatehouse",
       method: 'post',
@@ -350,11 +313,12 @@ onClearcontact() {
         sex: this.data.selectSex[this.data.indexsex],
         fukuantype: this.data.selectfukuan[this.data.indexfukuan],
         contact: this.data.contact,
-        img: that.data.img_paths,
+        img: this.data.img_paths,
         img_count: this.data.img_count,
         status: '待租',
         avasrc: app.globalData.icon,
-        location: location,
+        location: this.data.location,
+        houseindex: this.data.houseindex
       },
       header: {
         'content-type': 'application/json' // 默认值

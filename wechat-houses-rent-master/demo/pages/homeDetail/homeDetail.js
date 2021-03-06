@@ -41,8 +41,6 @@ Page({
     wx.request({
       url: "http://www.semmy.fun/springmvc/getonehouse?id=" + option.id,
       success(res) {
-        console.log(res.data)
-        console.log(res.data.avasrc)
         var endimg = res.data.img.length
         //console.log(res.data.img.substring(0, endimg).split(',')[0])
         var imgs = []

@@ -13,6 +13,7 @@ const Crypto = require('crypto.js');
  *@param - failc:失败回调
  */
 const uploadFile = function (filePath, idx, dir, successc, failc) {
+   console.log(!filePath || filePath.length < 9)
    if (!filePath || filePath.length < 9) {
       wx.showModal({
          title: '图片错误',

@@ -53,9 +53,10 @@ inputTyping: function (e) {
   clickitem: function (e) {
     var pages = getCurrentPages()
     var prevPage = pages[pages.length - 2] // 获取上一页
+    var location = e.currentTarget.dataset.location.lat + ',' + e.currentTarget.dataset.location.lng
     prevPage.setData({
       xiaoqu: e.currentTarget.dataset.title,
-      location: e.currentTarget.dataset.location,
+      location: location,
     })
     wx.navigateBack({})
   },
