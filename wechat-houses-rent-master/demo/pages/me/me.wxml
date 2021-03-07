@@ -24,38 +24,6 @@
 
 <!-- 底部列表 -->
 <view class='content'>
-	<!-- 收藏列表 -->
-	<!--
-	<view class='line'></view>
-	<view class='item' bindtap='onReqClick'>
-		<image class='icon' src='../../images/me/request.png' style="width:22px;height:21px;"></image>
-		<text class='itemName'>看房请求</text>
-		<view class="test">
-			<view class="redDot" hidden="{{!new_request}}" />
-		</view>
-		<view class='right'>></view>
-	</view>-->
-
-
-<!--
-	<view class='hr'></view>
-	<view class='item' bindtap='onPrevClick'>
-		<image class='icon' src='../../images/me/record.png' style="width:22px;height:21px;"></image>
-		<text class='itemName'>看房记录</text>
-		<view class="test">
-			<view class="redDot" hidden="{{!new_preview}}" />
-		</view>
-		<view class='right'>></view>
-	</view>-->
-
-	<!-- 邀请好友 -->
-<!--
-	<view class='line'></view>
-	<view class='item' bindtap="onRentClick">
-		<image class='icon' src='../../images/me/rent.png' style="width:22px;height:21px;"></image>
-		<text class='itemName'>租赁记录</text>
-		<view class='right'>></view>
-	</view>-->
 
 	<view class='hr'></view>
 	<view class='item' bindtap='OnPostHouseClick'>

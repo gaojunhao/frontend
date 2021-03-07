@@ -92,7 +92,7 @@ Page({
         url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
         success(res) {
           wx.navigateTo({
-            url: '../update_house/update_house?id=' + res.data.id + '&rent=' + res.data.rent + '&zulintype=' + res.data.zulintype + '&quyu=' + res.data.quyu + '&ditie=' + res.data.ditie + '&xiaoqu=' + res.data.xiaoqu + '&louceng=' + res.data.louceng + '&fangjiantype=' + res.data.fangjiantype + '&dianti=' + res.data.dianti + '&fangjiandaxiao=' + res.data.fangjiandaxiao + '&sex=' + res.data.sex + '&fukuantype=' + res.data.fukuantype + '&contact=' + res.data.contact + '&img=' + res.data.img + '&img_count=' + res.data.img_count + '&location=' + res.data.location + '&houseindex=' + res.data.houseindex,
+            url: '../update_house/update_house?id=' + res.data.id + '&rent=' + res.data.rent + '&zulintype=' + res.data.zulintype + '&quyu=' + res.data.quyu + '&ditie=' + res.data.ditie + '&xiaoqu=' + res.data.xiaoqu + '&louceng=' + res.data.louceng + '&fangjiantype=' + res.data.fangjiantype + '&dianti=' + res.data.dianti + '&fangjiandaxiao=' + res.data.fangjiandaxiao + '&sex=' + res.data.sex + '&fukuantype=' + res.data.fukuantype + '&contact=' + res.data.contact + '&img=' + res.data.img + '&img_count=' + res.data.img_count + '&location=' + res.data.location + '&houseindex=' + res.data.houseindex + '&poster=' + res.data.poster,
           })
         },
         fail(res) {

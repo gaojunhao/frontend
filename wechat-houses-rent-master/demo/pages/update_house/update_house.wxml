@@ -141,6 +141,14 @@
 			</view>
 			<image wx:if="{{img_count!=6}}" class="add_icon" mode="aspectFill" src="../../images/post-house/add-icon1.png" bindtap="UploadImg"></image>
 		</scroll-view>
+		<view class="playerInfo">
+        <view class="video">
+						<image class="videoContent" wx:if="{{poster}}" src="{{poster}}" mode="aspectFill" bindtap="UploadVideo"/>
+            <view class="videoContent"  wx:else bindtap="UploadVideo" >
+                <image class="playImg" src="../../images/post-house/video.jpg" mode="aspectFill"/>
+            </view>
+        </view>
+    </view>
 </block>
 		
 		<view class="weui-form__opr-area">
