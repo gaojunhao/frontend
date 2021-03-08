@@ -11,4 +11,5 @@
   bindwaiting="onWaiting"
   bindprogress="onProgress"
   bindloadedmetadata="onLoadedMetaData"
+  bind:swiperchangehandle="swiperchangehandle"
 ></mp-video-swiper>

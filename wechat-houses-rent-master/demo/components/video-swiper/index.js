@@ -152,6 +152,10 @@ Component({
                 });
             }
         },
+        swiperchange: function swiperchange(e) {
+            const { current, source } = e.detail;
+            this.triggerEvent('swiperchangehandle', { current, source });
+        },
         animationfinish: function animationfinish(e) {
             var _data = this.data,
                 _last = _data._last,

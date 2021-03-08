@@ -6,7 +6,9 @@
     vertical 
     current="1"
     duration="{{duration}}" 
+    bindchange="swiperchange"
     bindanimationfinish="animationfinish">
+    <!--bindchange="swiperchange"-->
     <!-- curQueue 循环会导致video重新插入，objectFit 不可变更 -->
     <!--<block wx:for="{{curQueue}}" wx:for-item="item" wx:key="*this">
     <swiper-item>-->

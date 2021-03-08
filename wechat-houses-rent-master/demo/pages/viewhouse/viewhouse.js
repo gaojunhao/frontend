@@ -20,7 +20,7 @@ Page({
 
   onLoad: function(options){
     var that = this
-    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    var url = "http://www.semmy.fun/springmvc/getvideo?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
@@ -30,16 +30,18 @@ Page({
         }
     
         that.setData({
-          videoList: that.data.posterarr.map((url, index) => ({ id: index, url: url })),
+          videoList: that.data.posterarr.map((url, index) => ({ id: index + 1, url }))
         })
       }
     })
   },
 
   onPlay(e) {
+    /*
     var that = this
     console.log(e.detail.activeId)
-    if(e.detail.activeId%5 == 0) {
+    console.log(that.data.posterarr)
+    if(e.detail.activeId%4 == 0) {
       that.data.itemcnt = that.data.itemcnt + 5
       var dataurl = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
       wx.request({
@@ -48,7 +50,7 @@ Page({
           var dataarr = res.data
           var posterlength = that.data.posterarr.length
           for (var i = 0; i < dataarr.length; i++) {
-            that.data.posterarr[i+posterlength] = dataarr[i].poster
+            that.data.posterarr[i] = dataarr[i].poster
           }
       
           that.setData({
@@ -56,7 +58,7 @@ Page({
           })
         }
       })
-    }
+    }*/
   },
 
   onPause(e) {
@@ -76,6 +78,29 @@ Page({
 
   onLoadedMetaData(e) {
     console.log('LoadedMetaData', e)
+  },
+
+  swiperchangehandle: function(e){
+    const { current, source } = e.detail;
+    console.log("swiperchangehandle", current, source);
+    if (current == 2) {
+      var that = this
+      that.data.itemcnt = that.data.itemcnt + 3
+      var url = "http://www.semmy.fun/springmvc/getvideo?itemcnt=" + that.data.itemcnt
+      wx.request({
+        url: url,
+        success(res) {
+          var dataarr = res.data
+          for (var i = 0; i < dataarr.length; i++) {
+            that.data.posterarr[i] = dataarr[i].poster
+          }
+      
+          that.setData({
+            videoList: that.data.posterarr.map((url, index) => ({ id: index + 1, url }))
+          })
+        }
+      })
+    }
   },
 
   buttonhandle:function(e){
