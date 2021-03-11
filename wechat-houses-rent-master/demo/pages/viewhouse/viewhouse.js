@@ -15,7 +15,6 @@ Page({
   data: {
     videoList: [],
     itemcnt: 0,
-    posterarr: [],
   },
 
   onLoad: function(options){
@@ -25,40 +24,19 @@ Page({
       url: url,
       success(res) {
         var dataarr = res.data
+        var posterarr = []
         for (var i = 0; i < dataarr.length; i++) {
-          that.data.posterarr[i] = dataarr[i].poster
+          posterarr[i] = dataarr[i].poster
         }
     
         that.setData({
-          videoList: that.data.posterarr.map((url, index) => ({ id: index + 1, url }))
+          videoList: posterarr.map((url, index) => ({ id: index + 1, url }))
         })
       }
     })
   },
 
   onPlay(e) {
-    /*
-    var that = this
-    console.log(e.detail.activeId)
-    console.log(that.data.posterarr)
-    if(e.detail.activeId%4 == 0) {
-      that.data.itemcnt = that.data.itemcnt + 5
-      var dataurl = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
-      wx.request({
-        url: dataurl,
-        success(res) {
-          var dataarr = res.data
-          var posterlength = that.data.posterarr.length
-          for (var i = 0; i < dataarr.length; i++) {
-            that.data.posterarr[i] = dataarr[i].poster
-          }
-      
-          that.setData({
-            videoList: that.data.posterarr.map((url, index) => ({ id: index, url: url })),
-          })
-        }
-      })
-    }*/
   },
 
   onPause(e) {
@@ -77,7 +55,7 @@ Page({
   onProgress(e) {},
 
   onLoadedMetaData(e) {
-    console.log('LoadedMetaData', e)
+    //console.log('LoadedMetaData', e)
   },
 
   swiperchangehandle: function(e){
@@ -91,46 +69,16 @@ Page({
         url: url,
         success(res) {
           var dataarr = res.data
+          var posterarr = []
           for (var i = 0; i < dataarr.length; i++) {
-            that.data.posterarr[i] = dataarr[i].poster
+            posterarr[i] = dataarr[i].poster
           }
-      
+          
           that.setData({
-            videoList: that.data.posterarr.map((url, index) => ({ id: index + 1, url }))
+            videoList: posterarr.map((url, index) => ({ id: index + 1, url }))
           })
         }
       })
-    }
-  },
-
-  buttonhandle:function(e){
-    const { buttontype, buttonname, itemid}=e.detail;
-    console.log(buttontype, buttonname, itemid);
-    switch (buttontype){
-        case "1":
-        console.log(buttonname,'调用收藏接口');
-        wx.showToast({
-          title: '收藏',
-          duration:1500
-        })
-        break;
-
-        case "2":
-        console.log(buttonname, '打开发消息弹框或者新页面');
-        wx.showToast({
-          title: '打开消息框',
-          duration: 1500
-        })
-        break;
-
-        case "3":
-        console.log(buttonname,'调用微信分享');
-        wx.showToast({
-          title: this.data.playerType,
-          duration: 1500
-        })
-        
-        break;
     }
   },
 })

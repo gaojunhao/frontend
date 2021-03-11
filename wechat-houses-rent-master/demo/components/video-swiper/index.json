@@ -1,4 +1,6 @@
 {
     "component": true,
-    "usingComponents": {}
+    "usingComponents": {
+        "video-button-bar": "../../components/video-button-bar/video-button-bar"
+    }
 }

@@ -136,7 +136,67 @@ Component({
             this.data._videoContexts = [wx.createVideoContext('video_0', this), wx.createVideoContext('video_1', this), wx.createVideoContext('video_2', this)];
         }
     },
+    buttonhandle:function(e){
+    const { buttontype, buttonname, itemid, url}=e.detail;
+    console.log(buttontype, buttonname, itemid, url);
+    switch (buttontype){
+        case "1":
+        console.log(buttonname,'调用收藏接口');
+        wx.showToast({
+          title: '收藏',
+          duration:1500
+        })
+        break;
+
+        case "2":
+        console.log(buttonname, '打开发消息弹框或者新页面');
+        wx.showToast({
+          title: '打开消息框',
+          duration: 1500
+        })
+        break;
+
+        case "3":
+        console.log(buttonname,'调用微信分享');
+        wx.showToast({
+          title: this.data.playerType,
+          duration: 1500
+        })
+        
+        break;
+    }
+  },
     methods: {
+        buttonhandle:function(e){
+            const { buttontype, buttonname, itemid}=e.detail;
+            console.log(buttontype, buttonname, itemid);
+            switch (buttontype){
+                case "1":
+                console.log(buttonname,'调用收藏接口');
+                wx.showToast({
+                  title: '收藏',
+                  duration:1500
+                })
+                break;
+        
+                case "2":
+                console.log(buttonname, '打开发消息弹框或者新页面');
+                wx.showToast({
+                  title: '打开消息框',
+                  duration: 1500
+                })
+                break;
+        
+                case "3":
+                console.log(buttonname,'调用微信分享');
+                wx.showToast({
+                  title: '调用微信分享',
+                  duration: 1500
+                })
+                
+                break;
+            }
+          },
         _videoListChanged: function _videoListChanged(newVal) {
             var _this = this;
 
@@ -162,7 +222,8 @@ Component({
                 _change = _data._change,
                 curQueue = _data.curQueue,
                 prevQueue = _data.prevQueue,
-                nextQueue = _data.nextQueue;
+                nextQueue = _data.nextQueue,
+                _stop = "";
 
             var current = e.detail.current;
             var diff = current - _last;
@@ -171,11 +232,15 @@ Component({
             this.playCurrent(current);
             this.triggerEvent('change', { activeId: curQueue[current].id });
             var direction = diff === 1 || diff === -2 ? 'up' : 'down';
+            //console.log("this.data._invalidDown:",this.data._invalidDown,"this.data._invalidUp",this.data._invalidUp)
             if (direction === 'up') {
                 if (this.data._invalidDown === 0) {
                     var change = (_change + 1) % 3;
                     var add = nextQueue.shift();
+                    _stop = add;
+                    console.log("add:",add)
                     var remove = curQueue[change];
+                    console.log("remove:",curQueue[change])
                     if (add) {
                         prevQueue.push(remove);
                         curQueue[change] = add;
@@ -204,17 +269,51 @@ Component({
                 }
             }
             var circular = true;
-            if (nextQueue.length === 0 && current !== 0) {
+            //console.log("nextQueue.length:",nextQueue.length,"current:",current)
+            /*if (nextQueue.length === 0 && current !== 0) {*/
+            if (_stop == null) {
+                console.log("set circular to false")
                 circular = false;
             }
             if (prevQueue.length === 0 && current !== 2) {
                 circular = false;
             }
+            console.log("curQueue:",curQueue)
             this.setData({
                 curQueue: curQueue,
                 circular: circular
             });
         },
+          buttonhandle:function(e){
+    const { buttontype, buttonname, itemid}=e.detail;
+    console.log(buttontype, buttonname, itemid);
+    switch (buttontype){
+        case "1":
+        console.log(buttonname,'调用收藏接口');
+        wx.showToast({
+          title: '收藏',
+          duration:1500
+        })
+        break;
+
+        case "2":
+        console.log(buttonname, '打开发消息弹框或者新页面');
+        wx.showToast({
+          title: '打开消息框',
+          duration: 1500
+        })
+        break;
+
+        case "3":
+        console.log(buttonname,'调用微信分享');
+        wx.showToast({
+          title: this.data.playerType,
+          duration: 1500
+        })
+        
+        break;
+    }
+  },
         playCurrent: function playCurrent(current) {
             this.data._videoContexts.forEach(function (ctx, index) {
                 index !== current ? ctx.pause() : ctx.play();

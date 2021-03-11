@@ -1,5 +1,5 @@
 
-<video-button-bar bind:buttonhandle="buttonhandle"></video-button-bar>
+
 <mp-video-swiper 
   class="video-swiper" 
   video-list="{{videoList}}" 
