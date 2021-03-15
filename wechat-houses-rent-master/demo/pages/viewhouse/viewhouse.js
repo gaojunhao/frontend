@@ -19,7 +19,7 @@ Page({
 
   onLoad: function(options){
     var that = this
-    var url = "http://www.semmy.fun/springmvc/getvideo?itemcnt=" + this.data.itemcnt
+    var url = app.globalData.url + "getvideo?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
@@ -64,7 +64,7 @@ Page({
     if (current == 2) {
       var that = this
       that.data.itemcnt = that.data.itemcnt + 3
-      var url = "http://www.semmy.fun/springmvc/getvideo?itemcnt=" + that.data.itemcnt
+      var url = app.globalData.url + "getvideo?itemcnt=" + that.data.itemcnt
       wx.request({
         url: url,
         success(res) {

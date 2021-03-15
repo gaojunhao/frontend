@@ -138,7 +138,7 @@ onLoad: function (options) {
       contact: app.globalData.phone
     })
     wx.request({
-      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
+      url: app.globalData.url + "gethousenum?phone=" + app.globalData.phone,
       success(res) {
         app.globalData.housenum = parseInt(res.data.housenum)
       }
@@ -159,17 +159,18 @@ UploadVideo: function () {
       //console.log(res)
       let tempFilePath = res.tempFilePath//选择定视频的临时文件路径（本地路径）
       let duration = res.duration //选定视频的时间长度
-      let size = parseFloat(res.size/1024/1024).toFixed(1) //选定视频的数据量大小
+      //let size = parseFloat(res.size/1024/1024).toFixed(1) //选定视频的数据量大小
       // let height = res.height //返回选定视频的高度
       // let width = res.width //返回选中视频的宽度
       that.data.duration = duration
-      if(parseFloat(size) > 100){
+      //console.log(duration)
+      if(parseFloat(duration) > 120){
         that.setData({
-          duration: ''
+          duration: 0
         })
-        let beyondSize = parseFloat(size) - 100
+        let beyondSize = parseFloat(duration) - 120
         wx.showToast({
-          title: '上传的视频大小超限，超出'+beyondSize+'MB,请重新上传',
+          title: '上传的视频时长超出120s，超出'+beyondSize+'MB,请重新上传',
           //image: '',//自定义图标的本地路径，image的优先级高于icon
           icon:'none'
         })
@@ -197,7 +198,7 @@ UploadVideo: function () {
           that.setData({
             abled: true,
             poster: '',
-            duration: '',
+            duration: 0,
           })
           return
         }
@@ -377,7 +378,7 @@ UploadImg: function () {
     }
     //var location = this.data.location.lat + ',' + this.data.location.lng
     wx.request({
-      url: "http://www.semmy.fun/springmvc/sethouses",
+      url: app.globalData.url + "sethouses",
       method: 'post',
       data: {
         phone: app.globalData.phone,

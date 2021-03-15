@@ -135,6 +135,7 @@
 						</view>
 					</view>
 				</view>
+				<view class="weui-cells__title">图片不超过6张，上传的视频不超过2分钟</view>
 			</view>
 	<!--	</view>-->
 	<block>

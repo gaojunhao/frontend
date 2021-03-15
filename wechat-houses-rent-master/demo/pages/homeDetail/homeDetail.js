@@ -39,7 +39,7 @@ Page({
     })
     that = this
     wx.request({
-      url: "http://www.semmy.fun/springmvc/getonehouse?id=" + option.id,
+      url: app.globalData.url + "getonehouse?id=" + option.id,
       success(res) {
         var endimg = res.data.img.length
         //console.log(res.data.img.substring(0, endimg).split(',')[0])
@@ -47,6 +47,7 @@ Page({
         for (var i = 0; i < res.data.img_count; i++) {
           imgs.push(res.data.img.substring(0, endimg).split(',')[i])
         }
+
 
         that.setData({
           img: imgs,
@@ -61,7 +62,7 @@ Page({
           zulintype: res.data.zulintype,
           quyu: res.data.quyu,
           ditie: res.data.ditie,
-          xiaoqu: res.data.xiaoqu,
+          xiaoqu: res.data.xiaoqu.substring(0,6),
           louceng: res.data.louceng,
           fangjianshu: res.data.fangjianshu,
           fangjiantype: res.data.fangjiantype,
@@ -72,7 +73,7 @@ Page({
           location: res.data.location,
         })
         wx.request({
-          url: 'http://www.semmy.fun/springmvc/containid?id=' + res.data.id + '&phone=' + app.globalData.phone,
+          url: app.globalData.url + 'containid?id=' + res.data.id + '&phone=' + app.globalData.phone,
           success: function (res) {
             var coll_checked
             if (res.data.result == "true")
@@ -110,9 +111,8 @@ Page({
 
   OnPhoneClick: function (e) {
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
@@ -156,17 +156,16 @@ Page({
 
   OnCollectClick: function (e) {
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
     var url_coll
     if (this.data.collectchecked == true){
-      url_coll = 'http://www.semmy.fun/springmvc/delcollect?id=' + this.data.id + '&phone=' + app.globalData.phone;
+      url_coll = app.globalData.url + 'delcollect?id=' + this.data.id + '&phone=' + app.globalData.phone;
     } else {
-      url_coll = 'http://www.semmy.fun/springmvc/addcollect?id=' + this.data.id + '&phone=' + app.globalData.phone;
+      url_coll = app.globalData.url + 'addcollect?id=' + this.data.id + '&phone=' + app.globalData.phone;
     }
     this.setData({
       collectchecked: !this.data.collectchecked,
@@ -181,9 +180,8 @@ Page({
 
   OnReqClick: function (e) {
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
@@ -221,9 +219,8 @@ Page({
 
   OnRentClick: function (e) {
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
@@ -247,7 +244,7 @@ Page({
 
   OnEditClick: function (e) {
     wx.request({
-      url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
+      url: app.globalData.url + "getonehousebyphone?phone=" + app.globalData.phone,
       success(res) {
         wx.navigateTo({
           url: '../update_house/update_house?rent=' + res.data.rent + '&zulintype=' + res.data.zulintype + '&quyu=' + res.data.quyu + '&ditie=' + res.data.ditie + '&xiaoqu=' + res.data.xiaoqu + '&louceng=' + res.data.louceng + '&fangjiantype=' + res.data.fangjiantype + '&dianti=' + res.data.dianti + '&fangjiandaxiao=' + res.data.fangjiandaxiao + '&sex=' + res.data.sex + '&fukuantype=' + res.data.fukuantype + '&contact=' + res.data.contact + '&img=' + res.data.img + '&img_count=' + res.data.img_count,
@@ -270,9 +267,8 @@ Page({
     app.globalData.id = this.data.id
     app.globalData.phone = this.data.user_phone
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }

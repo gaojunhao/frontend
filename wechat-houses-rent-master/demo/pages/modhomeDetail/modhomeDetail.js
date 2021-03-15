@@ -33,7 +33,7 @@ Page({
       user_phone: app.globalData.phone
     })
     wx.request({
-      url: "http://www.semmy.fun/springmvc/getonehouse?id=" + option.id,
+      url: app.globalData.url + "getonehouse?id=" + option.id,
       success(res) {
         var endimg = res.data.img.length
         //console.log(res.data.img.substring(0, endimg).split(',')[0])
@@ -50,7 +50,7 @@ Page({
           zulintype: res.data.zulintype,
           quyu: res.data.quyu,
           ditie: res.data.ditie,
-          xiaoqu: res.data.xiaoqu,
+          xiaoqu: res.data.xiaoqu.substring(0,6),
           louceng: res.data.louceng,
           fangjianshu: res.data.fangjianshu,
           fangjiantype: res.data.fangjiantype,
@@ -89,7 +89,7 @@ Page({
 
     OnEditClick: function (e) {
       wx.request({
-        url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
+        url: app.globalData.url + "getonehousebyphone?phone=" + app.globalData.phone,
         success(res) {
           wx.navigateTo({
             url: '../update_house/update_house?id=' + res.data.id + '&rent=' + res.data.rent + '&zulintype=' + res.data.zulintype + '&quyu=' + res.data.quyu + '&ditie=' + res.data.ditie + '&xiaoqu=' + res.data.xiaoqu + '&louceng=' + res.data.louceng + '&fangjiantype=' + res.data.fangjiantype + '&dianti=' + res.data.dianti + '&fangjiandaxiao=' + res.data.fangjiandaxiao + '&sex=' + res.data.sex + '&fukuantype=' + res.data.fukuantype + '&contact=' + res.data.contact + '&img=' + res.data.img + '&img_count=' + res.data.img_count + '&location=' + res.data.location + '&houseindex=' + res.data.houseindex + '&poster=' + res.data.poster,

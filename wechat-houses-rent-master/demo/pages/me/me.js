@@ -59,16 +59,15 @@ Page({
 
   OnPostHouseClick: function (e) {
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
     wx.request({
-      url: "http://www.semmy.fun/springmvc/gethousenum?phone=" + app.globalData.phone,
+      url: app.globalData.url + "gethousenum?phone=" + app.globalData.phone,
       success(res) {
-        if (parseInt(res.data.housenum) <= 20){
+        if (parseInt(res.data.housenum) == 0){
           wx.navigateTo({
             url: '../post_house/post_house',
           })
@@ -102,14 +101,13 @@ Page({
   oncolllistClick: function (event) {
     var that = this
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
     wx.request({
-      url: "http://www.semmy.fun/springmvc/getcollect?phone=" + app.globalData.phone,
+      url: app.globalData.url + "getcollect?phone=" + app.globalData.phone,
       success(res) {
         if (res.data.collect == "") {
           wx.showToast({
@@ -138,14 +136,13 @@ Page({
   onItemClick: function (event) {
     var that = this
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }
     wx.request({
-      url: "http://www.semmy.fun/springmvc/getonehousebyphone?phone=" + app.globalData.phone,
+      url: app.globalData.url + "getonehousebyphone?phone=" + app.globalData.phone,
       success(res) {
         if (res.data.id == -1) {
           wx.showToast({
@@ -174,9 +171,8 @@ Page({
   outClick: function () {
     var that = this
     if (!app.globalData.login) {
-      wx.showToast({
-        title: '您尚未登录！',
-        icon: 'none'
+      wx.navigateTo({
+        url: '../authorize/authorize',
       })
       return
     }

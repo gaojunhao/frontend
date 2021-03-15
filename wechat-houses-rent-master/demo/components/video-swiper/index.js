@@ -136,67 +136,7 @@ Component({
             this.data._videoContexts = [wx.createVideoContext('video_0', this), wx.createVideoContext('video_1', this), wx.createVideoContext('video_2', this)];
         }
     },
-    buttonhandle:function(e){
-    const { buttontype, buttonname, itemid, url}=e.detail;
-    console.log(buttontype, buttonname, itemid, url);
-    switch (buttontype){
-        case "1":
-        console.log(buttonname,'调用收藏接口');
-        wx.showToast({
-          title: '收藏',
-          duration:1500
-        })
-        break;
-
-        case "2":
-        console.log(buttonname, '打开发消息弹框或者新页面');
-        wx.showToast({
-          title: '打开消息框',
-          duration: 1500
-        })
-        break;
-
-        case "3":
-        console.log(buttonname,'调用微信分享');
-        wx.showToast({
-          title: this.data.playerType,
-          duration: 1500
-        })
-        
-        break;
-    }
-  },
     methods: {
-        buttonhandle:function(e){
-            const { buttontype, buttonname, itemid}=e.detail;
-            console.log(buttontype, buttonname, itemid);
-            switch (buttontype){
-                case "1":
-                console.log(buttonname,'调用收藏接口');
-                wx.showToast({
-                  title: '收藏',
-                  duration:1500
-                })
-                break;
-        
-                case "2":
-                console.log(buttonname, '打开发消息弹框或者新页面');
-                wx.showToast({
-                  title: '打开消息框',
-                  duration: 1500
-                })
-                break;
-        
-                case "3":
-                console.log(buttonname,'调用微信分享');
-                wx.showToast({
-                  title: '调用微信分享',
-                  duration: 1500
-                })
-                
-                break;
-            }
-          },
         _videoListChanged: function _videoListChanged(newVal) {
             var _this = this;
 
@@ -284,36 +224,46 @@ Component({
                 circular: circular
             });
         },
-          buttonhandle:function(e){
-    const { buttontype, buttonname, itemid}=e.detail;
-    console.log(buttontype, buttonname, itemid);
-    switch (buttontype){
-        case "1":
-        console.log(buttonname,'调用收藏接口');
-        wx.showToast({
-          title: '收藏',
-          duration:1500
-        })
-        break;
+        buttonhandle:function(e){
+            console.log(e.currentTarget.dataset.url)
+            wx.request({
+                url: app.globalData.url + "gethouseid?poster=" + e.currentTarget.dataset.url,
+                success(res) {
+                    wx.navigateTo({
+                        url: "../homeDetail/homeDetail?id=" + res.data.id
+                    })
+                }
+            })
+            /*
+            const { buttontype, buttonname, url, itemid}=e.detail;
+            console.log(buttontype, buttonname, url, itemid);
+            switch (buttontype){
+            case "1":
+            console.log(buttonname,'调用收藏接口');
+            wx.showToast({
+                title: '收藏',
+                duration:1500
+            })
+            break;
 
-        case "2":
-        console.log(buttonname, '打开发消息弹框或者新页面');
-        wx.showToast({
-          title: '打开消息框',
-          duration: 1500
-        })
-        break;
+            case "2":
+            console.log(buttonname, '打开发消息弹框或者新页面');
+            wx.showToast({
+                title: '打开消息框',
+                duration: 1500
+            })
+            break;
 
-        case "3":
-        console.log(buttonname,'调用微信分享');
-        wx.showToast({
-          title: this.data.playerType,
-          duration: 1500
-        })
+            case "3":
+            console.log(buttonname,'调用微信分享');
+            wx.showToast({
+                title: this.data.playerType,
+                duration: 1500
+            })
         
-        break;
-    }
-  },
+            break;
+            }*/
+        },
         playCurrent: function playCurrent(current) {
             this.data._videoContexts.forEach(function (ctx, index) {
                 index !== current ? ctx.pause() : ctx.play();

@@ -10,7 +10,7 @@ App({
     }
   },
   globalData: {
-    url: 'http://www.semmy.fun/springmvc/',
+    url: 'https://www.semmy.fun/springmvc/',
     pic_url: '',
     login: false,
     housenum: 0

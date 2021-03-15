@@ -38,7 +38,7 @@ wx.request({
 
   success: function (res) {
    wx.request({
-    url: 'http://www.semmy.fun/springmvc/getphone',
+    url: app.globalData.url + 'getphone',
     method: 'post',
     data: {
       session_key: res.data.session_key,
@@ -55,12 +55,12 @@ wx.request({
       app.globalData.name = res.data.phoneNumber;
       
       wx.request({
-        url: "http://www.semmy.fun/springmvc/checkuserbyphone?phone=" + app.globalData.phone,
+        url: app.globalData.url + "checkuserbyphone?phone=" + app.globalData.phone,
         success(res) {
           console.log(res.data)
           if(res.data.phone == "null"){
             wx.request({
-              url: 'http://www.semmy.fun/springmvc/registeruser',
+              url: app.globalData.url + 'registeruser',
               method: 'post',
               data: {
                   phone: app.globalData.phone,

@@ -22,12 +22,12 @@ Component({
    */
   methods: {
     toolBarButton: function (e) {
-      const { buttontype, buttonname, itemid, url } = e.currentTarget.dataset;
-      this.triggerEvent('buttonhandle', { buttontype, buttonname, itemid, url });
+      const { buttontype, buttonname, url, itemid} = e.currentTarget.dataset;
+      this.triggerEvent('buttonhandle', { buttontype, buttonname, url, itemid });
     },
     buttonhandle:function(e){
-      const { buttontype, buttonname, itemid, url } = e.detail;
-      this.triggerEvent('menuTap', { buttontype, buttonname, itemid, url });
+      const { buttontype, buttonname, url, itemid } = e.detail;
+      this.triggerEvent('menuTap', { buttontype, buttonname, url, itemid });
     },
   }
 })

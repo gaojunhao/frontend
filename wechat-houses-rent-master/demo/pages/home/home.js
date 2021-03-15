@@ -114,7 +114,7 @@ Page({
       title: '加载中',
     })
 
-    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    var url = app.globalData.url + "getAllhouses?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
@@ -129,8 +129,6 @@ Page({
 		
         that.setData({
           houses: arr,
-          //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
-          //itemcnt: arr.length
           itemcnt: 0
         })
         wx.stopPullDownRefresh();
@@ -201,7 +199,7 @@ Page({
       title: '加载中',
     })
   
-    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
+    var url = app.globalData.url + "getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
     console.log(url)
     wx.request({
       url: url,
@@ -209,7 +207,6 @@ Page({
         console.log(res.data)
         var arr = res.data
         for (var i = 0; i < arr.length; i++) {
-          //arr[i].rent = arr[i].rent.toFixed(2)
           var simg = arr[i]['img']
           var endimg = arr[i]['img'].length
           arr[i]['img'] = simg.substring(0, endimg).split(',')
@@ -217,8 +214,6 @@ Page({
     
         that.setData({
           houses: arr,
-          //houses: [{"status":"待租", "ads":"semmy小屋","maxg":"3","type":["带厨房","带卫生间"], "rent":"2000"}],
-          //itemcnt: arr.length
           itemcnt: 0
         })
         wx.stopPullDownRefresh();
@@ -321,7 +316,7 @@ Page({
       title: '加载中',
     })
   
-    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
+    var url = app.globalData.url + "getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
     console.log(url)
     wx.request({
       url: url,
@@ -360,7 +355,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    var url = "http://www.semmy.fun/springmvc/getAllhouses?itemcnt=" + this.data.itemcnt
+    var url = app.globalData.url + "getAllhouses?itemcnt=" + this.data.itemcnt
     wx.request({
       url: url,
       success(res) {
@@ -664,5 +659,8 @@ rentTypeClick: function(e){
   this.setData({
     [menuSrc]: true
 });
+},
+onShareAppMessage: function () {
+
 },
 })

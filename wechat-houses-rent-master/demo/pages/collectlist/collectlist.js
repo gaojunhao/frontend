@@ -42,7 +42,7 @@ Page({
     })
     console.log("##getDatacond")
    console.log(e)
-    var url = "http://www.semmy.fun/springmvc/gethousebyid?id=" + e
+    var url = app.globalData.url + "gethousebyid?id=" + e
     console.log(url)
     wx.request({
       url: url,

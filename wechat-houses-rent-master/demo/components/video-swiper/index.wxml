@@ -13,7 +13,7 @@
     <!--<block wx:for="{{curQueue}}" wx:for-item="item" wx:key="*this">
     <swiper-item>-->
     <swiper-item wx:for="{{curQueue}}" wx:key="*this">
-      <video-button-bar bind:buttonhandle="buttonhandle" data-url="{{item.url}}"></video-button-bar>
+      <video-button-bar bind:buttonhandle="buttonhandle" data-itemid="{{item.id}}" data-url="{{item.url}}"></video-button-bar>
       <video 
         id="video_{{index}}" 
         class="video_item" 
