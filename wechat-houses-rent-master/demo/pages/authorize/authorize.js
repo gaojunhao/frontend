@@ -34,8 +34,7 @@ getPhoneNumber: function (e) {
  
 　　　　　　//用code传给服务器调换session_key
 wx.request({
-  url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxdf33872822175f36&secret=8a13ec90b1fd2048188bfdbd37fe7004&js_code='+ this.data.code + '&grant_type=authorization_code', //接口地址
-
+  url: app.globalData.url + 'getsessdata?code=' + this.data.code,
   success: function (res) {
    wx.request({
     url: app.globalData.url + 'getphone',

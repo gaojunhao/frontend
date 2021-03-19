@@ -1,14 +1,5 @@
 
-const urls = [
-  'https://sanmizufang.oss-cn-shanghai.aliyuncs.com/18817573577/video/0/1615102978351.mp4?versionId=CAEQIRiBgMCjrseuwBciIDY5YmQzM2NmNmZiOTRlZjhiNDA4NzIyN2FlNDdiYjgz',
-  'https://sanmizufang.oss-cn-shanghai.aliyuncs.com/18817573577/video/0/1615103512432.mp4?versionId=CAEQIRiBgMDJ1NeuwBciIDU0Zjg3ODM5MzliZTQ0YTJiYWFmZDgzNTA5ODZlMjE2',
-  'https://sanmizufang.oss-cn-shanghai.aliyuncs.com/18817573577/video/0/1615107597098.mp4?versionId=CAEQIRiBgMDop9SvwBciIDBjMDQwNGY2YjIyYTQ3YzliNWYxNTc0YWI4ZmE5OTc1',
-  'http://www.w3school.com.cn/example/html5/mov_bbb.mp4',
-  'https://media.w3.org/2010/05/sintel/trailer.mp4',
-  'http://www.w3school.com.cn/example/html5/mov_bbb.mp4',
-  'https://media.w3.org/2010/05/sintel/trailer.mp4',
-  'http://www.w3school.com.cn/example/html5/mov_bbb.mp4'
-]
+const app = getApp()
 
 //const videoList = urls.map((url, index) => ({ id: index + 1, url }))
 Page({
