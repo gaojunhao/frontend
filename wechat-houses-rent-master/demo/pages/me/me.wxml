@@ -50,4 +50,10 @@
 		<view class='right'>></view>
 	</view>
 	<view class='hr'></view>
+	<view class='item' bindtap='contactClick'>
+		<image class='icon' src='../../images/topic-detail/phone.png' style="width:22px;height:21px;"></image>
+		<text class='itemName'>关于我们</text>
+		<view class='right'>></view>
+	</view>
+	<view class='hr'></view>
 </view>

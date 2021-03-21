@@ -1,10 +1,10 @@
 /* pages/post_house/post_house.wxss */
-.page{height:100%}
+.page{height:100%;width:100%;overflow-x:hidden;}
 .image-group {
   display: flex;
   white-space: nowrap;
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 .image-group view{
@@ -87,4 +87,20 @@
   font-weight: bold;
   color: red;
   margin-left: 20rpx;
+}
+
+.btncontainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.t1{
+  margin-left: 10rpx;
+}
+ 
+.t2{
+  margin-left: 10rpx;
 }

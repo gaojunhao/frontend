@@ -135,9 +135,9 @@
 						</view>
 					</view>
 				</view>
-				<view class="weui-cells__title">图片不超过6张,上传的视频不超过2分钟,不超过100MB</view>
+				
 			</view>
-	<!--	</view>-->
+	<!--	</view> <view class="weui-cells__title">图片不超过6张,上传的视频不超过1分钟,不超过100MB</view>-->
 	<block>
 		<scroll-view class="image-group" scroll-x="true">
 			<view wx:for='{{imgs}}' wx:for-index='idx' wx:key="item">
@@ -147,6 +147,7 @@
 			</view>
 			<image wx:if="{{img_count!=6}}" class="add_icon" mode="aspectFill" src="../../images/post-house/add-icon1.png" bindtap="UploadImg"></image>
 		</scroll-view>
+	</block>
 		<!--
 		<scroll-view class="image-group" scroll-x="true">
 			<view wx:for='{{videos}}' wx:for-index='idx' wx:key="item">
@@ -156,6 +157,17 @@
 			</view>
 			<image wx:if="{{video_count!=1}}" class="add_icon" mode="aspectFill" src="../../images/post-house/video.jpg" bindtap="UploadVideo"></image>
 		</scroll-view>-->
+		<video  wx:if="{{poster}}" src="{{poster}}" show-center-play-btn="false" object-fit="fill" autoplay="true" loop="true" show-progress="false"/>
+
+		<view class="btncontainer">
+			<view class='t1'>
+				<a class="weui-btn weui-btn_mini weui-btn_default" bindtap="UploadVideo">上传视频</a>
+			</view> 
+			<view class='t2'>
+				<a class="weui-btn weui-btn_mini weui-btn_default" bindtap="RemoveVideo">删除视频</a>
+			</view>
+		</view>
+		<!--
 		<view class="playerInfo">
         <view class="video">
 						<image class="videoContent" wx:if="{{poster}}" src="{{poster}}" mode="aspectFill" bindtap="UploadVideo"/>
@@ -163,10 +175,9 @@
                 <image class="playImg" src="../../images/post-house/video.jpg" mode="aspectFill"/>
             </view>
         </view>
-    </view>
-</block>
+    </view>-->
 		
-		<view class="weui-form__opr-area">
+		<view class="weui-form__opr-area" >
 			<a class="weui-btn weui-btn_primary" bindtap="OnPostClick">发布</a>
 		</view>
 	<!--</view>-->

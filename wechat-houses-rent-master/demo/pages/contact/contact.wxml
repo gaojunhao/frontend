@@ -1,0 +1,23 @@
+<!--pages/contact/contact.wxml-->
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">手机号</view>
+                <view class="weui-cell__ft">19821285538</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">微信号</view>
+                <view class="weui-cell__ft">dagourent</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">邮箱</view>
+                <view class="weui-cell__ft">dagourent@163.com</view>
+            </view>
+        </view>
+    </view>
+</view>

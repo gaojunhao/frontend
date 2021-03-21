@@ -86,7 +86,11 @@ Page({
       return
     }
   },
-
+contactClick: function (event) {
+      wx.navigateTo({
+        url: '../contact/contact',
+      })
+  },
   /**
    * 用户点击右上角分享
    */

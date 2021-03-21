@@ -151,7 +151,7 @@ UploadVideo: function () {
   //1.拍摄视频或从手机相册中选择视频
   wx.chooseVideo({
     sourceType: ['album', 'camera'], // album 从相册选视频，camera 使用相机拍摄
-    // maxDuration: 60, // 拍摄视频最长拍摄时间，单位秒。最长支持60秒
+    maxDuration: 60, // 拍摄视频最长拍摄时间，单位秒。最长支持60秒
     camera: 'back',//默认拉起的是前置或者后置摄像头，默认back
     compressed: true,//是否压缩所选择的视频文件
     success: function(res){
@@ -161,13 +161,13 @@ UploadVideo: function () {
       // let height = res.height //返回选定视频的高度
       // let width = res.width //返回选中视频的宽度
       that.data.duration = duration
-      if(parseFloat(duration) > 120){
+      if(parseFloat(duration) > 60){
         that.setData({
           duration: 0
         })
-        let beyondSize = parseFloat(duration) - 120
+        let beyondSize = parseFloat(duration) - 60
         wx.showToast({
-          title: '上传的视频时长超出120s，超出'+beyondSize+'秒,请重新上传',
+          title: '上传的视频时长超出60s，超出'+beyondSize+'秒,请重新上传',
           //image: '',//自定义图标的本地路径，image的优先级高于icon
           icon:'none'
         })

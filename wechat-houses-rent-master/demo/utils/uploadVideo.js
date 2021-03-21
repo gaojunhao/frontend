@@ -22,7 +22,6 @@ const uploadVideo = function (filePath, idx, dir, successc, failc) {
       return;
    }
  
-   console.log('上传视频.....');
    wx.showLoading({
       title: '上传进度：0%',
       mask: true //是否显示透明蒙层，防止触摸穿透
@@ -33,7 +32,6 @@ const uploadVideo = function (filePath, idx, dir, successc, failc) {
    const accessid = env.OSSAccessKeyId;
    const policyBase64 = getPolicyBase64();
    const signature = getSignature(policyBase64);//获取签名
- 
    const uploadTask = wx.uploadFile({
       url: aliyunServerURL,//开发者服务器 url
       filePath: filePath,//要上传文件资源的路径
