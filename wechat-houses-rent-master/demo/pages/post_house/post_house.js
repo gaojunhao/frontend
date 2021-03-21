@@ -146,7 +146,6 @@ onLoad: function (options) {
 },
 
 UploadVideo: function () {
-  console.log("UploadVideo")
   app.globalData.houseindex = app.globalData.housenum
   let that = this
   //1.拍摄视频或从手机相册中选择视频
@@ -156,31 +155,27 @@ UploadVideo: function () {
     camera: 'back',//默认拉起的是前置或者后置摄像头，默认back
     compressed: true,//是否压缩所选择的视频文件
     success: function(res){
-      //console.log(res)
       let tempFilePath = res.tempFilePath//选择定视频的临时文件路径（本地路径）
       let duration = res.duration //选定视频的时间长度
       //let size = parseFloat(res.size/1024/1024).toFixed(1) //选定视频的数据量大小
       // let height = res.height //返回选定视频的高度
       // let width = res.width //返回选中视频的宽度
       that.data.duration = duration
-      //console.log(duration)
       if(parseFloat(duration) > 120){
         that.setData({
           duration: 0
         })
         let beyondSize = parseFloat(duration) - 120
         wx.showToast({
-          title: '上传的视频时长超出120s，超出'+beyondSize+'MB,请重新上传',
+          title: '上传的视频时长超出120s，超出'+beyondSize+'秒,请重新上传',
           //image: '',//自定义图标的本地路径，image的优先级高于icon
           icon:'none'
         })
       }else{
         //2.本地视频资源上传到服务器
         //that.uploadFile(tempFilePath)
-        console.log(tempFilePath)
         uploadVideo(tempFilePath, new Date().getTime(), app.globalData.phone + '/video/' + app.globalData.houseindex + '/',
         function (result) {
-          console.log("junhao", result)
           that.setData({
             poster: result,
             duration: that.data.duration,
@@ -228,11 +223,11 @@ UploadImg: function () {
     sourceType: ['album', 'camera'],
     success: function (res) {
       let imgSrc = res.tempFilePaths
-      uploadImage(imgSrc[0], new Date().getTime(), app.globalData.phone + '/imgs/' + app.globalData.houseindex + '/',
+      for (var i=0; i < imgSrc.length; i++) {
+      uploadImage(imgSrc[i], new Date().getTime(), app.globalData.phone + '/imgs/' + app.globalData.houseindex + '/',
       function (result) {
         console.log("======上传成功图片地址为：", result);
         app.globalData.imgs = app.globalData.imgs.concat(result)
-        console.log(app.globalData.imgs)
         that.setData({
           img_count: app.globalData.imgs.length,
           imgs: app.globalData.imgs
@@ -253,6 +248,7 @@ UploadImg: function () {
         return
       }
     )
+      }
     }
   })
 },
@@ -269,7 +265,6 @@ UploadImg: function () {
 
   RemoveVideo: function (event) {
     // 渲染图片
-    console.log("RemoveVideo")
     this.setData({
       poster: '',
     })
@@ -406,9 +401,7 @@ UploadImg: function () {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        console.log(res.data)
         var id = res.data.substring(0, res.data.length - 2)
-        console.log(id)
         if (id == 'error') {
           wx.showToast({
             title: '数据库系统错误！',
@@ -437,7 +430,6 @@ UploadImg: function () {
           title: '发布失败！',
           icon: 'none'
         })
-        console.log(res)
         this.setData({
           abled: true
         })

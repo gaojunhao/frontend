@@ -94,7 +94,7 @@ Page({
     that = this
     that.getDatacond()
     var now_time = new Date()     
-    console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
+    //console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
   },
 
   onShow: function () {
@@ -118,7 +118,6 @@ Page({
     wx.request({
       url: url,
       success(res) {
-        console.log(res.data)
         var arr = res.data
 		
         for (var i = 0; i < arr.length; i++) {
@@ -200,11 +199,9 @@ Page({
     })
   
     var url = app.globalData.url + "getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
-    console.log(url)
     wx.request({
       url: url,
       success(res) {
-        console.log(res.data)
         var arr = res.data
         for (var i = 0; i < arr.length; i++) {
           var simg = arr[i]['img']
@@ -237,7 +234,6 @@ Page({
     };
     } else {
     var id = event.currentTarget.dataset.id;
-    console.log(id);
     wx.navigateTo({
       url: "../homeDetail/homeDetail?id=" + id
     })
@@ -317,12 +313,10 @@ Page({
     })
   
     var url = app.globalData.url + "getAllhouses?itemcnt=" + this.data.itemcnt + data_weizhi + data_ditie + data_quyu + data_price + data_roomtype + data_zulintype
-    console.log(url)
     wx.request({
       url: url,
       success(res) {
         var arr = res.data
-        console.log(arr)
         if (arr.length == 0) { // 没有新数据
           wx.showToast({
             title: '没有更多数据了',
@@ -351,7 +345,6 @@ Page({
     var temp = that.data.houses;
     // 获取后面二十条
     this.data.itemcnt = this.data.itemcnt + 5
-    console.log(this.data.itemcnt)
     wx.showLoading({
       title: '加载中',
     })
@@ -420,14 +413,12 @@ Page({
   },
 
   OnSearchClick: function (e) {
-    console.log("OnSearchClick")
     wx.navigateTo({
       url: "../search/search"
     })
   },
 
   OnAddressClick: function (e) {
-    console.log("OnAddressClick")
     wx.navigateTo({
       url: "../address/address"
     })

@@ -62,7 +62,7 @@ Page({
           zulintype: res.data.zulintype,
           quyu: res.data.quyu,
           ditie: res.data.ditie,
-          xiaoqu: res.data.xiaoqu.substring(0,6),
+          xiaoqu: res.data.xiaoqu.substring(0,5),
           louceng: res.data.louceng,
           fangjianshu: res.data.fangjianshu,
           fangjiantype: res.data.fangjiantype,
@@ -101,7 +101,6 @@ Page({
   },
 
   OnMapClick: function () {
-    console.log(this.data.location)
     var latitude = this.data.location.split(',')[0]
     var longitude = this.data.location.split(',')[1]
     wx.navigateTo({
@@ -119,7 +118,6 @@ Page({
     wx.showActionSheet({
       itemList: ['呼叫', '添加联系人'],
       success: function (res) {
-        console.log("点击电话 res：", res)
         if (res.tapIndex == 0) { //直接呼叫
           wx.makePhoneCall({
             phoneNumber: that.data.hphone,
@@ -200,7 +198,6 @@ Page({
       return
     }
     var url = "你的服务器链接"
-    console.log(url)
     wx.request({
       url: url,
       success(res) {
@@ -287,13 +284,9 @@ Page({
           wx.showLoading({
             title: '处理中',
           })
-          console.log(app.globalData.url)
           wx.request({
             url: app.globalData.url + 'deletehouse?id=' + app.globalData.id + '&phone=' + app.globalData.phone,
             success(res) {
-              console.log("delete house...")
-              console.log(res)
-              console.log(res.data)
               if (res.data == 0) {
 
                 setTimeout(

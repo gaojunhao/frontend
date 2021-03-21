@@ -18,7 +18,6 @@ Page({
   onLoad: function (options) {
     wx.login({
       success: res => {
-       console.log('code转换', res.code);
         this.setData({
           code: res.code
         })
@@ -28,11 +27,6 @@ Page({
 getPhoneNumber: function (e) {
   var ivObj = e.detail.iv
   var telObj = e.detail.encryptedData
-  console.log('iv=', ivObj)
-  console.log('encryptedData', telObj)
-  //------执行Login---------
- 
-　　　　　　//用code传给服务器调换session_key
 wx.request({
   url: app.globalData.url + 'getsessdata?code=' + this.data.code,
   success: function (res) {
@@ -56,7 +50,6 @@ wx.request({
       wx.request({
         url: app.globalData.url + "checkuserbyphone?phone=" + app.globalData.phone,
         success(res) {
-          console.log(res.data)
           if(res.data.phone == "null"){
             wx.request({
               url: app.globalData.url + 'registeruser',
@@ -73,7 +66,7 @@ wx.request({
                   'content-type': 'application/json'
               },
               success: function (res) {
-                  console.log("插入小程序登录用户信息成功！");
+                  console.log("插入信息成功！");
               }
           })
           }else{
@@ -98,7 +91,6 @@ wx.request({
         2000
     )
     } else { //允许授权执行跳转
-      console.log("允许授权执行跳转")
       setTimeout(
         function () {
           var pages = getCurrentPages()

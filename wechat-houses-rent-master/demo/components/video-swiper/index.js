@@ -1,3 +1,4 @@
+const app = getApp();
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -172,15 +173,12 @@ Component({
             this.playCurrent(current);
             this.triggerEvent('change', { activeId: curQueue[current].id });
             var direction = diff === 1 || diff === -2 ? 'up' : 'down';
-            //console.log("this.data._invalidDown:",this.data._invalidDown,"this.data._invalidUp",this.data._invalidUp)
             if (direction === 'up') {
                 if (this.data._invalidDown === 0) {
                     var change = (_change + 1) % 3;
                     var add = nextQueue.shift();
                     _stop = add;
-                    console.log("add:",add)
                     var remove = curQueue[change];
-                    console.log("remove:",curQueue[change])
                     if (add) {
                         prevQueue.push(remove);
                         curQueue[change] = add;
@@ -209,23 +207,19 @@ Component({
                 }
             }
             var circular = true;
-            //console.log("nextQueue.length:",nextQueue.length,"current:",current)
             /*if (nextQueue.length === 0 && current !== 0) {*/
             if (_stop == null) {
-                console.log("set circular to false")
                 circular = false;
             }
             if (prevQueue.length === 0 && current !== 2) {
                 circular = false;
             }
-            console.log("curQueue:",curQueue)
             this.setData({
                 curQueue: curQueue,
                 circular: circular
             });
         },
         buttonhandle:function(e){
-            console.log(e.currentTarget.dataset.url)
             wx.request({
                 url: app.globalData.url + "gethouseid?poster=" + e.currentTarget.dataset.url,
                 success(res) {

@@ -27,7 +27,6 @@ Page({
 
   onLoad: function (option) {
     that = this
-    console.log(option.id)
     this.setData({
       id: option.id,
       user_phone: app.globalData.phone
@@ -36,7 +35,6 @@ Page({
       url: app.globalData.url + "getonehouse?id=" + option.id,
       success(res) {
         var endimg = res.data.img.length
-        //console.log(res.data.img.substring(0, endimg).split(',')[0])
         var imgs = []
         for (var i = 0; i < res.data.img_count; i++) {
           imgs.push(res.data.img.substring(0, endimg).split(',')[i])
@@ -50,7 +48,7 @@ Page({
           zulintype: res.data.zulintype,
           quyu: res.data.quyu,
           ditie: res.data.ditie,
-          xiaoqu: res.data.xiaoqu.substring(0,6),
+          xiaoqu: res.data.xiaoqu.substring(0,5),
           louceng: res.data.louceng,
           fangjianshu: res.data.fangjianshu,
           fangjiantype: res.data.fangjiantype,
@@ -119,7 +117,6 @@ Page({
             wx.showLoading({
               title: '处理中',
             })
-            console.log(app.globalData.url)
             wx.request({
               url: app.globalData.url + 'deletehouse?id=' + app.globalData.id + '&phone=' + app.globalData.phone,
               success(res) {

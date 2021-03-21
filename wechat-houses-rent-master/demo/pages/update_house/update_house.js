@@ -136,7 +136,6 @@ onClearcontact() {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log()
     that = this
     this.setData({
       poster: options.poster,
@@ -184,11 +183,11 @@ onClearcontact() {
       sourceType: ['album', 'camera'],
       success: function (res) {
         let imgSrc = res.tempFilePaths
-        uploadImage(imgSrc[0], new Date().getTime(), app.globalData.phone + '/imgs/' + app.globalData.houseindex + '/',
+        for (var i=0; i < imgSrc.length; i++) {
+        uploadImage(imgSrc[i], new Date().getTime(), app.globalData.phone + '/imgs/' + app.globalData.houseindex + '/',
         function (result) {
           console.log("======上传成功图片地址为：", result);
           app.globalData.imgs = app.globalData.imgs.concat(result)
-          console.log(app.globalData.imgs)
           that.setData({
             img_count: app.globalData.imgs.length,
             imgs: app.globalData.imgs
@@ -209,12 +208,12 @@ onClearcontact() {
           return
         }
       )
+        }
       }
     })
   },
 
   UploadVideo: function () {
-    console.log("UploadVideo")
     app.globalData.houseindex = app.globalData.housenum
     let that = this
     //1.拍摄视频或从手机相册中选择视频
@@ -224,7 +223,6 @@ onClearcontact() {
       camera: 'back',//默认拉起的是前置或者后置摄像头，默认back
       compressed: true,//是否压缩所选择的视频文件
       success: function(res){
-        //console.log(res)
         let tempFilePath = res.tempFilePath//选择定视频的临时文件路径（本地路径）
         let duration = res.duration //选定视频的时间长度
         // let size = parseFloat(res.size/1024/1024).toFixed(1) //选定视频的数据量大小
@@ -243,8 +241,6 @@ onClearcontact() {
           })
         }else{
           //2.本地视频资源上传到服务器
-          //that.uploadFile(tempFilePath)
-          console.log(tempFilePath)
           uploadVideo(tempFilePath, new Date().getTime(), app.globalData.phone + '/video/' + app.globalData.houseindex + '/',
           function (result) {
             that.setData({
@@ -371,7 +367,6 @@ onClearcontact() {
           else
             that.data.img_paths = that.data.img_paths + that.data.imgs[i] + ","
       }
-      console.log(that.data.img_paths)
     //location = this.data.location.lat + ',' + this.data.location.lng
     wx.request({
       url: app.globalData.url + "updatehouse",
@@ -414,7 +409,6 @@ onClearcontact() {
         /*setTimeout(function () {
           wx.navigateBack()
         }, 2000)*/
-        console.log(res.data)
         setTimeout(
           function () {
             var pages = getCurrentPages()
@@ -433,7 +427,6 @@ onClearcontact() {
           title: '发布失败！',
           icon: 'none'
         })
-        console.log(res)
         this.setData({
           abled: true
         })

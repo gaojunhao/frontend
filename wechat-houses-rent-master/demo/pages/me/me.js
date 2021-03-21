@@ -42,18 +42,14 @@ Page({
   },
 
   onShow: function (options) {
+    var that = this
     if (!app.globalData.login) {
       return
     }
-    if (this.data.avaupdate) {
-      this.setData({
-        avaurl: app.globalData.icon,
-        avaupdate: false
-      })
-    }
-    this.setData({
-      phone: getApp().globalData.phone,
-      name: getApp().globalData.name,
+    that.setData({
+      name: app.globalData.name,
+      login: app.globalData.login,
+      avaurl: app.globalData.icon,
     })
   },
 
@@ -95,7 +91,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (event) {
-    console.log(event);
   },
 
   oncolllistClick: function (event) {
@@ -171,8 +166,9 @@ Page({
   outClick: function () {
     var that = this
     if (!app.globalData.login) {
-      wx.navigateTo({
-        url: '../authorize/authorize',
+      wx.showToast({
+        title: '尚未登录！',
+        icon: 'none'
       })
       return
     }

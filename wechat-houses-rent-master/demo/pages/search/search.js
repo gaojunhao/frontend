@@ -33,7 +33,6 @@ inputTyping: function (e) {
       boundary: "region(上海)"
     }
   }).then(res=>{
-    console.log(res.data.data)
     this.setData({
       searchresult: res.data.data
   });

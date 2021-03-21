@@ -58,7 +58,7 @@
                                 class="weui-input" 
 																type="text" 
 																value="{{louceng}}"
-                                placeholder="请输入所在楼层" 
+                                placeholder="请输入所在楼层,只填数字" 
                                 placeholder-class="weui-input__placeholder"
                                 bindinput="onloucengInput"
                             />
@@ -135,7 +135,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="weui-cells__title">图片不超过6张，上传的视频不超过2分钟</view>
+				<view class="weui-cells__title">图片不超过6张,上传的视频不超过2分钟,不超过100MB</view>
 			</view>
 	<!--	</view>-->
 	<block>

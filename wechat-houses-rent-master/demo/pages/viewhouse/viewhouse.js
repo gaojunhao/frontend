@@ -6,7 +6,7 @@ Page({
   data: {
     videoList: [],
     itemcnt: 0,
-  },
+  }, 
 
   onLoad: function(options){
     var that = this
@@ -31,7 +31,6 @@ Page({
   },
 
   onPause(e) {
-    //  console.log('pause', e.detail.activeId)
   },
 
   onEnded(e) {
@@ -46,12 +45,10 @@ Page({
   onProgress(e) {},
 
   onLoadedMetaData(e) {
-    //console.log('LoadedMetaData', e)
   },
 
   swiperchangehandle: function(e){
     const { current, source } = e.detail;
-    console.log("swiperchangehandle", current, source);
     if (current == 2) {
       var that = this
       that.data.itemcnt = that.data.itemcnt + 3

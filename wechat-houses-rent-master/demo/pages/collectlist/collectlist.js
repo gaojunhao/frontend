@@ -22,11 +22,9 @@ Page({
    */
   onLoad: function (options) {
     that = this
-    console.log("##onLoad")
-    console.log(options.collect)
     that.getDatacond(options.collect)
     var now_time = new Date()     
-    console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
+    //console.log(now_time.toLocaleDateString() + " " + now_time.getUTCHours() + ":" + now_time.getUTCMinutes() + ":" + now_time.getUTCSeconds())
   },
 
   onShow: function () {
@@ -40,15 +38,11 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    console.log("##getDatacond")
-   console.log(e)
     var url = app.globalData.url + "gethousebyid?id=" + e
-    console.log(url)
     wx.request({
       url: url,
       success(res) {
         var arr = res.data
-        console.log(arr)
         for (var i = 0; i < arr.length; i++) {
           //arr[i].rent = arr[i].rent.toFixed(2)
           var simg = arr[i]['img']
@@ -70,7 +64,6 @@ Page({
    */
   onItemClick: function (event) {
     var id = event.currentTarget.dataset.id;
-    console.log(id);
     wx.navigateTo({
       url: "../homeDetail/homeDetail?id=" + id
     })
